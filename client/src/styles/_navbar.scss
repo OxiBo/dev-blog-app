@@ -1,0 +1,37 @@
+
+ 
+ /* Stackoverflow https://stackoverflow.com/questions/40178386/bootstrap-4-navbar-items-on-right-side */
+ nav{
+     background-color: rgba(123, 172, 32, 0.7);
+       padding: 0 1rem!important;
+   
+     .navbar-nav {
+        // flex-direction: row;
+       
+        .nav-item:hover{
+            background-color: yellowgreen;
+
+        }
+      }
+      
+      .nav-link {
+        padding-right: .5rem !important;
+        padding-left: .5rem !important;
+        color: white!important;
+      }
+      
+      /* Fixes dropdown menus placed on the right side */
+      .ml-auto .dropdown-menu {
+        left: auto !important;
+        right: 0px;
+      }
+
+      button.navbar-toggler{
+          border: 2px solid grey!important;
+      }
+ }
+
+ 
+
+ 
+ 

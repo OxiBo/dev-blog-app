@@ -1,0 +1,34 @@
+// https://lipis.github.io/bootstrap-social/
+
+.btn-google{
+    background-color: #DD4B39;
+    color: white;
+    i{
+        padding: 5px;
+    }
+}
+.btn-google.dropdown-item:hover{
+    background-color: rgb(179, 52, 35);
+    color: white;
+    // opacity: !important;
+}
+
+
+.btn-github{
+    background-color: #444444;
+    color: white;
+    i{
+        padding: 5px;
+    }
+}
+.btn-github.dropdown-item:hover{
+    background-color: black;
+    color: white;
+    // opacity: !important;
+}
+
+
+i.fa-sign-out{
+    color: black;
+    padding: 5px;
+}

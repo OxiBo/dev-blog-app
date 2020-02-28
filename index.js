@@ -2,7 +2,10 @@ const express = require("express"),
   keys = require("./config/keys"),
   cors = require("cors"),
   bodyParser = require("body-parser"),
+  passport = require("passport"),
+  cookieSession = require("cookie-session"),
   mongoose = require("mongoose"),
+  User = require("./models/User"),
   app = express();
 
 app.use(cors()); // CORS is a node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options. ; https://en.wikipedia.org/wiki/Cross-origin_resource_sharing   , https://www.udemy.com/course/node-with-react-fullstack-web-development/learn/lecture/7605040?start=667#bookmarks
@@ -22,11 +25,46 @@ try {
   console.log("ERROR:", err.message);
 }
 
+app.use(
+  cookieSession({
+    name: "session", // default value
+    maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    keys: [keys.cookieKey]
+  })
+);
+
+// passport
+app.use(passport.initialize()); // has to be put before requiring auth routes
+app.use(passport.session()); // has to be put before requiring auth routes
+
+//requiring routes
+require("./routes/googleAuth")(app);
+require("./routes/githubAuth")(app);
+require("./routes/auth")(app);
+
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id, (err, user) => {
+    done(err, user);
+  });
+});
+
 app.get("/", (req, res) => {
+  console.log("============= REQ.USER ===========");
+  console.log(req.user);
+
   res.send({ greeting: "Hello, blog" });
 });
 
-const PORT = process.env.PORT || 6060;
+app.get("/api/logout", (req, res) => {
+  req.logout();
+  res.redirect("/");
+});
+
+const PORT = process.env.PORT || 6060; // if getting error about server already running on this port - https://stackoverflow.com/questions/9898372/how-to-fix-error-listen-eaddrinuse-while-using-nodejs
 app.listen(PORT, () => {
   console.log(`App is running on port ${PORT}`);
 });
