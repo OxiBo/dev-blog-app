@@ -46,7 +46,7 @@ class Header extends Component {
     const { current_user } = this.props;
     // console.log(this.props)
     // console.log( current_user)
-    const { google, github } = current_user || {} ;
+    const { google, github } = current_user || {};
     // console.log(google)
     // console.log(github)
     return (
@@ -69,11 +69,16 @@ class Header extends Component {
           </button>
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <ul className="navbar-nav">
-              <li className="nav-item active">
-                <a className="nav-link" href="/posts">
-                  Blog Posts <span className="sr-only">(current)</span>
-                </a>
-              </li>
+              {current_user ? (
+                <li className="nav-item active">
+                  <a className="nav-link" href="/posts">
+                    Blog Posts <span className="sr-only">(current)</span>
+                  </a>{" "}
+                </li>
+              ) : (
+                ""
+              )}
+
               <li className="nav-item">
                 <a className="nav-link" href="#">
                   Features
@@ -90,15 +95,16 @@ class Header extends Component {
                 this.renderAuthButtons()
               ) : (
                 <>
-                <li className='nav-item nav-link'>
-                 Logged in as { (google && google.name) || (github && github.name)} 
-              
-                </li>
-                <li className='nav-item'>
-                  <a className="nav-link" href="/api/logout">
-                    <i className="fa fa-sign-out" aria-hidden="true"></i>Logout
-                  </a>
-                </li>
+                  <li className="nav-item nav-link">
+                    Logged in as{" "}
+                    {(google && google.name) || (github && github.name)}
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" href="/api/logout">
+                      <i className="fa fa-sign-out" aria-hidden="true"></i>
+                      Logout
+                    </a>
+                  </li>
                 </>
               )}
             </ul>
