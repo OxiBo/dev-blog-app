@@ -38,9 +38,9 @@ app.use(passport.initialize()); // has to be put before requiring auth routes
 app.use(passport.session()); // has to be put before requiring auth routes
 
 //requiring routes
-require("./routes/googleAuth")(app);
-require("./routes/githubAuth")(app);
-require("./routes/auth")(app);
+require("./routes/auth/googleAuth")(app);
+require("./routes/auth/githubAuth")(app);
+require("./routes/auth/auth")(app);
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -59,10 +59,7 @@ app.get("/", (req, res) => {
   res.send({ greeting: "Hello, blog" });
 });
 
-app.get("/api/logout", (req, res) => {
-  req.logout();
-  res.redirect("/");
-});
+
 
 const PORT = process.env.PORT || 6060; // if getting error about server already running on this port - https://stackoverflow.com/questions/9898372/how-to-fix-error-listen-eaddrinuse-while-using-nodejs
 app.listen(PORT, () => {

@@ -1,0 +1,22 @@
+ul.list-group.list-group-flush {
+    li.list-group-item{
+        display: flex!important;
+        dt{
+            font-size: 0.8rem;
+            
+        }
+    }
+}
+
+.card-group{
+    
+    button.btn, a{
+        display: inline!important;
+        margin: 1rem 2rem;
+        width: 10rem;
+    }
+    a.btn-warning{
+        margin-left: auto;
+        color: white;
+    }
+}

@@ -24,13 +24,11 @@ passport.use(
       proxy: true
     },
     async (accessToken, refreshToken, profile, done) => {
-      //   console.log(profile);
-      //   console.log(accessToken)
+
       const { id, displayName, emails } = profile;
       //   console.log( emails[0].value)
       try {
         const foundUser = await User.findOne({ "google.id": id  });
-        // console.log(foundUser);
 
         if (foundUser) {
           return done(null, foundUser);

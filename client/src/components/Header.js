@@ -8,7 +8,7 @@ class Header extends Component {
   }
   renderAuthButtons() {
     return (
-      <li className="nav-item dropdown mr-auto">
+      <li className="nav-item nav-link dropdown mr-auto">
         <a
           className="nav-link dropdown-toggle"
           href="#"
@@ -95,9 +95,18 @@ class Header extends Component {
                 this.renderAuthButtons()
               ) : (
                 <>
-                  <li className="nav-item nav-link">
-                    Logged in as{" "}
-                    {(google && google.name) || (github && github.name)}
+                  <li className="nav-item">
+                    <a
+                      href={`/user-profile/${current_user._id}`}
+                      className="nav-link"
+                    >
+                      My Profile
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                  <p className="nav-link disabled">
+                  Logged in as{" "}
+                    {(google && google.name) || (github && github.name)}  </p>  
                   </li>
                   <li className="nav-item">
                     <a className="nav-link" href="/api/logout">

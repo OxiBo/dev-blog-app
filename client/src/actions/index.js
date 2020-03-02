@@ -3,6 +3,6 @@ import axios from 'axios';
 
 export const fetchCurrentUser = () => async dispatch => {
     const res = await axios.get('/api/current_user');
-    console.log(res);
+    // console.log(res);
     dispatch({ type: FETCH_CURRENT_USER, payload: res.data});
 }

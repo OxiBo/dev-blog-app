@@ -1,15 +1,15 @@
 const passport = require("passport");
-require("../services/googleAuthPassport");
+require("../../services/githubAuthPassport");
 
 module.exports = app => {
   app.get(
-    "/auth/google",
-    passport.authenticate("google", { scope: ["profile", "email"] })
+    "/auth/github",
+    passport.authenticate("github", { scope: ["profile", "user:email"] })
   );
 
   app.get(
-    "/auth/google/callback",
-    passport.authenticate("google", { failureRedirect: "/" }),
+    "/auth/github/callback",
+    passport.authenticate("github", { failureRedirect: "/" }),
     (req, res) => {
        
       // Successful authentication, redirect home.
@@ -18,3 +18,4 @@ module.exports = app => {
     }
   );
 };
+

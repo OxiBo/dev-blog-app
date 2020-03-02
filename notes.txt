@@ -1,1 +1,4 @@
  *  error about server already running on this port - https://stackoverflow.com/questions/9898372/how-to-fix-error-listen-eaddrinuse-while-using-nodejs
+
+
+ * initialValues in redux-form - https://medium.com/@1sherlynn/react-redux-form-two-ways-to-add-initial-values-ab48daa0a32e
