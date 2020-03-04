@@ -24,11 +24,10 @@ passport.use(
       proxy: true
     },
     async (accessToken, refreshToken, profile, done) => {
-
       const { id, displayName, emails } = profile;
       //   console.log( emails[0].value)
       try {
-        const foundUser = await User.findOne({ "google.id": id  });
+        const foundUser = await User.findOne({ "google.id": id });
 
         if (foundUser) {
           return done(null, foundUser);
@@ -39,7 +38,8 @@ passport.use(
             email: emails[0].value,
             name: displayName,
             token: accessToken
-          }
+          },
+          bio: { name: displayName, email: emails[0].value }
         }).save();
         return done(null, newUser);
       } catch (err) {

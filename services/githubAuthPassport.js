@@ -20,7 +20,7 @@ passport.use(
         // console.log( profile._json.email)
       try {
         const foundUser = await User.findOne({ "github.id": id });
-        console.log(foundUser);
+        // console.log(foundUser);
 
         if (foundUser) {
           return done(null, foundUser);
@@ -28,10 +28,11 @@ passport.use(
         const newUser = await new User({
           github: {
             id: id,
-            email: email || '',
+            email: email || 'not specified',
             name: displayName,
             token: accessToken
-          }
+          },
+          bio: { name: displayName, email: email || 'not specified'}
         }).save();
         return done(null, newUser);
       } catch (err) {

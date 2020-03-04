@@ -46,7 +46,7 @@ class Header extends Component {
     const { current_user } = this.props;
     // console.log(this.props)
     // console.log( current_user)
-    const { google, github } = current_user || {};
+    // const { google, github } = current_user || {};
     // console.log(google)
     // console.log(github)
     return (
@@ -104,9 +104,7 @@ class Header extends Component {
                     </a>
                   </li>
                   <li className="nav-item">
-                  <p className="nav-link disabled">
-                  Logged in as{" "}
-                    {(google && google.name) || (github && github.name)}  </p>  
+                  <p className="nav-link disabled">Logged in as {current_user.bio.name}</p>  
                   </li>
                   <li className="nav-item">
                     <a className="nav-link" href="/api/logout">
@@ -126,7 +124,7 @@ class Header extends Component {
 
 const mapStateToProps = ({ auth }) => {
   return {
-    current_user: auth.user
+    current_user: auth.current_user
   };
 };
 

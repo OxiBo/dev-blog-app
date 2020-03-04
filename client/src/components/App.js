@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import requireAuth from "./HOC/requireAuth";
+import requireAuthorization from "./HOC/requireAuthorization";
 import Landing from "./Landing";
 import Header from "./Header";
 import PostList from "./posts/PostList";
@@ -34,7 +35,7 @@ export default class App extends Component {
               <Route exact path="/" component={Landing} />
               <Route exact path="/posts" component={requireAuth(PostList)} />
               <Route exact path="/user-profile/:userId" component={UserProfile} />
-              <Route exact path="/user-profile/:userId/edit" component={EditUserProfileForm} />
+              <Route exact path="/user-profile/:userId/edit" component={requireAuthorization(EditUserProfileForm)} />
             </Switch>
           </div>
         </BrowserRouter>

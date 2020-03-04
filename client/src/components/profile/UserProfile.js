@@ -1,38 +1,24 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { fetchCurrentUser } from "../../actions";
+import { fetchCurrentUser, fetchUser } from "../../actions";
+import parseUserDetails from "../../utils/parseUserDetails";
 
 class UserProfile extends Component {
   componentDidMount() {
-    // console.log(this.props);
     this.props.fetchCurrentUser();
+    this.props.fetchUser(this.props.match.params.userId);
+    console.log(this.props);
+    // console.log(this.props.match.params.userId)
   }
 
   renderContent() {
-    const { current_user } = this.props;
-    const { age, avatar, occupation, gender } = current_user.bio;
-    const userDetails = current_user.google
-      ? { userName: current_user.google.name, email: current_user.google.email }
-      : current_user.github
-      ? { userName: current_user.github.name, email: current_user.github.email }
-      : {
-          userName: current_user.twitter.name,
-          email: current_user.twitter.email
-        };
-
-    // const user = Object.assign(userDetails, {
-    //   age,
-    //   avatar,
-    //   occupation,
-    //   gender
-    // });
-
-    // console.log(
-    //   Object.entries({ ...userDetails, age, avatar, occupation, gender })
-    // );
-    // console.log(this.props.current_user);
-    // console.log(user);
+    // const { user } = this.props;
+    // const { avatar } = this.props.user;
+    // console.log(this.props.current_user._id)
+    // console.log(this.props.match.params.userId)
+    const { bio } = this.props.user;
+    const { avatar } = bio;
 
     return (
       <div className="container">
@@ -48,12 +34,7 @@ class UserProfile extends Component {
               <div className="card-body py-1">
                 <div className="card">
                   <ul className="list-group list-group-flush">
-                    {Object.entries({
-                      ...userDetails,
-                      age,
-                      occupation,
-                      gender
-                    }).map((item, index) => {
+                    {Object.entries(bio).map((item, index) => {
                       return (
                         <li
                           className="list-group-item row"
@@ -77,13 +58,18 @@ class UserProfile extends Component {
             >
               GO BACK
             </button>
-            <Link
-              to={`/user-profile/${current_user._id}/edit`}
-              type="button"
-              className="btn btn-warning btn-lg"
-            >
-              EDIT
-            </Link>
+
+            {this.props.current_user &&
+              this.props.current_user._id ===
+                this.props.match.params.userId && (
+                <Link
+                  to={`/user-profile/${this.props.match.params.userId}/edit`}
+                  type="button"
+                  className="btn btn-warning btn-lg"
+                >
+                  EDIT
+                </Link>
+              )}
           </div>
         </div>
       </div>
@@ -91,22 +77,30 @@ class UserProfile extends Component {
   }
 
   render() {
-    if (this.props.current_user) {
+      console.log(this.props)
+    if ( this.props.user &&
+      Object.entries(this.props.user).length > 0 &&
+      this.props.user.constructor === Object
+    ) {
       return <div>{this.renderContent()}</div>;
     }
 
-    return <div>Loading...</div>;
+    return <div>User is not found... OR display an error</div>;
   }
 }
 
 const mapStateToProps = ({ auth }) => {
-    console.log(auth.user)
+  console.log(auth.user);
   return {
-    current_user: auth.user
+    current_user: auth.current_user,
+    user: auth.user
+    // user: parseUserDetails(auth.user)
   };
 };
 
-export default connect(mapStateToProps, { fetchCurrentUser })(UserProfile);
+export default connect(mapStateToProps, { fetchCurrentUser, fetchUser })(
+  UserProfile
+);
 
 /*
 

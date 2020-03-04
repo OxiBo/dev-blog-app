@@ -41,6 +41,7 @@ app.use(passport.session()); // has to be put before requiring auth routes
 require("./routes/auth/googleAuth")(app);
 require("./routes/auth/githubAuth")(app);
 require("./routes/auth/auth")(app);
+require("./routes/profile/profile")(app);
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
