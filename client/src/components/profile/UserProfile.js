@@ -8,7 +8,7 @@ class UserProfile extends Component {
   componentDidMount() {
     this.props.fetchCurrentUser();
     this.props.fetchUser(this.props.match.params.userId);
-    console.log(this.props);
+    // console.log(this.props);
     // console.log(this.props.match.params.userId)
   }
 
@@ -19,7 +19,7 @@ class UserProfile extends Component {
     // console.log(this.props.match.params.userId)
     const { bio } = this.props.user;
     const { avatar } = bio;
-
+    const userDetails = ["name", "email", "occupation", "age", "gender"];
     return (
       <div className="container">
         <div className="card bg-light mb-4">
@@ -34,14 +34,14 @@ class UserProfile extends Component {
               <div className="card-body py-1">
                 <div className="card">
                   <ul className="list-group list-group-flush">
-                    {Object.entries(bio).map((item, index) => {
+                    {userDetails.map((item, index) => {
                       return (
                         <li
                           className="list-group-item row"
-                          key={item[1] + index}
+                          key={bio[item] + index}
                         >
-                          <dt className="col-sm-5 text-uppercase">{item[0]}</dt>
-                          <dd className="col-sm-7">{item[1]}</dd>
+                          <dt className="col-sm-5 text-uppercase">{item}</dt>
+                          <dd className="col-sm-7">{bio[item]}</dd>
                         </li>
                       );
                     })}
@@ -77,8 +77,9 @@ class UserProfile extends Component {
   }
 
   render() {
-      console.log(this.props)
-    if ( this.props.user &&
+    // console.log(this.props);
+    if (
+      this.props.user &&
       Object.entries(this.props.user).length > 0 &&
       this.props.user.constructor === Object
     ) {
@@ -90,7 +91,7 @@ class UserProfile extends Component {
 }
 
 const mapStateToProps = ({ auth }) => {
-  console.log(auth.user);
+//   console.log(auth.user);
   return {
     current_user: auth.current_user,
     user: auth.user
@@ -104,13 +105,17 @@ export default connect(mapStateToProps, { fetchCurrentUser, fetchUser })(
 
 /*
 
- <div className="container">
-      <h2 className="card-header">User profile</h2>
-        <div class="card-body row container-fluid">
-          <div class="col-12 col-md-6"><img className='img-thumbnail img-fluid' src={user.avatar} alt=""/></div>
-          <div class="col-12 col-md-6">.col-6 .col-md-4</div>
-        </div>
-      </div>
+    {Object.entries(bio).map((item, index) => {
+                      return (
+                        <li
+                          className="list-group-item row"
+                          key={item[1] + index}
+                        >
+                          <dt className="col-sm-5 text-uppercase">{item[0]}</dt>
+                          <dd className="col-sm-7">{item[1]}</dd>
+                        </li>
+                      );
+                    })}
 
 
 */

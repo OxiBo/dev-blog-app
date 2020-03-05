@@ -1,16 +1,17 @@
 ul.list-group.list-group-flush {
   li.list-group-item {
     display: flex !important;
+    flex-wrap: wrap;
     dt {
       font-size: 0.8rem;
     }
-input{
-    font-size: 1.1rem;
-}
+    input {
+      font-size: 1.1rem;
+    }
     .radio-buttons {
       display: flex;
       flex-direction: column;
-      width: 100%;
+      width: 65%;
     }
     label {
       font-size: 0.8rem;
@@ -22,6 +23,17 @@ input{
       input {
         display: inline !important;
       }
+    }
+    .invalid-feedback {
+      display: block;
+      width: 70%;
+      margin-left: auto;
+      // text-align: center;
+    }
+    // override Bootstrap delete icon (X)
+    .form-control.is-invalid,
+    .was-validated .form-control:invalid {
+      background-image: none;
     }
   }
 }
