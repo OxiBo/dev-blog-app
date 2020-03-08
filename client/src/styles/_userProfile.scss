@@ -24,20 +24,21 @@ ul.list-group.list-group-flush {
         display: inline !important;
       }
     }
-    .invalid-feedback {
-      display: block;
-      width: 70%;
-      margin-left: auto;
-      // text-align: center;
-    }
-    // override Bootstrap delete icon (X)
-    .form-control.is-invalid,
-    .was-validated .form-control:invalid {
-      background-image: none;
-    }
+    // .invalid-feedback {
+    //   display: block;
+    //   width: 100%;
+    //   margin-left: auto;
+    //   font-size: 100%!important;
+    //   // text-align: center;
+    // }
+    // // override Bootstrap delete icon (X)
+    // .form-control.is-invalid,
+    // .was-validated .form-control:invalid {
+    //   background-image: none;
+    // }
   }
 }
-
+// buttons next and back
 .card-group {
   button.btn,
   a {
@@ -47,7 +48,7 @@ ul.list-group.list-group-flush {
   }
   a.btn-warning,
   button.btn-success {
-    margin-left: auto;
+    margin-left: auto!important;
     color: white;
   }
 }

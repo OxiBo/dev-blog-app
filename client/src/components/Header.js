@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from 'react-router-dom';
 import { fetchCurrentUser } from "../actions";
 
 class Header extends Component {
@@ -21,19 +22,19 @@ class Header extends Component {
           Signin/up
         </a>
         <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a
+          <Link
             className="dropdown-item btn btn-block btn-social btn-google"
-            href="/auth/google"
+            to="/auth/google"
           >
             <i className="fa fa-google"> </i>
             with Google
-          </a>
-          <a
+          </Link>
+          <Link
             className="dropdown-item btn btn-block btn-social btn-github"
-            href="/auth/github"
+            to="/auth/github"
           >
             <i className="fa fa-github"> </i> with GitHub
-          </a>
+          </Link>
           <a className="dropdown-item" href="#">
             with Twitter
           </a>
@@ -53,9 +54,9 @@ class Header extends Component {
       <header>
         {/* navbar breakpoints - https://stackoverflow.com/questions/36405532/bootstrap-4-change-breakpoint-navbar */}
         <nav className="navbar navbar-expand-sm navbar-light fixed-top">
-          <a className="navbar-brand" href="/">
+          <Link className="navbar-brand" to="/">
             Home
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -70,20 +71,27 @@ class Header extends Component {
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <ul className="navbar-nav">
               {current_user ? (
-                <li className="nav-item active">
-                  <a className="nav-link" href="/posts">
-                    Blog Posts <span className="sr-only">(current)</span>
-                  </a>{" "}
-                </li>
+                <>
+                  <li className="nav-item active">
+                    <Link className="nav-link" to="/posts">
+                      Blog Posts <span className="sr-only">(current)</span>
+                    </Link>{" "}
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/posts/new">
+                      New Post
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/users">
+                      Our bloggers
+                    </Link>
+                  </li>
+                </>
               ) : (
                 ""
               )}
 
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Features
-                </a>
-              </li>
               <li className="nav-item">
                 <a className="nav-link" href="#">
                   Pricing
@@ -104,7 +112,9 @@ class Header extends Component {
                     </a>
                   </li>
                   <li className="nav-item">
-                  <p className="nav-link disabled">Logged in as {current_user.bio.name}</p>  
+                    <p className="nav-link disabled">
+                      Logged in as {current_user.bio.name}
+                    </p>
                   </li>
                   <li className="nav-item">
                     <a className="nav-link" href="/api/logout">

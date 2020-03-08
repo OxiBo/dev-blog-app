@@ -1,0 +1,23 @@
+.form-inline {
+  label {
+    justify-content: flex-end !important;
+  }
+}
+
+// override Bootstrap delete icon (X)
+.form-control.is-invalid,
+.form-control:invalid {
+  background-image: none;
+}
+
+textarea.form-control{
+  width: 100%!important;
+}
+
+.invalid-feedback {
+  display: block;
+  width: 100%;
+  margin-left: auto;
+  font-size: 100%!important;
+  // text-align: center;
+}

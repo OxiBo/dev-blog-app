@@ -1,8 +1,9 @@
-import { FETCH_CURRENT_USER, FETCH_USER, EDIT_PROFILE } from "../actions/types";
+import { FETCH_CURRENT_USER, FETCH_USER, FETCH_USERS, EDIT_PROFILE } from "../actions/types";
 
 const defaultAuthState = {
   current_user: null,
-  user: null
+  user: null,
+  users: []
 };
 
 export default (state = defaultAuthState, action) => {
@@ -18,6 +19,12 @@ export default (state = defaultAuthState, action) => {
       return {
         ...state,
         user: action.payload
+      };
+      case FETCH_USERS:
+      // console.log(action.payload)
+      return {
+        ...state,
+        users: action.payload
       };
     case EDIT_PROFILE:
       // console.log(action.payload)

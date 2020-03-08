@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchCurrentUser, fetchUser } from "../../actions";
-import parseUserDetails from "../../utils/parseUserDetails";
+// import parseUserDetails from "../../utils/parseUserDetails";
 
 class UserProfile extends Component {
   componentDidMount() {
     this.props.fetchCurrentUser();
+    console.log(this.props.match.params.userId)
     this.props.fetchUser(this.props.match.params.userId);
     // console.log(this.props);
     // console.log(this.props.match.params.userId)
@@ -86,7 +87,7 @@ class UserProfile extends Component {
       return <div>{this.renderContent()}</div>;
     }
 
-    return <div>User is not found... OR display an error</div>;
+    return <div>Server side error...</div>;
   }
 }
 

@@ -7,15 +7,9 @@ import { errorTostStyle } from "../../styles/toastifyStyles";
 
 export default WrappedComponent => {
   class RequireAuthorization extends Component {
-    componentDidMount() {
-      console.log(this.props);
-    }
-
+    
     // which life cycle method  is best to use here?
     shouldComponentUpdate(nextProps) {
-      console.log(
-        nextProps.current_user._id !== this.props.match.params.userId
-      );
       if (nextProps.current_user._id !== this.props.match.params.userId) {
         toast("You are not authorized to see this page!", errorTostStyle);
         this.props.history.push("/");

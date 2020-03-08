@@ -15,6 +15,7 @@ const userSchema = new Schema({
     gender: { type: String, default: "Not specified" }
   },
   posts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
+  comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
   google: {
     id: String,
     email: String,

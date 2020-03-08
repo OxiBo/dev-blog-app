@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import { fetchCurrentUser, editProfile } from "../../actions";
 import renderRadioInput from "../../utils/renderRadioInputRedux";
-import { errorTostStyle } from "../../styles/toastifyStyles";
+// import { errorTostStyle } from "../../styles/toastifyStyles";
 import validateEmail from "../../utils/validateEmail";
 import validateURL from "../../utils/validateURL";
 // import parseUserDetails from "../../utils/parseUserDetails";
@@ -130,7 +130,7 @@ class EditUserProfile extends Component {
                           options={{
                             male: "Male",
                             female: "Female",
-                            notDefined: "Prefer not to say"
+                            "prefer not to say": "Prefer not to say"
                           }}
                         />
                       </li>
