@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { fetchCurrentUser } from "../actions";
 
 class Header extends Component {
@@ -75,6 +75,11 @@ class Header extends Component {
                   <li className="nav-item active">
                     <Link className="nav-link" to="/posts">
                       Blog Posts <span className="sr-only">(current)</span>
+                    </Link>{" "}
+                  </li>
+                  <li className="nav-item active">
+                    <Link className="nav-link" to={`/user/${current_user._id}/posts`}>
+                      My Posts <span className="sr-only">(current)</span>
                     </Link>{" "}
                   </li>
                   <li className="nav-item">

@@ -2,7 +2,9 @@ import {
   FETCH_CURRENT_USER,
   FETCH_USER,
   FETCH_USERS,
-  EDIT_PROFILE
+  EDIT_PROFILE,
+  SUBMIT_NEW_POST,
+  FETCH_USER_POSTS
 } from "./types";
 import { toast } from "react-toastify";
 
@@ -36,5 +38,30 @@ export const editProfile = (id, values) => async dispatch => {
   } catch (err) {
     console.error(err);
     toast("Server error. Failed to edit profile!", errorTostStyle);
+  }
+};
+
+export const submitNewPost = values => async dispatch => {
+  try {
+    const res = await axios.post("/api/posts/new", values);
+
+    dispatch({ type: SUBMIT_NEW_POST, payload: res.data });
+
+    // console.log(res.data)
+  } catch (err) {
+    console.error(err);
+    toast("Server error. Failed to add new post!", errorTostStyle);
+  }
+};
+
+export const fetchUserPosts = (id, history) => async dispatch => {
+  try {
+    const res = await axios.get(`/api/user/${id}/posts`);
+    // console.log(res);
+    dispatch({ type: FETCH_USER_POSTS, payload: res.data });
+  } catch (err) {
+    console.error(err);
+    toast("Server error. Failed to fetch posts!", errorTostStyle);
+    history.goBack();
   }
 };

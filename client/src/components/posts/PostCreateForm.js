@@ -90,7 +90,7 @@ class PostCreateForm extends Component {
   };
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <div className="container">
         <div className="card">
@@ -129,7 +129,7 @@ class PostCreateForm extends Component {
 
             <div className="card-group">
               <button
-                onClick={() => this.props.history.goBack()}
+                onClick={() => this.props.history.push('/posts')}
                 className="btn btn-primary btn-lg m-3"
               >
                 Cancel

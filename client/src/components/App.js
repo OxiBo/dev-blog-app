@@ -11,6 +11,7 @@ import Landing from "./Landing";
 import Header from "./Header";
 import PostList from "./posts/PostList";
 import PostCreate from "./posts/PostCreate";
+import UserPosts from "./posts/UserPosts";
 import UserProfile from "./profile/UserProfile";
 import UsersList from "./profile/UsersList";
 import EditUserProfileForm from "./profile/EditUserProfileForm";
@@ -40,6 +41,7 @@ export default class App extends Component {
               <Route exact path="/user-profile/:userId" component={UserProfile} />
               <Route exact path="/user-profile/:userId/edit" component={requireAuthorization(EditUserProfileForm)} />
               <Route exact path="/posts/new" component={requireAuth(PostCreate)} />
+              <Route exact path="/user/:userId/posts" component={requireAuth(UserPosts)} />
             </Switch>
           </div>
         </BrowserRouter>
