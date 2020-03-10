@@ -1,4 +1,9 @@
-import { SUBMIT_NEW_POST, FETCH_USER_POSTS } from "../actions/types";
+import {
+  SUBMIT_NEW_POST,
+  FETCH_USER_POSTS,
+  FETCH_POST,
+  FETCH_POSTS
+} from "../actions/types";
 
 const defaultPostReducer = {
   post: null,
@@ -12,12 +17,22 @@ export default (state = defaultPostReducer, action) => {
     case SUBMIT_NEW_POST:
       return {
         ...state,
-        post: action.payload
+        posts: [...state.posts, action.payload]
       };
     case FETCH_USER_POSTS:
       return {
         ...state,
         user_posts: action.payload
+      };
+    case FETCH_POST:
+      return {
+        ...state,
+        post: action.payload
+      };
+      case FETCH_POSTS:
+      return {
+        ...state,
+        posts: action.payload
       };
     default:
       return state;

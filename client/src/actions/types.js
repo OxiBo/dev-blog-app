@@ -7,3 +7,5 @@ export const FETCH_USER  = 'fetch_user';
 export const EDIT_PROFILE = "edit_profile";
 export const SUBMIT_NEW_POST = "submit_new_post";
 export const FETCH_USER_POSTS = 'fetch_user_posts';
+export const FETCH_POST = 'fetch_post';
+export const FETCH_POSTS = 'fetch_posts';

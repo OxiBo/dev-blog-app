@@ -25,7 +25,7 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       const { id, displayName, emails } = profile;
-      //   console.log( emails[0].value)
+        // console.log( displayName)
       try {
         const foundUser = await User.findOne({ "google.id": id });
 

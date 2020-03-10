@@ -32,6 +32,16 @@ module.exports = app => {
     }
   });
 
+  app.get("/api/posts/show/:postId", async (req, res) => {
+    try {
+      const foundPost = await Post.findById(req.params.postId);
+      console.log(foundPost);
+      return res.send(foundPost);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  });
+
   // create a new post
   app.post("/api/posts/new", async (req, res) => {
     // console.log(req.body);

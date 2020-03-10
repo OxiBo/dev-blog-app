@@ -46,6 +46,7 @@ require("./routes/profile/profile")(app);
 require("./routes/post/post")(app);
 
 passport.serializeUser((user, done) => {
+  
   done(null, user.id);
 });
 

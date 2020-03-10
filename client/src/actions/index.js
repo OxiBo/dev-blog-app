@@ -4,7 +4,9 @@ import {
   FETCH_USERS,
   EDIT_PROFILE,
   SUBMIT_NEW_POST,
-  FETCH_USER_POSTS
+  FETCH_USER_POSTS,
+  FETCH_POST,
+  FETCH_POSTS
 } from "./types";
 import { toast } from "react-toastify";
 
@@ -24,6 +26,7 @@ export const fetchUser = id => async dispatch => {
   dispatch({ type: FETCH_USER, payload: res.data });
 };
 
+// TODO change to fetch posts with particular userId
 export const fetchUsers = () => async dispatch => {
   const res = await axios.get("/api/users");
   // console.log(res);
@@ -59,9 +62,36 @@ export const fetchUserPosts = (id, history) => async dispatch => {
     const res = await axios.get(`/api/user/${id}/posts`);
     // console.log(res);
     dispatch({ type: FETCH_USER_POSTS, payload: res.data });
+    // history(`/user/${id}/posts`);
   } catch (err) {
     console.error(err);
     toast("Server error. Failed to fetch posts!", errorTostStyle);
     history.goBack();
+  }
+};
+
+
+export const fetchPosts = () => async dispatch => {
+  try {
+    const res = await axios.get(`/api//posts`);
+    // console.log(res);
+    dispatch({ type: FETCH_POSTS, payload: res.data });
+    // history(`/user/${id}/posts`);
+  } catch (err) {
+    console.error(err);
+    toast("Server error. Failed to fetch posts!", errorTostStyle);
+    // history.goBack();
+  }
+};
+
+export const fetchPost = (id) => async dispatch => {
+  try {
+    const res = await axios.get(`/api/posts/show/${id}`);
+    // console.log(res);
+    dispatch({ type: FETCH_POST, payload: res.data });
+    // history(`/user/${id}/posts`);
+  } catch (err) {
+    console.error(err);
+    toast("Server error. Failed to fetch the post!", errorTostStyle);
   }
 };

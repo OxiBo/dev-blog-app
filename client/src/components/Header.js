@@ -22,19 +22,19 @@ class Header extends Component {
           Signin/up
         </a>
         <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <Link
+          <a
             className="dropdown-item btn btn-block btn-social btn-google"
-            to="/auth/google"
+            href="/auth/google"
           >
             <i className="fa fa-google"> </i>
             with Google
-          </Link>
-          <Link
+          </a>
+          <a
             className="dropdown-item btn btn-block btn-social btn-github"
-            to="/auth/github"
+            href="/auth/github"
           >
             <i className="fa fa-github"> </i> with GitHub
-          </Link>
+          </a>
           <a className="dropdown-item" href="#">
             with Twitter
           </a>

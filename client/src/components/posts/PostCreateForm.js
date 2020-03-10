@@ -168,7 +168,7 @@ const validate = formValues => {
   // correct the maximum length before deployment
   if (
     formValues.body &&
-    (formValues.body.trim().length > 60 || formValues.body.trim().length < 3)
+    (formValues.body.trim().length > 3000 || formValues.body.trim().length < 3)
   ) {
     errors.body = "Your text is either too long or too short";
   }
