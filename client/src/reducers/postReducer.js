@@ -2,7 +2,8 @@ import {
   SUBMIT_NEW_POST,
   FETCH_USER_POSTS,
   FETCH_POST,
-  FETCH_POSTS
+  FETCH_POSTS,
+  DELETE_POST
 } from "../actions/types";
 
 const defaultPostReducer = {
@@ -29,10 +30,15 @@ export default (state = defaultPostReducer, action) => {
         ...state,
         post: action.payload
       };
-      case FETCH_POSTS:
+    case FETCH_POSTS:
       return {
         ...state,
         posts: action.payload
+      };
+    case DELETE_POST:
+      return {
+        ...state,
+        posts: [state.posts.filter(post => post._id === action.payload)]
       };
     default:
       return state;

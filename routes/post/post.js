@@ -1,10 +1,11 @@
-const mongoose = require("mongoose").set("debug", true);
-const Post = mongoose.model("posts");
-const User = mongoose.model("users");
+const mongoose = require("mongoose").set("debug", true),
+  Post = mongoose.model("posts"),
+  User = mongoose.model("users"),
+  isLoggedIn = require("../../middleware/isLoggedIn");
 
 module.exports = app => {
   // get a list of all posts
-  app.get("/api/posts", async (req, res) => {
+  app.get("/api/posts", isLoggedIn, async (req, res) => {
     try {
       const foundPosts = await Post.find();
       console.log(foundPosts);
@@ -15,7 +16,7 @@ module.exports = app => {
     }
   });
 
-  app.get("/api/user/:userId/posts", async (req, res) => {
+  app.get("/api/user/:userId/posts", isLoggedIn, async (req, res) => {
     // console.log(req.params.userId);
     try {
       const foundUser = await User.findById(req.params.userId)
@@ -32,18 +33,28 @@ module.exports = app => {
     }
   });
 
-  app.get("/api/posts/show/:postId", async (req, res) => {
+  app.get("/api/posts/show/:postId", isLoggedIn, async (req, res) => {
     try {
       const foundPost = await Post.findById(req.params.postId);
-      console.log(foundPost);
+
       return res.send(foundPost);
     } catch (err) {
       res.status(500).send(err);
     }
   });
 
+  app.delete("/api/posts/delete/:postId", isLoggedIn, async (req, res) => {
+    try {
+      await Post.findByIdAndRemove(req.params.postId);
+
+      return res.send("Post has been deleted");
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  });
+
   // create a new post
-  app.post("/api/posts/new", async (req, res) => {
+  app.post("/api/posts/new", isLoggedIn, async (req, res) => {
     // console.log(req.body);
     console.log(req.user);
     const { name } = req.user.bio;

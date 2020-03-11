@@ -1,6 +1,6 @@
 import { css } from "glamor";
 
-export const tostOptions = {
+export const toastOptions = {
     position: "top-center",
     autoClose: 5000,
     hideProgressBar: true,
@@ -16,8 +16,8 @@ export const tostOptions = {
     })
   };
   
-  export const errorTostStyle = {
-    ...tostOptions,
+  export const errorToastStyle = {
+    ...toastOptions,
     className: css({
       background: "rgba(255,229,229, 0.95)!important",
       color: "red!important",

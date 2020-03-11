@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchPost } from "../../actions";
+import { fetchPost, fetchCurrentUser, deletePost } from "../../actions";
 
 class PostShow extends Component {
   componentDidMount() {
+    this.props.fetchCurrentUser();
     this.props.fetchPost(this.props.match.params.postId);
   }
   render() {
     if (this.props.post) {
-      const { title, image, body, user } = this.props.post;
+      const { title, image, body, user, _id } = this.props.post;
 
       return (
         <div className="container col-lg-10 ">
@@ -49,6 +50,26 @@ class PostShow extends Component {
               >
                 Go Back
               </button>
+              {this.props.current_user &&
+                this.props.current_user._id === user.id && (
+                  <>
+                    <button
+                      onClick={() => console.log("edit button clicked")}
+                      className="btn btn-warning btn-lg m-3"
+                    >
+                      Edit
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        this.props.deletePost(_id);
+                      }}
+                      className="btn btn-danger btn-lg m-3"
+                    >
+                      Delete
+                    </button>
+                  </>
+                )}
             </div>
           </div>
         </div>
@@ -59,9 +80,14 @@ class PostShow extends Component {
   }
 }
 
-const mapStateToProps = ({ posts }) => {
+const mapStateToProps = ({ auth, posts }) => {
   return {
+    current_user: auth.current_user,
     post: posts.post
   };
 };
-export default connect(mapStateToProps, { fetchPost })(PostShow);
+export default connect(mapStateToProps, {
+  fetchPost,
+  fetchCurrentUser,
+  deletePost
+})(PostShow);

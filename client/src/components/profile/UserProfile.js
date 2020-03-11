@@ -7,7 +7,7 @@ import { fetchCurrentUser, fetchUser } from "../../actions";
 class UserProfile extends Component {
   componentDidMount() {
     this.props.fetchCurrentUser();
-    console.log(this.props.match.params.userId)
+    // console.log(this.props.match.params.userId)
     this.props.fetchUser(this.props.match.params.userId);
     // console.log(this.props);
     // console.log(this.props.match.params.userId)

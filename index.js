@@ -7,6 +7,7 @@ const express = require("express"),
   mongoose = require("mongoose"),
   User = require("./models/User"),
   Post = require("./models/Post"),
+  isLoggedIn = require('./middleware/isLoggedin'),
   app = express();
 
 app.use(cors()); // CORS is a node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options. ; https://en.wikipedia.org/wiki/Cross-origin_resource_sharing   , https://www.udemy.com/course/node-with-react-fullstack-web-development/learn/lecture/7605040?start=667#bookmarks
@@ -33,6 +34,7 @@ app.use(
     keys: [keys.cookieKey]
   })
 );
+// app.use(['/api/posts', "/api/user/:userId/posts"], isLoggedIn)
 
 // passport
 app.use(passport.initialize()); // has to be put before requiring auth routes

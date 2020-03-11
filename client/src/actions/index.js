@@ -6,13 +6,14 @@ import {
   SUBMIT_NEW_POST,
   FETCH_USER_POSTS,
   FETCH_POST,
-  FETCH_POSTS
+  FETCH_POSTS,
+  DELETE_POST
 } from "./types";
 import { toast } from "react-toastify";
 
 import axios from "axios";
 
-import { tostOptions, errorTostStyle } from "../styles/toastifyStyles";
+import { toastOptions, errorToastStyle } from "../styles/toastifyStyles";
 
 export const fetchCurrentUser = () => async dispatch => {
   const res = await axios.get("/api/current_user");
@@ -37,10 +38,10 @@ export const editProfile = (id, values) => async dispatch => {
   try {
     const res = await axios.patch(`/api/user-profile/${id}/edit`, values);
     dispatch({ type: EDIT_PROFILE, payload: res.data });
-    toast("You have successfully edited your profile!", tostOptions);
+    toast("You have successfully edited your profile!", toastOptions);
   } catch (err) {
     console.error(err);
-    toast("Server error. Failed to edit profile!", errorTostStyle);
+    toast("Server error. Failed to edit profile!", errorToastStyle);
   }
 };
 
@@ -53,7 +54,20 @@ export const submitNewPost = values => async dispatch => {
     // console.log(res.data)
   } catch (err) {
     console.error(err);
-    toast("Server error. Failed to add new post!", errorTostStyle);
+    toast("Server error. Failed to add new post!", errorToastStyle);
+  }
+};
+
+export const deletePost = id => async dispatch => {
+  try {
+    await axios.delete(`/api/posts/delete/${id}`);
+
+    dispatch({ type: DELETE_POST, payload: id });
+    toast("Your post has been removed!", toastOptions);
+    // console.log(res.data)
+  } catch (err) {
+    console.error(err);
+    toast("Server error. Failed to delete post!", errorToastStyle);
   }
 };
 
@@ -65,11 +79,10 @@ export const fetchUserPosts = (id, history) => async dispatch => {
     // history(`/user/${id}/posts`);
   } catch (err) {
     console.error(err);
-    toast("Server error. Failed to fetch posts!", errorTostStyle);
+    toast("Server error. Failed to fetch posts!", errorToastStyle);
     history.goBack();
   }
 };
-
 
 export const fetchPosts = () => async dispatch => {
   try {
@@ -79,19 +92,19 @@ export const fetchPosts = () => async dispatch => {
     // history(`/user/${id}/posts`);
   } catch (err) {
     console.error(err);
-    toast("Server error. Failed to fetch posts!", errorTostStyle);
+    toast("Server error. Failed to fetch posts!", errorToastStyle);
     // history.goBack();
   }
 };
 
-export const fetchPost = (id) => async dispatch => {
+export const fetchPost = id => async dispatch => {
   try {
     const res = await axios.get(`/api/posts/show/${id}`);
-    // console.log(res);
+    console.log(res);
     dispatch({ type: FETCH_POST, payload: res.data });
     // history(`/user/${id}/posts`);
   } catch (err) {
     console.error(err);
-    toast("Server error. Failed to fetch the post!", errorTostStyle);
+    toast("Server error. Failed to fetch the post!", errorToastStyle);
   }
 };

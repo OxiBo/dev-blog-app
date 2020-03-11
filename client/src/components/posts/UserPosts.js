@@ -14,9 +14,11 @@ class UserPosts extends Component {
   }
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     return (
-      <div>{this.props.user_posts && <PostsList posts={this.props.user_posts} />}</div>
+      <div>
+        {this.props.user_posts && <PostsList posts={this.props.user_posts} />}
+      </div>
     );
   }
 }

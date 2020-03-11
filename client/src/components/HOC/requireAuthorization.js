@@ -3,15 +3,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import { fetchCurrentUser } from "../../actions";
-import { errorTostStyle } from "../../styles/toastifyStyles";
+import { errorToastStyle } from "../../styles/toastifyStyles";
 
 export default WrappedComponent => {
   class RequireAuthorization extends Component {
-    
     // which life cycle method  is best to use here?
     shouldComponentUpdate(nextProps) {
       if (nextProps.current_user._id !== this.props.match.params.userId) {
-        toast("You are not authorized to see this page!", errorTostStyle);
+        toast("You are not authorized to see this page!", errorToastStyle);
         this.props.history.push("/");
       }
       return true;

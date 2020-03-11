@@ -57,7 +57,7 @@ class PostCompact extends Component {
               See more
             </Link>
 
-            {user.id === this.props.current_user._id && (
+            {/* {user.id === this.props.current_user._id && (
               <Link
                 to={`/posts/${_id}/edit`}
                 type="submit"
@@ -65,7 +65,7 @@ class PostCompact extends Component {
               >
                 Edit
               </Link>
-            )}
+            )} */}
           </div>
         </div>
       </div>
