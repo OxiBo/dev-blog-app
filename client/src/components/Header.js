@@ -54,7 +54,7 @@ class Header extends Component {
       <header>
         {/* navbar breakpoints - https://stackoverflow.com/questions/36405532/bootstrap-4-change-breakpoint-navbar */}
         <nav className="navbar navbar-expand-sm navbar-light fixed-top">
-          <Link className="navbar-brand" to="/">
+          <Link className="navbar-brand nav-item" to="/">
             Home
           </Link>
           <button
@@ -78,7 +78,10 @@ class Header extends Component {
                     </Link>{" "}
                   </li>
                   <li className="nav-item active">
-                    <Link className="nav-link" to={`/user/${current_user._id}/posts`}>
+                    <Link
+                      className="nav-link"
+                      to={`/user/${current_user._id}/posts`}
+                    >
                       My Posts <span className="sr-only">(current)</span>
                     </Link>{" "}
                   </li>
@@ -117,9 +120,9 @@ class Header extends Component {
                     </a>
                   </li>
                   <li className="nav-item">
-                    <p className="nav-link disabled">
+                    <a className="nav-link disabled">
                       Logged in as {current_user.bio.name}
-                    </p>
+                    </a>
                   </li>
                   <li className="nav-item">
                     <a className="nav-link" href="/api/logout">

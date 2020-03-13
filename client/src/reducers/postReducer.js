@@ -3,7 +3,8 @@ import {
   FETCH_USER_POSTS,
   FETCH_POST,
   FETCH_POSTS,
-  DELETE_POST
+  DELETE_POST,
+  EDIT_POST
 } from "../actions/types";
 
 const defaultPostReducer = {

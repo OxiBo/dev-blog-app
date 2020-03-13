@@ -16,5 +16,21 @@ body {
   }
 }
 
+// buttons next and back
+.buttons{
+  display: flex;
+  justify-content: space-around!important;
+  button.btn,
+  a {
+    display: inline !important;
+    margin: 1rem 2rem;
+    width: 10rem;
+  }
+  a.btn-warning,
+  button.btn-success {
+    margin-left: auto!important;
+    color: white;
+  }
+}
 
  

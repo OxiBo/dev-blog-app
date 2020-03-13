@@ -13,6 +13,7 @@ import PostsAll from "./posts/PostsAll";
 import PostCreate from "./posts/PostCreate";
 import UserPosts from "./posts/UserPosts";
 import PostShow from "./posts/PostShow";
+import EditPost from "./posts/EditPost";
 import UserProfile from "./profile/UserProfile";
 import UsersList from "./profile/UsersList";
 import EditUserProfileForm from "./profile/EditUserProfileForm";
@@ -43,6 +44,7 @@ export default class App extends Component {
               <Route exact path="/user-profile/:userId/edit" component={requireAuthorization(EditUserProfileForm)} />
               <Route exact path="/posts/new" component={requireAuth(PostCreate)} />
               <Route exact path="/posts/show/:postId" component={requireAuth(PostShow)} />
+              <Route exact path="/posts/edit/:postId" component={EditPost} />
               <Route exact path="/user/:userId/posts" component={requireAuth(UserPosts)} />
             </Switch>
           </div>

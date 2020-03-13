@@ -56,9 +56,9 @@ class PostCreateForm extends Component {
     );
   };
 
-    onSubmit = values => {
-      console.log(values);
-    };
+    // onSubmit = values => {
+    //   console.log(values);
+    // };
 
   renderTextarea = ({ input, meta, name, label, type, placeholder, rows }) => {
     const className = `col-sm-4 col-form-label text-uppercase font-weight-bold text-right ${
@@ -94,11 +94,11 @@ class PostCreateForm extends Component {
     return (
       <div className="container">
         <div className="card">
-          <h3 className="card-header text-center p-4">New post</h3>
+          <h3 className="card-header text-center p-4">{this.props.formTitle ? "Edit Post" : "New Post"}</h3>
           <form
             action=""
-            onSubmit={this.props.handleSubmit(() =>
-              this.props.onSubmit()
+            onSubmit={this.props.handleSubmit((values) =>
+              this.props.onSubmit(values)
             )}
             className="needs-validation m-4"
             noValidate
@@ -127,7 +127,7 @@ class PostCreateForm extends Component {
               rows="6"
             />
 
-            <div className="card-group">
+            <div className="card-group buttons">
               <button
                 onClick={() => this.props.history.push('/posts')}
                 className="btn btn-primary btn-lg m-3"
@@ -135,7 +135,7 @@ class PostCreateForm extends Component {
                 Cancel
               </button>
               <button type="submit" className="btn btn-success btn-lg m-3">
-                Next
+                {this.props.formTitle ? "Submit" : "Next"}
               </button>
             </div>
           </form>

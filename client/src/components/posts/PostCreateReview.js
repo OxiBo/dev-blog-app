@@ -37,7 +37,7 @@ class PostCreateReview extends Component {
               </div>
             </div>
           </div>
-          <div className="card-group">
+          <div className="card-group buttons">
             <button
               onClick={() => this.props.onCancel()}
               className="btn btn-primary btn-lg m-3"

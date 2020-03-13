@@ -11,18 +11,21 @@ class PostCompact extends Component {
     return (
       <div className="container col-lg-10 ">
         <div className="card mb-3">
-          <div className="row no-gutters m-3">
+          <div className="row no-gutters m-3 ">
             {image && (
-              <div className="col-md-4">
+              // vertical alignment in bootstrap - https://medium.com/wdstack/bootstrap-4-vertical-center-1211448a2eff
+              <div className="col-md-4 my-auto"> 
+             
                 <img src={image} className="card-img img-thumbnail" alt="..." />
-              </div>
+                </div>
+         
             )}
 
             <div className={`col-md-${image ? "8" : "12"}`}>
               <div className="card-body">
                 <h5 className="card-title text-center">{title}</h5>
                 <p className="card-text">
-                  {body.length > 350 ? body.substring(0, 350) + "..." : body}
+                  {body.length > 250 ? body.substring(0, 350) + "..." : body}
                 </p>
                 <div className="d-flex justify-content-between">
                   <p className="card-text  text-left d-inline">
@@ -79,3 +82,5 @@ const mapStateToProps = ({ auth }) => {
   };
 };
 export default connect(mapStateToProps, { fetchCurrentUser })(PostCompact);
+
+

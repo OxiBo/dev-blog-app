@@ -7,7 +7,8 @@ import {
   FETCH_USER_POSTS,
   FETCH_POST,
   FETCH_POSTS,
-  DELETE_POST
+  DELETE_POST,
+  EDIT_POST
 } from "./types";
 import { toast } from "react-toastify";
 
@@ -58,13 +59,25 @@ export const submitNewPost = values => async dispatch => {
   }
 };
 
+export const editPost = (values, id) => async dispatch => {
+  try {
+    const res = await axios.patch(`/api/posts/edit/${id}`, values);
+
+    dispatch({ type: FETCH_POST, payload: res.data });
+    toast("Post edited successfully!", toastOptions);
+    // console.log(res.data)
+  } catch (err) {
+    console.error(err);
+    toast("Server error. Failed to edit post!", errorToastStyle);
+  }
+};
+
 export const deletePost = id => async dispatch => {
   try {
     await axios.delete(`/api/posts/delete/${id}`);
 
     dispatch({ type: DELETE_POST, payload: id });
     toast("Your post has been removed!", toastOptions);
-    // console.log(res.data)
   } catch (err) {
     console.error(err);
     toast("Server error. Failed to delete post!", errorToastStyle);

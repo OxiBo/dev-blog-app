@@ -8,7 +8,7 @@ module.exports = app => {
   app.get("/api/posts", isLoggedIn, async (req, res) => {
     try {
       const foundPosts = await Post.find();
-      console.log(foundPosts);
+      // console.log(foundPosts);
       return res.send(foundPosts);
     } catch (err) {
       console.error(err);
@@ -43,6 +43,22 @@ module.exports = app => {
     }
   });
 
+  app.patch("/api/posts/edit/:postId", isLoggedIn, async (req, res) => {
+    // console.log(req.body);
+    try {
+      const { title, body, image } = req.body;
+      const updatedPost = await Post.findByIdAndUpdate(req.params.postId, {
+        title,
+        body,
+        image
+      });
+      res.send(updatedPost);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send(err);
+    }
+  });
+
   app.delete("/api/posts/delete/:postId", isLoggedIn, async (req, res) => {
     try {
       await Post.findByIdAndRemove(req.params.postId);
@@ -56,7 +72,7 @@ module.exports = app => {
   // create a new post
   app.post("/api/posts/new", isLoggedIn, async (req, res) => {
     // console.log(req.body);
-    console.log(req.user);
+    // console.log(req.user);
     const { name } = req.user.bio;
     try {
       const newPost = await new Post({

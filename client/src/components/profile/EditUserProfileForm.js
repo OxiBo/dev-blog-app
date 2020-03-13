@@ -139,7 +139,7 @@ class EditUserProfile extends Component {
                 </div>
               </div>
             </div>
-            <div className="card-group">
+            <div className="card-group buttons">
               <button
                 type="button"
                 className="btn btn-primary btn-lg"
