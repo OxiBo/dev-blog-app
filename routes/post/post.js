@@ -1,7 +1,8 @@
 const mongoose = require("mongoose").set("debug", true),
   Post = mongoose.model("posts"),
   User = mongoose.model("users"),
-  isLoggedIn = require("../../middleware/isLoggedIn");
+  isLoggedIn = require("../../middleware/isLoggedIn"),
+  isAuthorizedToEditPost = require("../../middleware/isAuthorizedToEditPost");
 
 module.exports = app => {
   // get a list of all posts
@@ -43,7 +44,7 @@ module.exports = app => {
     }
   });
 
-  app.patch("/api/posts/edit/:postId", isLoggedIn, async (req, res) => {
+  app.patch("/api/posts/edit/:postId", isLoggedIn, isAuthorizedToEditPost, async (req, res) => {
     // console.log(req.body);
     try {
       const { title, body, image } = req.body;
@@ -52,6 +53,7 @@ module.exports = app => {
         body,
         image
       });
+     
       res.send(updatedPost);
     } catch (err) {
       console.error(err);

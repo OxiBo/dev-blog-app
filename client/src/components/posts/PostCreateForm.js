@@ -176,9 +176,9 @@ const validate = formValues => {
   return errors;
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ auth }) => {
   return {
-    user: state.auth
+    user: auth.user
   };
 };
 

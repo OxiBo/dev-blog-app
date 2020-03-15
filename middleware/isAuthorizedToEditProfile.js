@@ -1,4 +1,3 @@
-// isAuthorizedToEditProfile
 module.exports = (req, res, next) => {
   try {
     if (req.user && req.user._id.equals(req.params.userId)) {

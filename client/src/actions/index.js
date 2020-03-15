@@ -7,8 +7,7 @@ import {
   FETCH_USER_POSTS,
   FETCH_POST,
   FETCH_POSTS,
-  DELETE_POST,
-  EDIT_POST
+  DELETE_POST
 } from "./types";
 import { toast } from "react-toastify";
 
@@ -35,11 +34,12 @@ export const fetchUsers = () => async dispatch => {
   dispatch({ type: FETCH_USERS, payload: res.data });
 };
 
-export const editProfile = (id, values) => async dispatch => {
+export const editProfile = (id, values, history) => async dispatch => {
   try {
     const res = await axios.patch(`/api/user-profile/${id}/edit`, values);
     dispatch({ type: EDIT_PROFILE, payload: res.data });
     toast("You have successfully edited your profile!", toastOptions);
+    history.push(`/user-profile/${id}`);
   } catch (err) {
     console.error(err);
     toast("Server error. Failed to edit profile!", errorToastStyle);
@@ -59,13 +59,13 @@ export const submitNewPost = values => async dispatch => {
   }
 };
 
-export const editPost = (values, id) => async dispatch => {
+export const editPost = (values, id, history) => async dispatch => {
   try {
     const res = await axios.patch(`/api/posts/edit/${id}`, values);
 
-    dispatch({ type: FETCH_POST, payload: res.data });
+    await dispatch({ type: FETCH_POST, payload: res.data });
     toast("Post edited successfully!", toastOptions);
-    // console.log(res.data)
+    history.push(`/posts/show/${id}`);// console.log(res.data)
   } catch (err) {
     console.error(err);
     toast("Server error. Failed to edit post!", errorToastStyle);
@@ -113,7 +113,7 @@ export const fetchPosts = () => async dispatch => {
 export const fetchPost = id => async dispatch => {
   try {
     const res = await axios.get(`/api/posts/show/${id}`);
-    console.log(res);
+    console.log(res.data)
     dispatch({ type: FETCH_POST, payload: res.data });
     // history(`/user/${id}/posts`);
   } catch (err) {

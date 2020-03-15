@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default class UserCompact extends Component {
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     const { avatar, name, occupation, _id, createdAt } = this.props.user;
     return (
       <div className="card bg-light mb-0">
@@ -14,7 +14,7 @@ export default class UserCompact extends Component {
           <div className="col-md-8 user-compact-body">
             <div className="card-body">
               <h4 className="card-title">{name}</h4>
-              <p className="card-text">{occupation}</p>
+              <p className="card-text">{occupation === "Not specified" ? "" : occupation}</p>
               <p className="card-text">Since <span className="text-muted">{new Date(createdAt).toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric' } )}</span></p>
             </div>
 

@@ -11,14 +11,6 @@ import validateURL from "../../utils/validateURL";
 // import axios from "axios";
 
 class EditUserProfile extends Component {
-  async componentDidMount() {
-    // console.log(this.props);
-    await this.props.fetchCurrentUser();
-    // const user = await axios.get(
-    //   "/api/user-profile/" + this.props.match.params.userId
-    // );
-    // console.log(user);
-  }
 
   renderError({ error, touched }) {
     if (touched && error) {
@@ -71,8 +63,8 @@ class EditUserProfile extends Component {
         formValues[item[0]] = "Not specified";
       }
     });
-    this.props.editProfile(userId, formValues);
-    this.props.history.push(`/user-profile/${userId}`);
+    this.props.editProfile(userId, formValues, this.props.history);
+   
   };
 
   renderContent() {
@@ -209,7 +201,7 @@ const validate = formValues => {
 const mapStateToProps = ({ auth }) => {
   return {
     current_user: auth.current_user,
-    initialValues: auth.current_user && auth.current_user.bio
+    initialValues: (auth.current_user && auth.current_user.bio)  || {}
   };
 };
 

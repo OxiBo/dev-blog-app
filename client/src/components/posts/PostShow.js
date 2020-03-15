@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import Comments from '../comments/Comments';
 import { fetchPost, fetchCurrentUser, deletePost } from "../../actions";
 
 class PostShow extends Component {
   componentDidMount() {
-    this.props.fetchCurrentUser();
+    // this.props.fetchCurrentUser();
     this.props.fetchPost(this.props.match.params.postId);
   }
   render() {
@@ -71,7 +72,9 @@ class PostShow extends Component {
                     </button>
                   </>
                 )}
+              <button className="btn btn-success btn-lg m-3">Comment</button>
             </div>
+          <Comments />
           </div>
         </div>
       );
@@ -89,7 +92,7 @@ const mapStateToProps = ({ auth, posts }) => {
 };
 export default connect(mapStateToProps, {
   fetchPost,
-  fetchCurrentUser,
+
   deletePost
 })(PostShow);
 
