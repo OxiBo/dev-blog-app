@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
-
-export default class form extends Component {
+import NewCommentForm from './NewCommentForm';
+export default class NewComment extends Component {
     render() {
         return (
             <div>
-                <form>
-                    <input type="text"/>
-                </form>
+                <NewCommentForm />
             </div>
         )
     }

@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import NewComment from "./NewComment";
+import NewComment from "./NewCommentForm";
 import CommentsList from "./CommentsList";
 
 export default class Comments extends Component {
-    state = {
-        showComments: false
-    }
+  state = {
+    showComments: false
+  };
   render() {
     return (
       <div className="card m-3">
-        <NewComment />
+        <NewComment onSubmit={(values) => console.log(values)}/>
         <button
           onClick={() =>
             this.setState(prevState => ({
