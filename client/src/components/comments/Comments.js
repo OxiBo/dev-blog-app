@@ -9,7 +9,7 @@ export default class Comments extends Component {
   render() {
     return (
       <div className="card m-3">
-        <NewComment onSubmit={(values) => console.log(values)}/>
+        <NewComment />
         <button
           onClick={() =>
             this.setState(prevState => ({

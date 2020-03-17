@@ -7,7 +7,8 @@ import {
   FETCH_USER_POSTS,
   FETCH_POST,
   FETCH_POSTS,
-  DELETE_POST
+  DELETE_POST,
+  SUBMIT_NEW_COMMENT
 } from "./types";
 import { toast } from "react-toastify";
 
@@ -65,7 +66,7 @@ export const editPost = (values, id, history) => async dispatch => {
 
     await dispatch({ type: FETCH_POST, payload: res.data });
     toast("Post edited successfully!", toastOptions);
-    history.push(`/posts/show/${id}`);// console.log(res.data)
+    history.push(`/posts/show/${id}`); // console.log(res.data)
   } catch (err) {
     console.error(err);
     toast("Server error. Failed to edit post!", errorToastStyle);
@@ -113,11 +114,24 @@ export const fetchPosts = () => async dispatch => {
 export const fetchPost = id => async dispatch => {
   try {
     const res = await axios.get(`/api/posts/show/${id}`);
-    console.log(res.data)
+    console.log(res.data);
     dispatch({ type: FETCH_POST, payload: res.data });
     // history(`/user/${id}/posts`);
   } catch (err) {
     console.error(err);
     toast("Server error. Failed to fetch the post!", errorToastStyle);
+  }
+};
+
+export const submitNewComment = values => async dispatch => {
+  try {
+    const res = await axios.post("/api/comments/new", values);
+
+    dispatch({ type: SUBMIT_NEW_COMMENT, payload: res.data });
+
+    // console.log(res.data)
+  } catch (err) {
+    console.error(err);
+    toast("Server error. Failed to add new comment!", errorToastStyle);
   }
 };

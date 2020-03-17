@@ -10,3 +10,4 @@ export const FETCH_USER_POSTS = 'fetch_user_posts';
 export const FETCH_POST = 'fetch_post';
 export const FETCH_POSTS = 'fetch_posts';
 export const DELETE_POST = 'delete_post';
+export const SUBMIT_NEW_COMMENT = "submit_new_comment";

@@ -1,11 +1,20 @@
-import React, { Component } from 'react'
-import NewCommentForm from './NewCommentForm';
-export default class NewComment extends Component {
-    render() {
-        return (
-            <div>
-                <NewCommentForm />
-            </div>
-        )
-    }
+import React, { Component } from "react";
+import { reduxForm } from "redux-form";
+import NewCommentForm from "./NewCommentForm";
+class NewComment extends Component {
+  onSubmit = values => {
+    console.log(values);
+  };
+  render() {
+    return (
+      <div>
+        <NewCommentForm 
+        test={'it is test'}
+        onSubmit={this.onSubmit} />
+      </div>
+    );
+  }
 }
+
+
+export default reduxForm({form: "newComment"})(NewComment)
