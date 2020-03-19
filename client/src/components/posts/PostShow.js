@@ -74,7 +74,7 @@ class PostShow extends Component {
                 )}
               <button className="btn btn-success btn-lg m-3">Comment</button>
             </div>
-          <Comments />
+          <Comments postId={this.props.post._id}/>
           </div>
         </div>
       );

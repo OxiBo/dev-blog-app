@@ -7,7 +7,8 @@ const express = require("express"),
   mongoose = require("mongoose"),
   User = require("./models/User"),
   Post = require("./models/Post"),
-  isLoggedIn = require('./middleware/isLoggedin'),
+  Comment = require("./models/Comment"),
+  isLoggedIn = require("./middleware/isLoggedin"),
   app = express();
 
 app.use(cors()); // CORS is a node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options. ; https://en.wikipedia.org/wiki/Cross-origin_resource_sharing   , https://www.udemy.com/course/node-with-react-fullstack-web-development/learn/lecture/7605040?start=667#bookmarks
@@ -46,9 +47,9 @@ require("./routes/auth/githubAuth")(app);
 require("./routes/auth/auth")(app);
 require("./routes/profile/profile")(app);
 require("./routes/post/post")(app);
+require("./routes/comments/comments")(app);
 
 passport.serializeUser((user, done) => {
-  
   done(null, user.id);
 });
 
@@ -64,8 +65,6 @@ app.get("/", (req, res) => {
 
   res.send({ greeting: "Hello, blog" });
 });
-
-
 
 const PORT = process.env.PORT || 6060; // if getting error about server already running on this port - https://stackoverflow.com/questions/9898372/how-to-fix-error-listen-eaddrinuse-while-using-nodejs
 app.listen(PORT, () => {

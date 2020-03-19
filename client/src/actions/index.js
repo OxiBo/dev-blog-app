@@ -123,9 +123,10 @@ export const fetchPost = id => async dispatch => {
   }
 };
 
-export const submitNewComment = values => async dispatch => {
+export const submitNewComment = (values, postId) => async dispatch => {
   try {
-    const res = await axios.post("/api/comments/new", values);
+    // console.log(values);
+    const res = await axios.post(`/api/posts/show/${postId}/comments/new`, values );
 
     dispatch({ type: SUBMIT_NEW_COMMENT, payload: res.data });
 
