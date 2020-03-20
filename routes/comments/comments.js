@@ -6,12 +6,13 @@ const mongoose = require("mongoose"),
 //   isAuthorizedToEditComment = require("../../middleware/isAuthorizedToEditComment");
 
 module.exports = app => {
+    // get all post comments
   app.get("/api/posts/show/:postId/comments", async (req, res) => {
     try {
       const foundPost = await Post.findById(req.params.postId)
         .populate({ path: "comments", model: Comment })
         .exec();
-      console.log(foundPost);
+    //   console.log(foundPost);
       res.send(foundPost.comments);
     } catch (err) {
       console.error(err);
@@ -19,6 +20,7 @@ module.exports = app => {
     }
   });
 
+  // add new comment
   app.post("/api/posts/show/:postId/comments/new", async (req, res) => {
     try {
       const foundPost = await Post.findById(req.params.postId);

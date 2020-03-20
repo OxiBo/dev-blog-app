@@ -1,3 +1,5 @@
+import {reset} from 'redux-form';
+
 import {
   FETCH_CURRENT_USER,
   FETCH_USER,
@@ -8,7 +10,8 @@ import {
   FETCH_POST,
   FETCH_POSTS,
   DELETE_POST,
-  SUBMIT_NEW_COMMENT
+  SUBMIT_NEW_COMMENT, 
+  FETCH_COMMENTS
 } from "./types";
 import { toast } from "react-toastify";
 
@@ -129,10 +132,24 @@ export const submitNewComment = (values, postId) => async dispatch => {
     const res = await axios.post(`/api/posts/show/${postId}/comments/new`, values );
 
     dispatch({ type: SUBMIT_NEW_COMMENT, payload: res.data });
-
+    dispatch(reset('newComment'))
     // console.log(res.data)
   } catch (err) {
     console.error(err);
     toast("Server error. Failed to add new comment!", errorToastStyle);
+  }
+};
+
+
+export const fetchComments = (postId) => async dispatch => {
+  try {
+    const res = await axios.get(`/api/posts/show/${postId}/comments`);
+    // console.log(res);
+    dispatch({ type: FETCH_COMMENTS, payload: res.data });
+    // history(`/user/${id}/posts`);
+  } catch (err) {
+    console.error(err);
+    toast("Server error. Failed to fetch posts!", errorToastStyle);
+    // history.goBack();
   }
 };

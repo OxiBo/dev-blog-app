@@ -17,7 +17,7 @@ class PostShow extends Component {
         <div className="container col-lg-10 ">
           <div className="card mb-3">
             <h4 className="card-header text-center p-4">{title}</h4>
-            <div className="row no-gutters m-3">
+            <div className="row no-gutters mb-1">
               {image && (
                 <div className="col-md-4">
                   <img
@@ -29,10 +29,10 @@ class PostShow extends Component {
               )}
 
               <div className={`col-md-${image ? "8" : "12"}`}>
-                <div className="card-body">
+                <div className="card-body p-1 ">
                   {/* <h5 className="card-title text-center">{title}</h5> */}
-                  <p className="card-text">{body}</p>
-                  <p className="card-text  text-right">
+                  <p className="card-text mr-3 ml-3 mb-0">{body}</p>
+                  <p className="card-text  text-right p-1 pr-3">
                     <Link
                       to={`/user-profile/${user.id}`}
                       className="text-muted"
@@ -44,10 +44,10 @@ class PostShow extends Component {
                 </div>
               </div>
             </div>
-            <div className="card-group buttons">
+            <div className="card-group buttons m-0 p-0">
               <button
                 onClick={() => this.props.history.goBack()}
-                className="btn btn-primary btn-lg m-3"
+                className="btn btn-primary btn-lg m-0 p-2"
               >
                 Go Back
               </button>
@@ -56,7 +56,7 @@ class PostShow extends Component {
                   <>
                     <Link
                       to={`/posts/edit/${_id}`}
-                      className="btn btn-warning btn-lg m-3"
+                      className="btn btn-warning btn-lg m-0 p-2"
                     >
                       Edit
                     </Link>
@@ -66,15 +66,15 @@ class PostShow extends Component {
                         this.props.deletePost(_id);
                         this.props.history.goBack();
                       }}
-                      className="btn btn-danger btn-lg m-3"
+                      className="btn btn-danger btn-lg m-0 p-2"
                     >
                       Delete
                     </button>
                   </>
                 )}
-              <button className="btn btn-success btn-lg m-3">Comment</button>
+              <button className="btn btn-success btn-lg m-0 p-2">Comment</button>
             </div>
-          <Comments postId={this.props.post._id}/>
+          <Comments />
           </div>
         </div>
       );
