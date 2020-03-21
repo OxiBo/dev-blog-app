@@ -1,16 +1,43 @@
-.user-tiny{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  
-    .user-icon-container {
-        margin: 0.7rem;
-        border-radius: 50%;
-     }
+li.list-group-item {
+  padding: 0 0.7rem;
+  a {
+    text-decoration: none;
+    color: black;
+  }
+  p.text-muted {
+    font-size: 0.8rem;
+  }
 }
 
+.user-tiny {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
+  .user-icon-container {
+    margin: 0.7rem;
+    border-radius: 50%;
+  }
+}
 
+// buttons next and back, cancel, edit
+.buttons-small {
+  display: flex;
+  justify-content: flex-end !important;
+  button.btn,
+  .btn-outline-warning,
+  .btn-outline-success a {
+    display: inline !important;
+    margin: 0.1rem 0.5rem;
+    width: 7rem;
+  }
+  a.btn-outline-warning,
+  button.btn-outline-warning,
+  button.btn-outline-success {
+    // margin-left: auto!important;
+    //   color: white;
+  }
+}
 
 // .user-icon-container {
 //   display: inline-block;

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 
 class CommentSingle extends Component {
@@ -8,12 +9,12 @@ class CommentSingle extends Component {
       <li className="list-group-item">
         <div className="row no-gutters col-md-12">
           <div className="col-md-2 text-center user-tiny">
-            <p className="text-center p-1 m-1">{user.name}</p>
+            <p className="text-center p-1 m-1"><Link to={`/user-profile/${user.id}`}>{user.name}</Link></p>
           </div>
           <div className="col-md-10">
             <div className="card-body p-1 m-1">
               <p className="card-text m-1">{text}</p>
-              <p className="text-muted m-0 text-right">
+              <p className="text-muted m-0 text-right font-italic">
                 {new Date(createdAt).toLocaleString("en-US", {
                   year: "numeric",
                   month: "long",
@@ -23,16 +24,14 @@ class CommentSingle extends Component {
                   hour24: true
                 })}
               </p>
-              { this.props.current_user._id === user.id ? (
-<div className="card-group buttons m-0 p-0">
-<button className="btn btn-sm btn-warning">
-    Edit
-</button>
-<button className="btn btn-sm btn-danger">
-    Delete
-</button>
-</div>
-              ) : ""}
+              {this.props.current_user._id === user.id ? (
+                <div className="card-group buttons-small m-0 p-0">
+                  <button className="btn btn-sm btn-outline-warning">Edit</button>
+                  <button className="btn btn-sm btn-outline-danger">Delete</button>
+                </div>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </div>
