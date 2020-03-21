@@ -38,7 +38,6 @@ class NewCommentForm extends Component {
   };
 
   render() {
-    // console.log(this.props);
     const {
       bio: { avatar, name }
     } = this.props.current_user;
@@ -84,6 +83,10 @@ const validate = formValues => {
   const errors = {};
 
   // TODO: correct the maximum length before deployment
+
+  if (!formValues.commentBody) {
+    errors.commentBody = "You must enter your comment";
+  }
   if (
     formValues.commentBody &&
     (formValues.commentBody.trim().length > 500 ||

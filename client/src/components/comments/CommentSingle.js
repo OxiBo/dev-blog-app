@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
-export default class CommentSingle extends Component {
+class CommentSingle extends Component {
   render() {
     const { text, user, createdAt } = this.props.comment;
     return (
@@ -22,6 +23,16 @@ export default class CommentSingle extends Component {
                   hour24: true
                 })}
               </p>
+              { this.props.current_user._id === user.id ? (
+<div className="card-group buttons m-0 p-0">
+<button className="btn btn-sm btn-warning">
+    Edit
+</button>
+<button className="btn btn-sm btn-danger">
+    Delete
+</button>
+</div>
+              ) : ""}
             </div>
           </div>
         </div>
@@ -29,3 +40,11 @@ export default class CommentSingle extends Component {
     );
   }
 }
+
+const mapStateToProps = ({ auth }) => {
+  return {
+    current_user: auth.current_user
+  };
+};
+
+export default connect(mapStateToProps)(CommentSingle);
