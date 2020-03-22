@@ -1,15 +1,18 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { deleteComment } from "../../actions";
 
 class CommentSingle extends Component {
   render() {
-    const { text, user, createdAt } = this.props.comment;
+    const { _id, text, user, createdAt } = this.props.comment;
     return (
       <li className="list-group-item">
         <div className="row no-gutters col-md-12">
           <div className="col-md-2 text-center user-tiny">
-            <p className="text-center p-1 m-1"><Link to={`/user-profile/${user.id}`}>{user.name}</Link></p>
+            <p className="text-center p-1 m-1">
+              <Link to={`/user-profile/${user.id}`}>{user.name}</Link>
+            </p>
           </div>
           <div className="col-md-10">
             <div className="card-body p-1 m-1">
@@ -24,14 +27,35 @@ class CommentSingle extends Component {
                   hour24: true
                 })}
               </p>
-              {this.props.current_user._id === user.id ? (
-                <div className="card-group buttons-small m-0 p-0">
-                  <button className="btn btn-sm btn-outline-warning">Edit</button>
-                  <button className="btn btn-sm btn-outline-danger">Delete</button>
-                </div>
-              ) : (
-                ""
-              )}
+              <div className="card-group buttons-small m-0 p-0">
+                {// TODO - optimize this part of the code: buttons rendering
+                this.props.current_user._id === user.id ? (
+                  <>
+                    <button className="btn btn-sm btn-outline-warning">
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => {
+                        this.props.deleteComment(_id, this.props.post._id);
+                      }}
+                      className="btn btn-sm btn-outline-danger"
+                    >
+                      Delete
+                    </button>
+                  </>
+                ) : this.props.current_user._id === this.props.post.user.id ? (
+                  <button
+                    onClick={() => {
+                      this.props.deleteComment(_id, this.props.post._id);
+                    }}
+                    className="btn btn-sm btn-outline-danger"
+                  >
+                    Delete
+                  </button>
+                ) : (
+                  ""
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -40,10 +64,34 @@ class CommentSingle extends Component {
   }
 }
 
-const mapStateToProps = ({ auth }) => {
+const mapStateToProps = ({ auth, posts }) => {
   return {
-    current_user: auth.current_user
+    current_user: auth.current_user,
+    post: posts.post
   };
 };
 
-export default connect(mapStateToProps)(CommentSingle);
+export default connect(mapStateToProps, { deleteComment })(CommentSingle);
+
+/*
+
+
+  {this.props.current_user._id === user.id ? (
+                <div className="card-group buttons-small m-0 p-0">
+                  <button className="btn btn-sm btn-outline-warning">
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => {
+                      this.props.deleteComment(_id, this.props.post._id);
+                    }}
+                    className="btn btn-sm btn-outline-danger"
+                  >
+                    Delete
+                  </button>
+                </div>
+              ) : (
+                ""
+              )}
+
+*/

@@ -1,4 +1,4 @@
-import {reset} from 'redux-form';
+import { reset } from "redux-form";
 
 import {
   FETCH_CURRENT_USER,
@@ -10,8 +10,9 @@ import {
   FETCH_POST,
   FETCH_POSTS,
   DELETE_POST,
-  SUBMIT_NEW_COMMENT, 
-  FETCH_COMMENTS
+  SUBMIT_NEW_COMMENT,
+  FETCH_COMMENTS,
+  DELETE_COMMENT
 } from "./types";
 import { toast } from "react-toastify";
 
@@ -129,10 +130,13 @@ export const fetchPost = id => async dispatch => {
 export const submitNewComment = (values, postId) => async dispatch => {
   try {
     // console.log(values);
-    const res = await axios.post(`/api/posts/show/${postId}/comments/new`, values );
+    const res = await axios.post(
+      `/api/posts/show/${postId}/comments/new`,
+      values
+    );
 
     dispatch({ type: SUBMIT_NEW_COMMENT, payload: res.data });
-    dispatch(reset('newComment'))
+    dispatch(reset("newComment"));
     // console.log(res.data)
   } catch (err) {
     console.error(err);
@@ -140,8 +144,7 @@ export const submitNewComment = (values, postId) => async dispatch => {
   }
 };
 
-
-export const fetchComments = (postId) => async dispatch => {
+export const fetchComments = postId => async dispatch => {
   try {
     const res = await axios.get(`/api/posts/show/${postId}/comments`);
     // console.log(res);
@@ -151,5 +154,17 @@ export const fetchComments = (postId) => async dispatch => {
     console.error(err);
     toast("Server error. Failed to fetch posts!", errorToastStyle);
     // history.goBack();
+  }
+};
+
+export const deleteComment = (id, postId) => async dispatch => {
+  try {
+    await axios.delete(`/api/posts/show/${postId}/comments/${id}`);
+
+    dispatch({ type: DELETE_COMMENT, payload: id });
+    toast("Your comment has been removed!", toastOptions);
+  } catch (err) {
+    console.error(err);
+    toast("Server error. Failed to delete comment!", errorToastStyle);
   }
 };

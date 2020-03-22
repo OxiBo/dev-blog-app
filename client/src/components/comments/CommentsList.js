@@ -7,6 +7,12 @@ class CommentsList extends Component {
   componentDidMount() {
     this.props.fetchComments(this.props.postId);
   }
+
+//   shouldComponentUpdate(nextProps, nextState) {
+//     if (this.props.comments.length > nextProps.comments.length) {
+//       this.props.fetchComments(this.props.postId);
+//     }
+//   }
   render() {
     return (
       <>
@@ -15,7 +21,7 @@ class CommentsList extends Component {
             Nobody left a comment yet...
           </div>
         ) : (
-          <ul className="list-group mt-4">
+          <ul className="list-group mt-4 comments">
             {this.props.comments.map(comment => (
               <CommentSingle key={comment._id} comment={comment} />
             ))}
@@ -29,7 +35,9 @@ class CommentsList extends Component {
 const mapStateToProps = ({ posts, comments }) => {
   return {
     postId: posts.post._id,
-    comments: comments.comments.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt))
+    comments: comments.comments.sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    )
   };
 };
 

@@ -12,3 +12,4 @@ export const FETCH_POSTS = 'fetch_posts';
 export const DELETE_POST = 'delete_post';
 export const SUBMIT_NEW_COMMENT = "submit_new_comment";
 export const FETCH_COMMENTS = 'fetch_comments';
+export const DELETE_COMMENT = 'delete_comment'

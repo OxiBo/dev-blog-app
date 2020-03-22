@@ -1,4 +1,4 @@
-import { SUBMIT_NEW_COMMENT, FETCH_COMMENTS } from "../actions/types";
+import { SUBMIT_NEW_COMMENT, FETCH_COMMENTS, DELETE_COMMENT } from "../actions/types";
 
 const defaultCommentReducer = {
   comment: null,
@@ -16,6 +16,13 @@ export default  (state = defaultCommentReducer, action) => {
           return {
               ...state,
               comments: action.payload
+          }
+          case DELETE_COMMENT: 
+          return {
+              ...state,
+              comments: state.comments.filter(comment => {
+                  return comment._id !== action.payload
+              })
           }
     default:
       return state;
