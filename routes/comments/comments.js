@@ -3,7 +3,7 @@ const mongoose = require("mongoose"),
   User = mongoose.model("users"),
   Comment = mongoose.model("comments"),
   isLoggedIn = require("../../middleware/isLoggedIn");
-//   isAuthorizedToEditComment = require("../../middleware/isAuthorizedToEditComment");
+  isAuthorizedToDeleteComment = require("../../middleware/isAuthorizedToDeleteComment");
 
 module.exports = app => {
   // get all post comments
@@ -45,7 +45,7 @@ module.exports = app => {
   );
 
   // TODO - create middleware that checks the right to delete a comment
-  app.delete("/api/posts/show/:postId/comments/:id", async (req, res) => {
+  app.delete("/api/posts/show/:postId/comments/:id", isAuthorizedToDeleteComment, async (req, res) => {
       console.log(req.params.id)
     try {
       await Comment.findByIdAndRemove(req.params.id);

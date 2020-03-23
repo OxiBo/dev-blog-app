@@ -72,7 +72,6 @@ class PostShow extends Component {
                     </button>
                   </>
                 )}
-              <button className="btn btn-success btn-lg m-0 p-2">Comment</button>
             </div>
           <Comments />
           </div>
