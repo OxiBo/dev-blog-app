@@ -56,9 +56,9 @@ class PostCreateForm extends Component {
     );
   };
 
-    // onSubmit = values => {
-    //   console.log(values);
-    // };
+  // onSubmit = values => {
+  //   console.log(values);
+  // };
 
   renderTextarea = ({ input, meta, name, label, type, placeholder, rows }) => {
     const className = `col-sm-4 col-form-label text-uppercase font-weight-bold text-right ${
@@ -94,10 +94,12 @@ class PostCreateForm extends Component {
     return (
       <div className="container">
         <div className="card">
-          <h3 className="card-header text-center p-4">{this.props.formTitle ? "Edit Post" : "New Post"}</h3>
+          <h3 className="card-header text-center p-4">
+            {this.props.formTitle ? "Edit Post" : "New Post"}
+          </h3>
           <form
             action=""
-            onSubmit={this.props.handleSubmit((values) =>
+            onSubmit={this.props.handleSubmit(values =>
               this.props.onSubmit(values)
             )}
             className="needs-validation m-4"
@@ -129,7 +131,7 @@ class PostCreateForm extends Component {
 
             <div className="card-group buttons">
               <button
-                onClick={() => this.props.history.push('/posts')}
+                onClick={() => this.props.history.push("/posts")}
                 className="btn btn-primary btn-lg m-3"
               >
                 Cancel
@@ -184,6 +186,8 @@ const mapStateToProps = ({ auth }) => {
 
 export default withRouter(
   connect(mapStateToProps)(
-    reduxForm({ form: "createPost", destroyOnUnmount: false,validate })(PostCreateForm)
+    reduxForm({ form: "createPost", destroyOnUnmount: false, validate })(
+      PostCreateForm
+    )
   )
 );

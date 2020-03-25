@@ -9,11 +9,11 @@ export default class Comments extends Component {
     showComments: false
   };
 
-  async componentDidMount(){
-      console.log(this.props)
-// const comments = await axios.get(`/api/posts/show/${this.props.postId}/comments`)
-// console.log(comments)
-  }
+//   async componentDidMount(){
+//       console.log(this.props)
+// // const comments = await axios.get(`/api/posts/show/${this.props.postId}/comments`)
+// // console.log(comments)
+//   }
   render() {
     return (
       <div className="card m-3">

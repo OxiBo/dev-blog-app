@@ -12,7 +12,9 @@ class NewComment extends Component {
   render() {
     return (
       <div>
-        <NewCommentForm onSubmit={this.onSubmit} />
+        <NewCommentForm 
+        form={"newComment"}
+        onSubmit={this.onSubmit} />
       </div>
     );
   }

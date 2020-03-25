@@ -12,7 +12,8 @@ import {
   DELETE_POST,
   SUBMIT_NEW_COMMENT,
   FETCH_COMMENTS,
-  DELETE_COMMENT
+  DELETE_COMMENT,
+  EDIT_COMMENT
 } from "./types";
 import { toast } from "react-toastify";
 
@@ -166,5 +167,19 @@ export const deleteComment = (id, postId) => async dispatch => {
   } catch (err) {
     console.error(err);
     toast("Server error. Failed to delete comment!", errorToastStyle);
+  }
+};
+
+
+export const editComment = (values, commentId, postId) => async dispatch => {
+  try {
+    const res = await axios.patch(`/api/posts/show/${postId}/comments/edit/${commentId}`, values);
+console.log(res.data)
+    await dispatch({ type: EDIT_COMMENT, payload: res.data });
+    // toast("Post edited successfully!", toastOptions);
+    // history.push(`/posts/show/${id}`); // console.log(res.data)
+  } catch (err) {
+    console.error(err);
+    toast("Server error. Failed to edit comment!", errorToastStyle);
   }
 };

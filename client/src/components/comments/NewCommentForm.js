@@ -3,10 +3,10 @@ import { reduxForm, Field } from "redux-form";
 import { connect } from "react-redux";
 
 class NewCommentForm extends Component {
-  // onSubmit = values => {
-  //   this.props.onSubmit(values);
-  //   console.log(values);
-  // };
+  onSubmit = values => {
+    this.props.onSubmit(values);
+    console.log(values);
+  };
 
   renderError({ error, touched }) {
     if (touched && error) {
@@ -38,6 +38,7 @@ class NewCommentForm extends Component {
   };
 
   render() {
+    // console.log(this.props);
     const {
       bio: { avatar, name }
     } = this.props.current_user;
@@ -52,7 +53,11 @@ class NewCommentForm extends Component {
         </div>
         <div className="col-md-10">
           <div className="card-body">
-            <h5 className="card-title text-center">Add comment</h5>
+            <h5 className="card-title text-center">
+              {this.props.form === "editCommentForm"
+                ? "Edit comment"
+                : "Add comment"}
+            </h5>
             <form
               className=""
               onSubmit={this.props.handleSubmit(values =>
@@ -61,12 +66,20 @@ class NewCommentForm extends Component {
             >
               <Field
                 type="textarea"
-                name="commentBody"
+                name="text"
                 component={this.renderTextarea}
                 placeholder="Enter text"
                 rows="4"
               />
               <div className="buttons">
+                {this.props.form === "editCommentForm" && (
+                  <button
+                    className="btn btn-md btn-primary ml-auto m-2"
+                    onClick={this.props.onCancel}
+                  >
+                    Cancel
+                  </button>
+                )}
                 <button className="btn btn-md btn-success ml-auto m-2">
                   Submit
                 </button>
@@ -84,15 +97,14 @@ const validate = formValues => {
 
   // TODO: correct the maximum length before deployment
 
-  if (!formValues.commentBody) {
-    errors.commentBody = "You must enter your comment";
+  if (!formValues.text) {
+    errors.text = "You must enter your comment";
   }
   if (
-    formValues.commentBody &&
-    (formValues.commentBody.trim().length > 500 ||
-      formValues.commentBody.trim().length < 2)
+    formValues.text &&
+    (formValues.text.trim().length > 500 || formValues.text.trim().length < 2)
   ) {
-    errors.commentBody = "Your text is either too long or too short";
+    errors.text = "Your text is either too long or too short";
   }
 
   return errors;
@@ -105,5 +117,5 @@ const mapStateToProps = ({ auth }) => {
 };
 
 export default connect(mapStateToProps)(
-  reduxForm({ form: "newComment", validate })(NewCommentForm)
+  reduxForm({ validate, enableReinitialize: true })(NewCommentForm)
 );

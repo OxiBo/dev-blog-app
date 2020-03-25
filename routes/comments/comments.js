@@ -3,7 +3,7 @@ const mongoose = require("mongoose"),
   User = mongoose.model("users"),
   Comment = mongoose.model("comments"),
   isLoggedIn = require("../../middleware/isLoggedIn");
-  isAuthorizedToDeleteComment = require("../../middleware/isAuthorizedToDeleteComment");
+isAuthorizedToDeleteComment = require("../../middleware/isAuthorizedToDeleteComment");
 
 module.exports = app => {
   // get all post comments
@@ -28,7 +28,7 @@ module.exports = app => {
       try {
         const foundPost = await Post.findById(req.params.postId);
         const newComment = await new Comment({
-          text: req.body.commentBody,
+          text: req.body.text,
           user: { id: req.user._id, name: req.user.bio.name },
           post: req.params.postId
         }).save();
@@ -44,15 +44,42 @@ module.exports = app => {
     }
   );
 
-  // TODO - create middleware that checks the right to delete a comment
-  app.delete("/api/posts/show/:postId/comments/:id", isAuthorizedToDeleteComment, async (req, res) => {
-      console.log(req.params.id)
-    try {
-      await Comment.findByIdAndRemove(req.params.id);
-      res.send({});
-    } catch (err) {
-      console.error(err);
-      res.status(500).send(err);
+  //  create middleware for checking the right to edit post
+  app.patch(
+    "/api/posts/show/:postId/comments/edit/:commentId",
+    isLoggedIn,
+    async (req, res) => {
+      console.log(req.body);
+      try {
+        const { text, createdAt } = req.body;
+        const updatedComment = await Comment.findByIdAndUpdate(
+          req.params.commentId,
+          {
+            text,
+            createdAt
+          }, {new: true}
+        );
+        console.log(updatedComment);
+        res.send(updatedComment);
+      } catch (err) {
+        console.error(err);
+        res.status(500).send(err);
+      }
     }
-  });
+  );
+
+  app.delete(
+    "/api/posts/show/:postId/comments/:id",
+    isAuthorizedToDeleteComment,
+    async (req, res) => {
+      console.log(req.params.id);
+      try {
+        await Comment.findByIdAndRemove(req.params.id);
+        res.send({});
+      } catch (err) {
+        console.error(err);
+        res.status(500).send(err);
+      }
+    }
+  );
 };
