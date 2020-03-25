@@ -3,7 +3,8 @@ const mongoose = require("mongoose"),
   User = mongoose.model("users"),
   Comment = mongoose.model("comments"),
   isLoggedIn = require("../../middleware/isLoggedIn");
-isAuthorizedToDeleteComment = require("../../middleware/isAuthorizedToDeleteComment");
+(isAuthorizedToDeleteComment = require("../../middleware/isAuthorizedToDeleteComment")),
+  (isAuthorizedToEditComment = require("../../middleware/isAuthorizedToEditComment"));
 
 module.exports = app => {
   // get all post comments
@@ -27,9 +28,14 @@ module.exports = app => {
     async (req, res) => {
       try {
         const foundPost = await Post.findById(req.params.postId);
+        const user = await User.findById(req.user._id);
         const newComment = await new Comment({
           text: req.body.text,
-          user: { id: req.user._id, name: req.user.bio.name },
+          user: {
+            id: req.user._id,
+            name: req.user.bio.name,
+            avatar: user.bio.avatar
+          },
           post: req.params.postId
         }).save();
         await foundPost.comments.push(newComment);
@@ -48,8 +54,9 @@ module.exports = app => {
   app.patch(
     "/api/posts/show/:postId/comments/edit/:commentId",
     isLoggedIn,
+    isAuthorizedToEditComment,
     async (req, res) => {
-      console.log(req.body);
+      // console.log(req.body);
       try {
         const { text, createdAt } = req.body;
         const updatedComment = await Comment.findByIdAndUpdate(
@@ -57,9 +64,10 @@ module.exports = app => {
           {
             text,
             createdAt
-          }, {new: true}
+          },
+          { new: true } // to get new updated comment back
         );
-        console.log(updatedComment);
+        // console.log(updatedComment);
         res.send(updatedComment);
       } catch (err) {
         console.error(err);

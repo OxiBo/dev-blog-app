@@ -2,3 +2,6 @@
 
 
  * initialValues in redux-form - https://medium.com/@1sherlynn/react-redux-form-two-ways-to-add-initial-values-ab48daa0a32e
+
+
+ * i had a warning 'Form submission canceled because the form is not connected' https://github.com/redux-form/redux-form/issues/2679 

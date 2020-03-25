@@ -1,18 +1,17 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { deleteComment } from "../../actions";
+import { deleteComment, renderEditComment } from "../../actions";
 import EditComment from "./EditComment";
 
 class CommentSingle extends Component {
-  state = {
-    showEditCommentForm: false
-  };
+  //   state = {
+  //     showEditCommentForm: false
+  //   };
 
   onCancel = () => {
-    this.setState({ showEditCommentForm: false })
-  }
-  
+    this.props.renderEditComment();
+  };
 
   renderButtons() {
     const { _id, user } = this.props.comment;
@@ -20,7 +19,7 @@ class CommentSingle extends Component {
       <>
         <button
           className="btn btn-sm btn-outline-warning"
-          onClick={() => this.setState({ showEditCommentForm: true })}
+          onClick={() => this.props.renderEditComment(_id)}
         >
           Edit
         </button>
@@ -47,18 +46,28 @@ class CommentSingle extends Component {
     );
   }
   render() {
-    const { text, user, createdAt } = this.props.comment;
-// console.log(this.state)
+    const { text, user, createdAt, _id } = this.props.comment;
+    // console.log(this.state)
+    const { id, avatar, name } = user;
     return (
       <>
-        {this.state.showEditCommentForm ? (
-         <EditComment comment={this.props.comment} onCancel={this.onCancel}/>
+        {this.props.renderEditForm === _id ? (
+          <EditComment comment={this.props.comment} onCancel={this.onCancel} />
         ) : (
           <li className="list-group-item">
             <div className="row no-gutters col-md-12">
               <div className="col-md-2 text-center user-tiny">
-                <p className="text-center p-1 m-1">
-                  <Link to={`/user-profile/${user.id}`}>{user.name}</Link>
+                <div className="user-icon-container m-2">
+                  {avatar && ( // change this before deployment
+                    <img
+                      src={avatar}
+                      className="card-img user-icon"
+                      alt="..."
+                    />
+                  )}
+                </div>
+                <p className="text-center p-0 m-0 mb-2">
+                  <Link to={`/user-profile/${id}`}>{name}</Link>
                 </p>
               </div>
               <div className="col-md-10">
@@ -81,20 +90,23 @@ class CommentSingle extends Component {
               </div>
             </div>
           </li>
-        ) }
+        )}
       </>
     );
   }
 }
 
-const mapStateToProps = ({ auth, posts }) => {
+const mapStateToProps = ({ auth, posts, comments }) => {
   return {
     current_user: auth.current_user,
-    post: posts.post
+    post: posts.post,
+    renderEditForm: comments.renderEditForm
   };
 };
 
-export default connect(mapStateToProps, { deleteComment })(CommentSingle);
+export default connect(mapStateToProps, { deleteComment, renderEditComment })(
+  CommentSingle
+);
 
 /*
 

@@ -13,7 +13,8 @@ import {
   SUBMIT_NEW_COMMENT,
   FETCH_COMMENTS,
   DELETE_COMMENT,
-  EDIT_COMMENT
+  EDIT_COMMENT,
+  RENDER_EDIT_COMMENT
 } from "./types";
 import { toast } from "react-toastify";
 
@@ -119,7 +120,6 @@ export const fetchPosts = () => async dispatch => {
 export const fetchPost = id => async dispatch => {
   try {
     const res = await axios.get(`/api/posts/show/${id}`);
-    console.log(res.data);
     dispatch({ type: FETCH_POST, payload: res.data });
     // history(`/user/${id}/posts`);
   } catch (err) {
@@ -170,11 +170,13 @@ export const deleteComment = (id, postId) => async dispatch => {
   }
 };
 
-
 export const editComment = (values, commentId, postId) => async dispatch => {
   try {
-    const res = await axios.patch(`/api/posts/show/${postId}/comments/edit/${commentId}`, values);
-console.log(res.data)
+    const res = await axios.patch(
+      `/api/posts/show/${postId}/comments/edit/${commentId}`,
+      values
+    );
+    console.log(res.data);
     await dispatch({ type: EDIT_COMMENT, payload: res.data });
     // toast("Post edited successfully!", toastOptions);
     // history.push(`/posts/show/${id}`); // console.log(res.data)
@@ -182,4 +184,11 @@ console.log(res.data)
     console.error(err);
     toast("Server error. Failed to edit comment!", errorToastStyle);
   }
+};
+
+export const renderEditComment = (id = "") => {
+  return {
+    type: RENDER_EDIT_COMMENT,
+    payload: id
+  };
 };

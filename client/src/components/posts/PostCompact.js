@@ -24,7 +24,7 @@ class PostCompact extends Component {
             <div className={`col-md-${image ? "8" : "12"}`}>
               <div className="card-body">
                 <h5 className="card-title text-center">{title}</h5>
-                <p className="card-text">
+                <p className="card-text text-justify">
                   {body.length > 250 ? body.substring(0, 350) + "..." : body}
                 </p>
                 <div className="d-flex justify-content-between">

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Comments from '../comments/Comments';
-import { fetchPost, fetchCurrentUser, deletePost } from "../../actions";
+import { fetchPost, deletePost } from "../../actions";
 
 class PostShow extends Component {
   componentDidMount() {
@@ -31,7 +31,7 @@ class PostShow extends Component {
               <div className={`col-md-${image ? "8" : "12"}`}>
                 <div className="card-body p-1 ">
                   {/* <h5 className="card-title text-center">{title}</h5> */}
-                  <p className="card-text mr-3 ml-3 mb-0">{body}</p>
+                  <p className="card-text mr-3 ml-3 mb-0 text-justify">{body}</p>
                   <p className="card-text  text-right p-1 pr-3">
                     <Link
                       to={`/user-profile/${user.id}`}

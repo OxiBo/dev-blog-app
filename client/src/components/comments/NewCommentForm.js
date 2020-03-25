@@ -3,10 +3,10 @@ import { reduxForm, Field } from "redux-form";
 import { connect } from "react-redux";
 
 class NewCommentForm extends Component {
-  onSubmit = values => {
-    this.props.onSubmit(values);
-    console.log(values);
-  };
+  // onSubmit = values => {
+  //   this.props.onSubmit(values);
+  //   // console.log(values);
+  // };
 
   renderError({ error, touched }) {
     if (touched && error) {
@@ -73,7 +73,7 @@ class NewCommentForm extends Component {
               />
               <div className="buttons">
                 {this.props.form === "editCommentForm" && (
-                  <button
+                  <button type="button" // https://github.com/redux-form/redux-form/issues/2679
                     className="btn btn-md btn-primary ml-auto m-2"
                     onClick={this.props.onCancel}
                   >
@@ -117,5 +117,5 @@ const mapStateToProps = ({ auth }) => {
 };
 
 export default connect(mapStateToProps)(
-  reduxForm({ validate, enableReinitialize: true })(NewCommentForm)
+  reduxForm({ validate, destroyOnUnmount: false, enableReinitialize: true })(NewCommentForm)
 );

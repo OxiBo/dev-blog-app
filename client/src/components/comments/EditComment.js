@@ -2,15 +2,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 // import { reduxForm } from "redux-form";
 import NewCommentForm from "./NewCommentForm";
-import { editComment } from '../../actions';
+import { editComment } from "../../actions";
 
 class EditComment extends Component {
   onSubmit = values => {
     // console.log(values);
     this.props.onCancel();
     // console.log(values);
-    this.props.editComment(values, this.props.comment._id, this.props.post._id, this.props.current_user._id)
+    this.props.editComment(values, this.props.comment._id, this.props.post._id);
   };
+
   render() {
     return (
       <div>
@@ -32,7 +33,4 @@ const mapStateToProps = ({ auth, posts }) => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { editComment }
-)(EditComment);
+export default connect(mapStateToProps, { editComment })(EditComment);
