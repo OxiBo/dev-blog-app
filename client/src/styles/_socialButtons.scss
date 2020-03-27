@@ -27,6 +27,18 @@
     // opacity: !important;
 }
 
+.btn-twitter{
+    background-color: #38A1F3;
+    color: white;
+    i{
+        padding: 5px;
+    }
+}
+.btn-twitter.dropdown-item:hover{
+    background-color: #00B6F1;
+    color: white;
+    // opacity: !important;
+}
 
 i.fa-sign-out{
     color: black;

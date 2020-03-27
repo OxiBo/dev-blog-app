@@ -44,6 +44,7 @@ app.use(passport.session()); // has to be put before requiring auth routes
 //requiring routes
 require("./routes/auth/googleAuth")(app);
 require("./routes/auth/githubAuth")(app);
+require("./routes/auth/twitterAuth")(app);
 require("./routes/auth/auth")(app);
 require("./routes/profile/profile")(app);
 require("./routes/post/post")(app);
@@ -54,9 +55,13 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
-    done(err, user);
-  });
+  try {
+    User.findById(id, (err, user) => {
+      done(err, user);
+    });
+  } catch (err) {
+    done(new Error("Failed to deserialize user"));
+  }
 });
 
 app.get("/", (req, res) => {

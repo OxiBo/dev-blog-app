@@ -35,8 +35,9 @@ class Header extends Component {
           >
             <i className="fa fa-github"> </i> with GitHub
           </a>
-          <a className="dropdown-item" href="#">
-            with Twitter
+          <a className="dropdown-item btn btn-block btn-social btn-twitter"
+           href="/auth/twitter">
+          <i className="fa fa-twitter"> </i> with Twitter
           </a>
         </div>
       </li>

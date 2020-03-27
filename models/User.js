@@ -28,6 +28,12 @@ const userSchema = new Schema({
     name: String,
     token: String
   },
+  twitter: {
+    id: String,
+    email: String,
+    name: String,
+    token: String
+  },
   createdAt: { type: Date, default: Date.now() }
 });
 

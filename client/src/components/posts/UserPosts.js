@@ -17,7 +17,15 @@ class UserPosts extends Component {
     // console.log(this.props);
     return (
       <div>
-        {this.props.user_posts && <PostsList posts={this.props.user_posts} />}
+        {this.props.user_posts.length ? (
+          <PostsList posts={this.props.user_posts} />
+        ) : (
+          <div className="card m-3">
+            <div className="list-group m-2 p-2 text-center">
+              You don't have posts yet
+            </div>
+          </div>
+        )}
       </div>
     );
   }
