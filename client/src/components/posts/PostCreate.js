@@ -22,7 +22,7 @@ class PostCreate extends Component {
             />
           )
         ) : (
-          <div></div>
+          ""
         )}
       </div>
     );

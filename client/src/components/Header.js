@@ -78,6 +78,21 @@ class Header extends Component {
                       Blog Posts <span className="sr-only">(current)</span>
                     </Link>{" "}
                   </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/users">
+                      Our bloggers
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/posts/new">
+                      New Post
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to={`/user/${current_user._id}/posts/drafts`}>
+                      My drafts
+                    </Link>
+                  </li>
                   <li className="nav-item active">
                     <Link
                       className="nav-link"
@@ -86,16 +101,8 @@ class Header extends Component {
                       My Posts <span className="sr-only">(current)</span>
                     </Link>{" "}
                   </li>
-                  <li className="nav-item">
-                    <Link className="nav-link" to="/posts/new">
-                      New Post
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link" to="/users">
-                      Our bloggers
-                    </Link>
-                  </li>
+                 
+                 
                 </>
               ) : (
                 ""

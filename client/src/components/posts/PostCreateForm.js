@@ -137,7 +137,7 @@ class PostCreateForm extends Component {
                 Cancel
               </button>
               <button type="submit" className="btn btn-success btn-lg m-3">
-                {this.props.formTitle ? "Submit" : "Next"}
+                {this.props.formTitle ? "Submit" : "View draft"}
               </button>
             </div>
           </form>

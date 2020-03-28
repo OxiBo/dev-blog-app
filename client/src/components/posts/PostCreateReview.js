@@ -1,16 +1,17 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
+import { reduxForm, Field } from "redux-form";
 import { submitNewPost } from "../../actions";
 
 class PostCreateReview extends Component {
   onSubmit = values => {
-    // console.log(values);
+    console.log(values);
     this.props.submitNewPost(values);
-    this.props.history.push(`/user/${this.props.current_user._id}/posts`)
+    this.props.history.push(`/user/${this.props.current_user._id}/posts`);
   };
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     const { formValues } = this.props;
     const { title, image, body } = formValues;
     return (
@@ -34,6 +35,19 @@ class PostCreateReview extends Component {
                     - {this.props.current_user.bio.name}
                   </span>
                 </p>
+
+                <div className="form-check">
+                  <Field
+                    name="published"
+                    id="published"
+                    component={"input"}
+                    type="checkbox"
+                    className="form-check-input"
+                  />
+                  <label className="form-check-label" htmlFor="publish">
+                    Publish
+                  </label>
+                </div>
               </div>
             </div>
           </div>
