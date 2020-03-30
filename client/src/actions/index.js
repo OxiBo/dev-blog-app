@@ -71,7 +71,7 @@ export const editPost = (values, id, history) => async dispatch => {
     const res = await axios.patch(`/api/posts/edit/${id}`, values);
 
     await dispatch({ type: FETCH_POST, payload: res.data });
-    toast("Post edited successfully!", toastOptions);
+    // toast("Post edited successfully!", toastOptions);
     history.push(`/posts/show/${id}`); // console.log(res.data)
   } catch (err) {
     console.error(err);
@@ -91,9 +91,9 @@ export const deletePost = id => async dispatch => {
   }
 };
 
-export const fetchUserPosts = (id, history) => async dispatch => {
+export const fetchUserPosts = (id, history, published) => async dispatch => {
   try {
-    const res = await axios.get(`/api/user/${id}/posts`);
+    const res = await axios.get(`/api/user/${id}/posts/${published}`);
     // console.log(res);
     dispatch({ type: FETCH_USER_POSTS, payload: res.data });
     // history(`/user/${id}/posts`);

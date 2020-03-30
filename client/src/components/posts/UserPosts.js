@@ -9,7 +9,8 @@ class UserPosts extends Component {
     this.props.fetchUser(this.props.match.params.userId);
     this.props.fetchUserPosts(
       this.props.match.params.userId,
-      this.props.history
+      this.props.history,
+      true
     );
   }
 

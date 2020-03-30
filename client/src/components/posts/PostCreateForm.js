@@ -95,7 +95,7 @@ class PostCreateForm extends Component {
       <div className="container">
         <div className="card">
           <h3 className="card-header text-center p-4">
-            {this.props.formTitle ? "Edit Post" : "New Post"}
+            {this.props.edit ? "Edit Post" : "New Post"}
           </h3>
           <form
             action=""
@@ -128,16 +128,33 @@ class PostCreateForm extends Component {
               placeholder="Enter text"
               rows="6"
             />
-
+            {this.props.edit && (
+              <div className="form-inline m-3">
+              <label className="col-sm-4 col-form-label text-uppercase font-weight-bold text-right  form-check-label" htmlFor="publish">
+                  Publish
+                </label>
+                <div className="col-sm-8">
+                <Field
+                  name="published"
+                  id="published"
+                  component={"input"}
+                  type="checkbox"
+                  className="form-check-input"
+                />
+                </div>
+                
+               
+              </div>
+            )}
             <div className="card-group buttons">
               <button
-                onClick={() => this.props.history.push("/posts")}
+                onClick={() => this.props.history.goBack()}
                 className="btn btn-primary btn-lg m-3"
               >
                 Cancel
               </button>
               <button type="submit" className="btn btn-success btn-lg m-3">
-                {this.props.formTitle ? "Submit" : "View draft"}
+                {this.props.edit ? "Submit" : "View draft"}
               </button>
             </div>
           </form>
@@ -183,6 +200,16 @@ const mapStateToProps = ({ auth }) => {
     user: auth.user
   };
 };
+
+// export default withRouter(
+//   connect(mapStateToProps)(
+//     reduxForm({ form: "createPost", validate })(
+//       PostCreateForm
+//     )
+//   )
+// );
+
+
 
 export default withRouter(
   connect(mapStateToProps)(

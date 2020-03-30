@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import Comments from '../comments/Comments';
+import Comments from "../comments/Comments";
 import { fetchPost, deletePost } from "../../actions";
 
 class PostShow extends Component {
@@ -11,11 +11,11 @@ class PostShow extends Component {
   }
   render() {
     if (this.props.post) {
-      const { title, image, body, user, _id } = this.props.post;
+      const { title, image, body, user, _id, published } = this.props.post;
 
       return (
         <div className="container col-lg-10 ">
-          <div className="card mb-3">
+          <div className="card mb-3 p-2">
             <h4 className="card-header text-center p-4">{title}</h4>
             <div className="row no-gutters mb-1">
               {image && (
@@ -31,7 +31,9 @@ class PostShow extends Component {
               <div className={`col-md-${image ? "8" : "12"}`}>
                 <div className="card-body p-1 ">
                   {/* <h5 className="card-title text-center">{title}</h5> */}
-                  <p className="card-text mr-3 ml-3 mb-0 text-justify post-body">{body}</p>
+                  <p className="card-text mr-3 ml-3 mb-0 text-justify post-body">
+                    {body}
+                  </p>
                   <p className="card-text  text-right p-1 pr-3">
                     <Link
                       to={`/user-profile/${user.id}`}
@@ -73,7 +75,7 @@ class PostShow extends Component {
                   </>
                 )}
             </div>
-          <Comments />
+            {published && <Comments />}
           </div>
         </div>
       );

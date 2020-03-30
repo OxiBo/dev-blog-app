@@ -27,9 +27,10 @@ class EditPost extends Component {
         {this.props.post ? (
           <PostCreateForm
             form={"editPost"}
+            destroyOnUnmount={true}
             initialValues={this.props.post}
             onSubmit={this.onSubmit}
-            formTitle={true}
+            edit={true}
           />
         ) : (
           <div>Loading...</div>

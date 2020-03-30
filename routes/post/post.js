@@ -8,7 +8,7 @@ module.exports = app => {
   // get a list of all posts
   app.get("/api/posts", isLoggedIn, async (req, res) => {
     try {
-      const foundPosts = await Post.find();
+      const foundPosts = await Post.find({published: true});
       // console.log(foundPosts);
       return res.send(foundPosts);
     } catch (err) {
@@ -17,13 +17,16 @@ module.exports = app => {
     }
   });
 
-  app.get("/api/user/:userId/posts", isLoggedIn, async (req, res) => {
-    // console.log(req.params.userId);
+  // TODO - middleware to check if user has the right to see the posts (should be able to only see his drafts) 
+  app.get("/api/user/:userId/posts/:published", isLoggedIn, async (req, res) => {
+    // console.log(req.params.published);
+    
     try {
       const foundUser = await User.findById(req.params.userId)
         .populate({
           path: "posts",
-          model: Post
+          model: Post,
+          match: { published: req.params.published }
         })
         .exec();
       //   console.log(foundUser)
@@ -47,11 +50,12 @@ module.exports = app => {
   app.patch("/api/posts/edit/:postId", isLoggedIn, isAuthorizedToEditPost, async (req, res) => {
     // console.log(req.body);
     try {
-      const { title, body, image } = req.body;
+      const { title, body, image, published } = req.body;
       const updatedPost = await Post.findByIdAndUpdate(req.params.postId, {
         title,
         body,
-        image
+        image,
+        published
       });
      
       res.send(updatedPost);

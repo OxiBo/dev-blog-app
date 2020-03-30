@@ -36,5 +36,5 @@ const mapStateToProps = ({ auth }) => {
 };
 
 export default connect(mapStateToProps)(
-  reduxForm({ form: "createPost" })(PostCreate)
+  reduxForm({ form: "createPost", destroyOnUnmount: false })(PostCreate)
 );
