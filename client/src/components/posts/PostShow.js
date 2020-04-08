@@ -11,7 +11,15 @@ class PostShow extends Component {
   }
   render() {
     if (this.props.post) {
-      const { title, image, body, user, _id, published } = this.props.post;
+      const {
+        title,
+        image,
+        body,
+        user,
+        likes,
+        _id,
+        published,
+      } = this.props.post;
 
       return (
         <div className="container col-lg-10 ">
@@ -34,15 +42,23 @@ class PostShow extends Component {
                   <p className="card-text mr-3 ml-3 mb-0 text-justify post-body">
                     {body}
                   </p>
-                  <p className="card-text  text-right p-1 pr-3">
-                    <Link
-                      to={`/user-profile/${user.id}`}
-                      className="text-muted"
-                    >
-                      {" "}
-                      - {user.name}
-                    </Link>
-                  </p>
+                  <div className="row no-gutters col-md-12 p-3">
+                    <div className="card-text text-left ">
+                     <p>{likes} 
+                       <button className='likes'> <i className="fa fa-heart"></i></button>
+                    
+                       </p> 
+                    </div>
+                    <p className="card-text  ml-auto">
+                      <Link
+                        to={`/user-profile/${user.id}`}
+                        className="text-muted"
+                      >
+                        {" "}
+                        - {user.name}
+                      </Link>
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -88,13 +104,13 @@ class PostShow extends Component {
 const mapStateToProps = ({ auth, posts }) => {
   return {
     current_user: auth.current_user,
-    post: posts.post
+    post: posts.post,
   };
 };
 export default connect(mapStateToProps, {
   fetchPost,
 
-  deletePost
+  deletePost,
 })(PostShow);
 
 /*

@@ -1,3 +1,19 @@
-p.post-body{
-    white-space: pre-wrap
+p.post-body {
+  white-space: pre-wrap;
+}
+
+.likes {
+  border: none;
+
+  .fa.fa-heart {
+    font-size: 2rem;
+    padding: 0.5rem;
+    color: lightgrey;
+
+    // color: palevioletred;
+  }
+}
+
+.likes:focus {
+  outline: none;
 }

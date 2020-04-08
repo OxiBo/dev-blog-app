@@ -4,12 +4,13 @@ import { fetchPost, editPost } from "../../actions";
 import { connect } from "react-redux";
 
 class EditPost extends Component {
-  componentDidMount() {
-    // this.props.fetchCurrentUser();// delete?
-    // if(this.props.current_user){
-    // this.props.fetchPost(this.props.match.params.postId);
-    // }
-  }
+  // TODO - fetch post when component is mounted
+  // componentDidMount() {
+  //   // this.props.fetchCurrentUser();// delete?
+  //   // if(this.props.current_user){
+  //   // this.props.fetchPost(this.props.match.params.postId);
+  //   // }
+  // }
 
   onSubmit = values => {
     // console.log("edit form submited");
@@ -28,6 +29,7 @@ class EditPost extends Component {
           <PostCreateForm
             form={"editPost"}
             destroyOnUnmount={true}
+            enableReinitialize={true}
             initialValues={this.props.post}
             onSubmit={this.onSubmit}
             edit={true}
