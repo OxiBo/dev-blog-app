@@ -211,6 +211,15 @@ const mapStateToProps = ({ auth }) => {
 
 
 
+// export default withRouter(
+//   connect(mapStateToProps)(
+//     reduxForm({ validate })(
+//       PostCreateForm
+//     )
+//   )
+// );
+
+
 export default withRouter(
   connect(mapStateToProps)(
     reduxForm({ form: "createPost", destroyOnUnmount: false, validate })(

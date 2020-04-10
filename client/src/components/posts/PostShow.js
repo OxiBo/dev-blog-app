@@ -2,15 +2,24 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Comments from "../comments/Comments";
-import { fetchPost, deletePost } from "../../actions";
+import {
+  fetchCurrentUser,
+  fetchPost,
+  deletePost,
+  likePost,
+} from "../../actions";
 
 class PostShow extends Component {
+  // state = {
+  //   postLikedStyle: this.props.postLike ? this.props.postLike : false,
+  // };
   componentDidMount() {
     // this.props.fetchCurrentUser();
     this.props.fetchPost(this.props.match.params.postId);
   }
   render() {
-    if (this.props.post) {
+    if (this.props.post && this.props.current_user) {
+      // ????????
       const {
         title,
         image,
@@ -21,6 +30,11 @@ class PostShow extends Component {
         published,
       } = this.props.post;
 
+      const { postLikes } = this.props.current_user;
+
+      const liked = postLikes.find((postLike) => postLike.post === _id);
+      const likesStyle = liked && liked.like ? "liked" : "";
+      // const likesStyle = this.state.postLikedStyle ? "liked" : "";
       return (
         <div className="container col-lg-10 ">
           <div className="card mb-3 p-2">
@@ -43,12 +57,29 @@ class PostShow extends Component {
                     {body}
                   </p>
                   <div className="row no-gutters col-md-12 p-3">
-                    <div className="card-text text-left ">
-                     <p>{likes} 
-                       <button className='likes'> <i className="fa fa-heart"></i></button>
-                    
-                       </p> 
-                    </div>
+                    {published && (
+                      <div className="card-text text-left ">
+                        <p>
+                          {likes}
+                          <button
+                            className="likes"
+                            onClick={async () => {
+                              await this.props.likePost(_id);
+                              {
+                                /* this.setState((prevState) => ({
+                                postLikedStyle: !prevState.postLikedStyle,
+                              })); */
+                              }
+                              this.props.fetchCurrentUser();
+                            }}
+                          >
+                            {" "}
+                            <i className={`fa fa-heart ${likesStyle}`}></i>
+                          </button>
+                        </p>
+                      </div>
+                    )}
+
                     <p className="card-text  ml-auto">
                       <Link
                         to={`/user-profile/${user.id}`}
@@ -105,11 +136,15 @@ const mapStateToProps = ({ auth, posts }) => {
   return {
     current_user: auth.current_user,
     post: posts.post,
+    postLike: (auth.current_user && posts.post) && auth.current_user.postLikes.find(
+      (like) => like.post === posts.post._id
+    ),
   };
 };
 export default connect(mapStateToProps, {
+  fetchCurrentUser,
   fetchPost,
-
+  likePost,
   deletePost,
 })(PostShow);
 

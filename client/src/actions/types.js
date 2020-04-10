@@ -14,4 +14,4 @@ export const SUBMIT_NEW_COMMENT = "submit_new_comment";
 export const FETCH_COMMENTS = 'fetch_comments';
 export const DELETE_COMMENT = 'delete_comment';
 export const EDIT_COMMENT = 'edit_comment';
-export const RENDER_EDIT_COMMENT = 'render_edit_comment'
+export const RENDER_EDIT_COMMENT = 'render_edit_comment';

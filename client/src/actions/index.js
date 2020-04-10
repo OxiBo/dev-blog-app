@@ -128,6 +128,18 @@ export const fetchPost = id => async dispatch => {
   }
 };
 
+
+export const likePost = (id) => async dispatch => {
+  try{
+    // console.log(id)
+    const res = await axios.patch(`/api/posts/show/${id}/like`);
+    dispatch({ type: FETCH_POST, payload: res.data})
+  }catch(err){
+    console.error(err);
+    // TODO - do something???
+  }
+}
+
 export const submitNewComment = (values, postId) => async dispatch => {
   try {
     // console.log(values);

@@ -6,7 +6,7 @@ import PostCreateReview from "./PostCreateReview";
 
 class PostCreate extends Component {
   state = {
-    showReview: false
+    showReview: false,
   };
   render() {
     return (
@@ -14,6 +14,7 @@ class PostCreate extends Component {
         {this.props.current_user ? (
           !this.state.showReview ? (
             <PostCreateForm
+             
               onSubmit={() => this.setState({ showReview: true })}
             />
           ) : (
@@ -31,7 +32,7 @@ class PostCreate extends Component {
 
 const mapStateToProps = ({ auth }) => {
   return {
-    current_user: auth.current_user
+    current_user: auth.current_user,
   };
 };
 

@@ -6,7 +6,7 @@ import { submitNewPost } from "../../actions";
 
 class PostCreateReview extends Component {
   onSubmit = values => {
-    console.log(values);
+    // console.log(values);
     this.props.submitNewPost(values);
     this.props.history.push(`/user/${this.props.current_user._id}/posts`);
   };

@@ -4,7 +4,7 @@ const mongoose = require("mongoose").set("debug", true),
   isLoggedIn = require("../../middleware/isLoggedIn"),
   isAuthorizedToEditPost = require("../../middleware/isAuthorizedToEditPost");
 
-module.exports = app => {
+module.exports = (app) => {
   // get a list of all posts
   app.get("/api/posts", isLoggedIn, async (req, res) => {
     try {
@@ -29,7 +29,7 @@ module.exports = app => {
           .populate({
             path: "posts",
             model: Post,
-            match: { published: req.params.published }
+            match: { published: req.params.published },
           })
           .exec();
         //   console.log(foundUser)
@@ -63,7 +63,7 @@ module.exports = app => {
           title,
           body,
           image,
-          published
+          published,
         });
 
         res.send(updatedPost);
@@ -73,6 +73,49 @@ module.exports = app => {
       }
     }
   );
+
+  app.patch("/api/posts/show/:id/like", isLoggedIn, async (req, res) => {
+    try {
+      const user = await User.findById(req.user.id).select({
+        postLikes: {
+          $elemMatch: { post: req.params.id },
+        },
+      });
+
+      let post;
+      if (user.postLikes.length) {
+        const like = user.postLikes[0].like ? -1 : 1;
+
+        post = await Post.findByIdAndUpdate(
+          req.params.id,
+          {
+            $inc: { likes: like },
+          },
+          { new: true }
+        );
+
+        user.postLikes[0].like = await !user.postLikes[0].like;
+        await user.save();
+      } else {
+        await user.update({
+          $push: { postLikes: { post: req.params.id, like: true } },
+        });
+
+        post = await Post.findByIdAndUpdate(
+          req.params.id,
+          {
+            $inc: { likes: 1 },
+          },
+          { new: true }
+        );
+      }
+      res.send(post);
+      // https://stackoverflow.com/questions/41353839/get-one-element-from-an-array-of-objects-thats-part-of-one-document-mongoose/41354554#41354554
+    } catch (err) {
+      console.log(err);
+      res.status(500).send(err);
+    }
+  });
 
   app.delete("/api/posts/delete/:postId", isLoggedIn, async (req, res) => {
     try {
@@ -92,7 +135,7 @@ module.exports = app => {
     try {
       const newPost = await new Post({
         ...req.body,
-        user: { name, id: req.user.id }
+        user: { name, id: req.user.id },
       });
       newPost.save();
       //   console.log(newPost);
