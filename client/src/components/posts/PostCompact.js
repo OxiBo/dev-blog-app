@@ -6,7 +6,7 @@ import { fetchCurrentUser } from "../../actions";
 // TODO delete check if user exist because there will be no posts without user name
 class PostCompact extends Component {
   render() {
-    const { image, title, createdAt, user, body, _id } = this.props.post;
+    const { image, title, createdAt, user, body, _id, likes } = this.props.post;
     // console.log(user.id === this.props.current_user._id)
     return (
       <div className="container col-lg-10 ">
@@ -14,11 +14,9 @@ class PostCompact extends Component {
           <div className="row no-gutters m-3 ">
             {image && (
               // vertical alignment in bootstrap - https://medium.com/wdstack/bootstrap-4-vertical-center-1211448a2eff
-              <div className="col-md-4 my-auto"> 
-             
+              <div className="col-md-4 my-auto">
                 <img src={image} className="card-img img-thumbnail" alt="..." />
-                </div>
-         
+              </div>
             )}
 
             <div className={`col-md-${image ? "8" : "12"}`}>
@@ -27,18 +25,24 @@ class PostCompact extends Component {
                 <p className="card-text text-justify">
                   {body.length > 250 ? body.substring(0, 350) + "..." : body}
                 </p>
-                <div className="d-flex justify-content-between">
-                  <p className="card-text  text-left d-inline">
-                    <span className="text-muted">
-                      {" "}
+                <div className="d-flex justify-content-between h-100">
+                  <p className="card-text  text-left align-self-center text-muted d-inline mb-0">
+                    
                       {new Date(createdAt).toLocaleString("en-US", {
                         year: "numeric",
                         month: "long",
-                        day: "numeric"
+                        day: "numeric",
                       })}
+                 
+                  </p>
+
+                  <p className="card-text align-self-center  text-center d-inline mb-0">{likes}
+                    <span className="likes d-inline">
+
+                      <i className={`fa fa-heart `}></i>
                     </span>
                   </p>
-                  <p className="card-text  text-right d-inline">
+                  <p className="card-text  align-self-center text-right d-inline">
                     <Link
                       to={`/user-profile/${user.id}`}
                       className="text-muted"
@@ -78,9 +82,7 @@ class PostCompact extends Component {
 
 const mapStateToProps = ({ auth }) => {
   return {
-    current_user: auth.current_user
+    current_user: auth.current_user,
   };
 };
 export default connect(mapStateToProps, { fetchCurrentUser })(PostCompact);
-
-
