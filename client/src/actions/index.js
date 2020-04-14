@@ -14,7 +14,9 @@ import {
   FETCH_COMMENTS,
   DELETE_COMMENT,
   EDIT_COMMENT,
-  RENDER_EDIT_COMMENT
+  RENDER_EDIT_COMMENT,
+  SET_FIND_BY_TITLE,
+  SET_SORT_BY,
 } from "./types";
 import { toast } from "react-toastify";
 
@@ -22,26 +24,27 @@ import axios from "axios";
 
 import { toastOptions, errorToastStyle } from "../styles/toastifyStyles";
 
-export const fetchCurrentUser = () => async dispatch => {
+
+export const fetchCurrentUser = () => async (dispatch) => {
   const res = await axios.get("/api/current_user");
   // console.log(res);
   dispatch({ type: FETCH_CURRENT_USER, payload: res.data });
 };
 
-export const fetchUser = id => async dispatch => {
+export const fetchUser = (id) => async (dispatch) => {
   const res = await axios.get(`/api/user-profile/${id}`);
   // console.log(res);
   dispatch({ type: FETCH_USER, payload: res.data });
 };
 
 // TODO change to fetch posts with particular userId
-export const fetchUsers = () => async dispatch => {
+export const fetchUsers = () => async (dispatch) => {
   const res = await axios.get("/api/users");
   // console.log(res);
   dispatch({ type: FETCH_USERS, payload: res.data });
 };
 
-export const editProfile = (id, values, history) => async dispatch => {
+export const editProfile = (id, values, history) => async (dispatch) => {
   try {
     const res = await axios.patch(`/api/user-profile/${id}/edit`, values);
     dispatch({ type: EDIT_PROFILE, payload: res.data });
@@ -53,7 +56,7 @@ export const editProfile = (id, values, history) => async dispatch => {
   }
 };
 
-export const submitNewPost = values => async dispatch => {
+export const submitNewPost = (values) => async (dispatch) => {
   try {
     const res = await axios.post("/api/posts/new", values);
 
@@ -66,7 +69,7 @@ export const submitNewPost = values => async dispatch => {
   }
 };
 
-export const editPost = (values, id, history) => async dispatch => {
+export const editPost = (values, id, history) => async (dispatch) => {
   try {
     const res = await axios.patch(`/api/posts/edit/${id}`, values);
 
@@ -79,7 +82,7 @@ export const editPost = (values, id, history) => async dispatch => {
   }
 };
 
-export const deletePost = id => async dispatch => {
+export const deletePost = (id) => async (dispatch) => {
   try {
     await axios.delete(`/api/posts/delete/${id}`);
 
@@ -91,7 +94,7 @@ export const deletePost = id => async dispatch => {
   }
 };
 
-export const fetchUserPosts = (id, history, published) => async dispatch => {
+export const fetchUserPosts = (id, history, published) => async (dispatch) => {
   try {
     const res = await axios.get(`/api/user/${id}/posts/${published}`);
     // console.log(res);
@@ -104,7 +107,7 @@ export const fetchUserPosts = (id, history, published) => async dispatch => {
   }
 };
 
-export const fetchPosts = () => async dispatch => {
+export const fetchPosts = () => async (dispatch) => {
   try {
     const res = await axios.get(`/api//posts`);
     // console.log(res);
@@ -117,7 +120,7 @@ export const fetchPosts = () => async dispatch => {
   }
 };
 
-export const fetchPost = id => async dispatch => {
+export const fetchPost = (id) => async (dispatch) => {
   try {
     const res = await axios.get(`/api/posts/show/${id}`);
     dispatch({ type: FETCH_POST, payload: res.data });
@@ -128,19 +131,18 @@ export const fetchPost = id => async dispatch => {
   }
 };
 
-
-export const likePost = (id) => async dispatch => {
-  try{
+export const likePost = (id) => async (dispatch) => {
+  try {
     // console.log(id)
     const res = await axios.patch(`/api/posts/show/${id}/like`);
-    dispatch({ type: FETCH_POST, payload: res.data})
-  }catch(err){
+    dispatch({ type: FETCH_POST, payload: res.data });
+  } catch (err) {
     console.error(err);
     // TODO - do something???
   }
-}
+};
 
-export const submitNewComment = (values, postId) => async dispatch => {
+export const submitNewComment = (values, postId) => async (dispatch) => {
   try {
     // console.log(values);
     const res = await axios.post(
@@ -157,7 +159,7 @@ export const submitNewComment = (values, postId) => async dispatch => {
   }
 };
 
-export const fetchComments = postId => async dispatch => {
+export const fetchComments = (postId) => async (dispatch) => {
   try {
     const res = await axios.get(`/api/posts/show/${postId}/comments`);
     // console.log(res);
@@ -170,7 +172,7 @@ export const fetchComments = postId => async dispatch => {
   }
 };
 
-export const deleteComment = (id, postId) => async dispatch => {
+export const deleteComment = (id, postId) => async (dispatch) => {
   try {
     await axios.delete(`/api/posts/show/${postId}/comments/${id}`);
 
@@ -182,7 +184,7 @@ export const deleteComment = (id, postId) => async dispatch => {
   }
 };
 
-export const editComment = (values, commentId, postId) => async dispatch => {
+export const editComment = (values, commentId, postId) => async (dispatch) => {
   try {
     const res = await axios.patch(
       `/api/posts/show/${postId}/comments/edit/${commentId}`,
@@ -201,6 +203,23 @@ export const editComment = (values, commentId, postId) => async dispatch => {
 export const renderEditComment = (id = "") => {
   return {
     type: RENDER_EDIT_COMMENT,
-    payload: id
+    payload: id,
+  };
+};
+
+// filters
+
+export const setSortBy = (sortBy) => {
+  return {
+    type: SET_SORT_BY,
+    payload: sortBy,
+  };
+};
+
+
+export const setFindByTitle = (title) => {
+  return {
+    type: SET_FIND_BY_TITLE,
+    payload: title,
   };
 };

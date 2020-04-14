@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
-import { reduxForm, Field } from "redux-form";
+import { Field } from "redux-form";
 import { submitNewPost } from "../../actions";
 
 class PostCreateReview extends Component {
-  onSubmit = values => {
+  onSubmit = (values, dispatch) => {
     // console.log(values);
     this.props.submitNewPost(values);
+
     this.props.history.push(`/user/${this.props.current_user._id}/posts`);
   };
   render() {
@@ -75,7 +76,7 @@ const mapStateToProps = ({ form, auth }) => {
   // console.log(state.form.surveyForm.values)
   return {
     formValues: form.createPost.values,
-    current_user: auth.current_user
+    current_user: auth.current_user,
   };
 };
 

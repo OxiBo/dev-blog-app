@@ -9,7 +9,7 @@ class PostsList extends Component {
   render() {
     // console.log(this.props);
     return (
-      <div>
+      <>
         {this.props.posts ? (
           this.props.posts.map(post => (
            post._id && <PostCompact key={post._id} post={post} />
@@ -17,7 +17,7 @@ class PostsList extends Component {
         ) : (
           <div>Loading...</div>
         )}
-      </div>
+      </>
     );
   }
 }

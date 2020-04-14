@@ -8,13 +8,18 @@ class PostCreate extends Component {
   state = {
     showReview: false,
   };
+
+  // to clear the form after successful submission
+  componentWillUnmount() {
+    this.props.reset();
+  }
   render() {
+    // console.log(this.props);
     return (
       <div>
         {this.props.current_user ? (
           !this.state.showReview ? (
             <PostCreateForm
-             
               onSubmit={() => this.setState({ showReview: true })}
             />
           ) : (
