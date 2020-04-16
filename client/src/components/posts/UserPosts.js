@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchUser, fetchUserPosts } from "../../actions";
 // import PostCompact from "./PostCompact";
+import filterPosts from "../../selectors/filterPosts";
+import PostListFilters from "./PostListFilters";
 import PostsList from "./PostsList";
 
 class UserPosts extends Component {
@@ -18,8 +20,12 @@ class UserPosts extends Component {
     // console.log(this.props);
     return (
       <div>
+     
         {this.props.user_posts.length ? (
+          <>
+          <PostListFilters />
           <PostsList posts={this.props.user_posts} />
+          </>
         ) : (
           <div className="card m-3">
             <div className="list-group m-2 p-2 text-center">
@@ -32,10 +38,12 @@ class UserPosts extends Component {
   }
 }
 
-const mapStateToProps = ({ posts }) => {
+const mapStateToProps = ({ posts, filters: { sortBy, findByTitle } }) => {
   return {
     // current_user: auth.current_user
-    user_posts: posts.user_posts
+    sortBy,
+    findByTitle,
+    user_posts: filterPosts(posts.posts, sortBy, findByTitle)
   };
 };
 export default connect(mapStateToProps, { fetchUser, fetchUserPosts })(

@@ -6,7 +6,7 @@ import { fetchCurrentUser } from "../../actions";
 // TODO delete check if user exist because there will be no posts without user name
 class PostCompact extends Component {
   render() {
-    const { image, title, createdAt, user, body, _id, likes } = this.props.post;
+    const { image, title, createdAt, user, body, _id, likes, published } = this.props.post;
     // console.log(user.id === this.props.current_user._id)
     return (
       <div className="container col-lg-10 ">
@@ -36,12 +36,12 @@ class PostCompact extends Component {
                  
                   </p>
 
-                  <p className="card-text align-self-center  text-center d-inline mb-0">{likes}
+                 {  published && <p className="card-text align-self-center  text-center d-inline mb-0">{likes}
                     <span className="likes d-inline">
 
                       <i className={`fa fa-heart `}></i>
                     </span>
-                  </p>
+                  </p>}
                   <p className="card-text  align-self-center text-right d-inline">
                     <Link
                       to={`/user-profile/${user.id}`}

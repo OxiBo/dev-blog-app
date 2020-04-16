@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchUser, fetchUserPosts } from "../../actions";
 // import PostCompact from "./PostCompact";
+import PostListFilters from "./PostListFilters";
 import PostsList from "./PostsList";
 
 class UserDrafts extends Component {
@@ -18,8 +19,9 @@ class UserDrafts extends Component {
     // console.log(this.props);
     return (
       <div>
+      <PostListFilters />
         {this.props.user_drafts.length ? (
-          <PostsList posts={this.props.user_drafts} />
+          <PostsList posts={this.props.user_drafts} like={false}/>
         ) : (
           <div className="card m-3">
             <div className="list-group m-2 p-2 text-center">

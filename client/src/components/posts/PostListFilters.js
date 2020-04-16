@@ -7,7 +7,36 @@ class PostListFilters extends Component {
     return (
       <div className="container col-lg-10 mb-3">
         <div className="row no-gutters-m-3 mx-0">
-   
+
+        <div className="card col-md-6">
+            <div className="card-body">
+              <div className="form-group">
+                <label htmlFor="findByTitle" className="font-weight-bold">
+                  Find by title
+                </label>
+                <div className="input-group">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="findByTitle"
+                    autoComplete={"off"}
+                    aria-describedby="findByTitleField"
+                    placeholder="Enter title"
+                    value={this.props.findByTitle}
+                    onChange={(e) => this.props.setFindByTitle(e.target.value)}
+                  />
+                  <button
+                    className="btn bg-transparent"
+                    style={{ marginLeft: "-40px", zIndex: "100" }}
+                    onClick={() => this.props.setFindByTitle("")}
+                  >
+                    <i className="fa fa-times"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="card col-md-6">
             <div className="card-body">
               <div className="form-group">
@@ -31,31 +60,7 @@ class PostListFilters extends Component {
             </div>
           </div>
 
-          <div className="card col-md-6">
-            <div className="card-body">
-              <div className="form-group">
-                <label htmlFor="findByTitle" className="font-weight-bold">
-                  Find by title
-                </label>
-                <div className="input-group">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="findByTitle"
-                  autoComplete={"off"}
-                  aria-describedby="findByTitleField"
-                  placeholder="Enter title"
-                  value={this.props.findByTitle}
-                  onChange={(e) => this.props.setFindByTitle(e.target.value)}
-                />
-                <button className="btn bg-transparent" style={{"marginLeft": "-40px", "zIndex": "100"}}
-                onClick={() => this.props.setFindByTitle("")}>
-      <i className="fa fa-times"></i>
-    </button>
-    </div>
-              </div>
-            </div>
-          </div>
+       
         </div>
       </div>
     );
