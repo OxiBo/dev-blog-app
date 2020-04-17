@@ -43,7 +43,7 @@ const mapStateToProps = ({ posts, filters: { sortBy, findByTitle } }) => {
     // current_user: auth.current_user
     sortBy,
     findByTitle,
-    user_posts: filterPosts(posts.posts, sortBy, findByTitle)
+    user_posts: filterPosts(posts.user_posts, sortBy, findByTitle)
   };
 };
 export default connect(mapStateToProps, { fetchUser, fetchUserPosts })(
