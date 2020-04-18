@@ -5,3 +5,5 @@
 
 
  * i had a warning 'Form submission canceled because the form is not connected' https://github.com/redux-form/redux-form/issues/2679 
+
+ * select fields when populate document from mongo - https://stackoverflow.com/questions/26691543/return-certain-fields-with-populate-from-mongoose/26698904

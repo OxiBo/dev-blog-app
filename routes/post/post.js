@@ -41,7 +41,7 @@ module.exports = (app) => {
             populate: {
               path: "user",
               model: User,
-              select: { "bio.name": 1 }
+              select: { "bio.name": 1 } // https://stackoverflow.com/questions/26691543/return-certain-fields-with-populate-from-mongoose/26698904
             }
           })
           .exec();
@@ -120,13 +120,7 @@ module.exports = (app) => {
           },
           { new: true }
         )
-          .populate({
-            // path: "user",
-            path: "user",
-            model: User,
-            select: { "bio.name": 1 },
-          })
-          .exec();
+          
 
         user.postLikes[0].like = await !user.postLikes[0].like;
         await user.save();
@@ -141,7 +135,13 @@ module.exports = (app) => {
             $inc: { likes: 1 },
           },
           { new: true }
-        );
+        ).populate({
+          // path: "user",
+          path: "user",
+          model: User,
+          select: { "bio.name": 1 },
+        })
+        .exec();
       }
       res.send(post);
       // https://stackoverflow.com/questions/41353839/get-one-element-from-an-array-of-objects-thats-part-of-one-document-mongoose/41354554#41354554
