@@ -8,8 +8,16 @@ module.exports = (app) => {
   // get a list of all posts
   app.get("/api/posts", isLoggedIn, async (req, res) => {
     try {
-      const foundPosts = await Post.find({ published: true });
+      const foundPosts = await Post.find({ published: true })
+        .populate({
+          // path: "user",
+          path: "user",
+          model: User,
+          select: { "bio.name": 1 }
+        })
+        .exec();
       // console.log(foundPosts);
+
       return res.send(foundPosts);
     } catch (err) {
       console.error(err);
@@ -30,6 +38,11 @@ module.exports = (app) => {
             path: "posts",
             model: Post,
             match: { published: req.params.published },
+            populate: {
+              path: "user",
+              model: User,
+              select: { "bio.name": 1 }
+            }
           })
           .exec();
         //   console.log(foundUser)
@@ -43,7 +56,14 @@ module.exports = (app) => {
 
   app.get("/api/posts/show/:postId", isLoggedIn, async (req, res) => {
     try {
-      const foundPost = await Post.findById(req.params.postId);
+      const foundPost = await Post.findById(req.params.postId)
+        .populate({
+          // path: "user",
+          path: "user",
+          model: User,
+          select: { "bio.name": 1 },
+        })
+        .exec();
 
       return res.send(foundPost);
     } catch (err) {
@@ -64,7 +84,14 @@ module.exports = (app) => {
           body,
           image,
           published,
-        });
+        })
+          .populate({
+            // path: "user",
+            path: "user",
+            model: User,
+            select: { "bio.name": 1 },
+          })
+          .exec();
 
         res.send(updatedPost);
       } catch (err) {
@@ -92,7 +119,14 @@ module.exports = (app) => {
             $inc: { likes: like },
           },
           { new: true }
-        );
+        )
+          .populate({
+            // path: "user",
+            path: "user",
+            model: User,
+            select: { "bio.name": 1 },
+          })
+          .exec();
 
         user.postLikes[0].like = await !user.postLikes[0].like;
         await user.save();
@@ -131,11 +165,12 @@ module.exports = (app) => {
   app.post("/api/posts/new", isLoggedIn, async (req, res) => {
     // console.log(req.body);
     // console.log(req.user);
-    const { name } = req.user.bio;
+    // const { name } = req.user.bio;
     try {
       const newPost = await new Post({
         ...req.body,
-        user: { name, id: req.user.id },
+        // user: { name, id: req.user.id },
+        user: req.user.id,
       });
       newPost.save();
       //   console.log(newPost);

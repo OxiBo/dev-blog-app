@@ -82,11 +82,11 @@ class PostShow extends Component {
 
                     <p className="card-text  ml-auto">
                       <Link
-                        to={`/user-profile/${user.id}`}
+                        to={`/user-profile/${user._id}`}
                         className="text-muted"
                       >
                         {" "}
-                        - {user.name}
+                        - {user.bio.name}
                       </Link>
                     </p>
                   </div>
@@ -101,7 +101,7 @@ class PostShow extends Component {
                 Go Back
               </button>
               {this.props.current_user &&
-                this.props.current_user._id === user.id && (
+                this.props.current_user._id === user._id && (
                   <>
                     <Link
                       to={`/posts/edit/${_id}`}

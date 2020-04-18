@@ -24,6 +24,7 @@ class PostsAll extends Component {
   }
 }
 const mapStateToProps = ({ posts, filters: { sortBy, findByTitle } }) => {
+  console.log(posts.posts)
   return {
     // current_user: auth.current_user
     sortBy,

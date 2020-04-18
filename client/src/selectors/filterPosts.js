@@ -33,6 +33,6 @@ export default (posts, sortBy, findByTitle) => {
       if (findByTitle) {
         return title.toLowerCase().includes(findByTitle.toLowerCase());
       }
-      return title
+      return title;
     });
 };

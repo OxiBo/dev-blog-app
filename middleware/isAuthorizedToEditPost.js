@@ -5,7 +5,7 @@ module.exports = async (req, res, next) => {
   try {
     const foundPost = await Post.findById(req.params.postId);
 
-    if (foundPost && req.user && req.user._id.equals(foundPost.user.id)) {
+    if (foundPost && req.user && req.user._id.equals(foundPost.user._id)) {
       next();
     } else {
       return res.status(401).send({ error: "You are not authorized!" });

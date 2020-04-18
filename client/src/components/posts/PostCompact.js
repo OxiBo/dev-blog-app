@@ -44,11 +44,11 @@ class PostCompact extends Component {
                   </p>}
                   <p className="card-text  align-self-center text-right d-inline">
                     <Link
-                      to={`/user-profile/${user.id}`}
+                      to={`/user-profile/${user._id}`}
                       className="text-muted"
                     >
                       {" "}
-                      - {user.name}
+                      - {user.bio.name}
                     </Link>
                   </p>
                 </div>

@@ -14,7 +14,7 @@ export default WrappedComponent => {
       
         if (
           nextProps.post &&
-          nextProps.current_user._id !== nextProps.post.user.id
+          nextProps.current_user._id !== nextProps.post.user._id
         ) {
           toast("You are not authorized to see this page!", errorToastStyle);
           nextProps.history.push("/posts");
