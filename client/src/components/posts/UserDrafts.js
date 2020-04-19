@@ -19,9 +19,11 @@ class UserDrafts extends Component {
     // console.log(this.props);
     return (
       <div>
-      <PostListFilters />
         {this.props.user_drafts.length ? (
-          <PostsList posts={this.props.user_drafts} like={false}/>
+          <>
+            <PostListFilters />
+            <PostsList posts={this.props.user_drafts} like={false} />
+          </>
         ) : (
           <div className="card m-3">
             <div className="list-group m-2 p-2 text-center">
@@ -37,7 +39,7 @@ class UserDrafts extends Component {
 const mapStateToProps = ({ posts }) => {
   return {
     // current_user: auth.current_user
-    user_drafts: posts.user_posts
+    user_drafts: posts.user_posts,
   };
 };
 export default connect(mapStateToProps, { fetchUser, fetchUserPosts })(

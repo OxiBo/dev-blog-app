@@ -17,19 +17,23 @@ class PostsAll extends Component {
 
     return (
       <div className="container-fluid">
-        <PostListFilters />
-        {this.props.posts && <PostsList posts={this.props.posts} />}
+        {this.props.posts && (
+          <>
+            <PostListFilters />
+            <PostsList posts={this.props.posts} />
+          </>
+        )}
       </div>
     );
   }
 }
 const mapStateToProps = ({ posts, filters: { sortBy, findByTitle } }) => {
-  console.log(posts.posts)
+  console.log(posts.posts);
   return {
     // current_user: auth.current_user
     sortBy,
     findByTitle,
-    posts: filterPosts(posts.posts, sortBy, findByTitle)
+    posts: filterPosts(posts.posts, sortBy, findByTitle),
   };
 };
 export default connect(mapStateToProps, { fetchPosts })(PostsAll);
