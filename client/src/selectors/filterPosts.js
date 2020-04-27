@@ -26,8 +26,9 @@ export default (posts, sortBy, findByTitle) => {
       } else if (sortBy === "popular") {
         return b.likes - a.likes;
       } else if (sortBy === "author") {
-        return a.user.name.localeCompare(b.user.name);
+        return a.user.bio.name.localeCompare(b.user.bio.name);
       }
+      return a // ???
     })
     .filter(({ title }) => {
       if (findByTitle) {

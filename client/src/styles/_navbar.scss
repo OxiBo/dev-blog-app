@@ -2,7 +2,8 @@
  
  /* Stackoverflow https://stackoverflow.com/questions/40178386/bootstrap-4-navbar-items-on-right-side */
  nav{
-     background-color: rgba(123, 172, 32, 0.7);
+     background-color: $navbarBackground;
+     color: $navbarTextColor;
        padding: 0 1rem!important;
    
      .navbar-nav {

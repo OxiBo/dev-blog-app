@@ -16,10 +16,10 @@ class PostsAll extends Component {
     // }
 
     return (
-      <div className="container-fluid">
+      <div className="">
         {this.props.posts && (
           <>
-            <PostListFilters />
+            {/* <PostListFilters /> */}
             <PostsList posts={this.props.posts} />
           </>
         )}
@@ -28,7 +28,7 @@ class PostsAll extends Component {
   }
 }
 const mapStateToProps = ({ posts, filters: { sortBy, findByTitle } }) => {
-  console.log(posts.posts);
+  // console.log(posts.posts);
   return {
     // current_user: auth.current_user
     sortBy,

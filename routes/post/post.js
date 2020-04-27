@@ -6,18 +6,18 @@ const mongoose = require("mongoose").set("debug", true),
 
 module.exports = (app) => {
   // get a list of all posts
-  app.get("/api/posts", isLoggedIn, async (req, res) => {
+  app.get("/api/posts", /*isLoggedIn, (made posts visible to not logged in users*/ async (req, res) => {
     try {
       const foundPosts = await Post.find({ published: true })
         .populate({
           // path: "user",
           path: "user",
           model: User,
-          select: { "bio.name": 1 }
+          select: { "bio.name": 1 },
         })
         .exec();
       // console.log(foundPosts);
-
+      // return res.status(500).send(err);
       return res.send(foundPosts);
     } catch (err) {
       console.error(err);
@@ -41,11 +41,12 @@ module.exports = (app) => {
             populate: {
               path: "user",
               model: User,
-              select: { "bio.name": 1 } // https://stackoverflow.com/questions/26691543/return-certain-fields-with-populate-from-mongoose/26698904
-            }
+              select: { "bio.name": 1 }, // https://stackoverflow.com/questions/26691543/return-certain-fields-with-populate-from-mongoose/26698904
+            },
           })
           .exec();
         //   console.log(foundUser)
+      
         return res.send(foundUser.posts);
       } catch (err) {
         console.error(err);
@@ -119,8 +120,7 @@ module.exports = (app) => {
             $inc: { likes: like },
           },
           { new: true }
-        )
-          
+        );
 
         user.postLikes[0].like = await !user.postLikes[0].like;
         await user.save();
@@ -135,13 +135,14 @@ module.exports = (app) => {
             $inc: { likes: 1 },
           },
           { new: true }
-        ).populate({
-          // path: "user",
-          path: "user",
-          model: User,
-          select: { "bio.name": 1 },
-        })
-        .exec();
+        )
+          .populate({
+            // path: "user",
+            path: "user",
+            model: User,
+            select: { "bio.name": 1 },
+          })
+          .exec();
       }
       res.send(post);
       // https://stackoverflow.com/questions/41353839/get-one-element-from-an-array-of-objects-thats-part-of-one-document-mongoose/41354554#41354554

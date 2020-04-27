@@ -71,13 +71,18 @@ class Header extends Component {
           </button>
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <ul className="navbar-nav">
-              {current_user ? (
-                <>
-                  <li className="nav-item active">
+            <li className="nav-item active">
                     <Link className="nav-link" to="/posts">
                       Blog Posts <span className="sr-only">(current)</span>
                     </Link>{" "}
                   </li>
+              {current_user ? (
+                <>
+                  {/* <li className="nav-item active">
+                    <Link className="nav-link" to="/posts">
+                      Blog Posts <span className="sr-only">(current)</span>
+                    </Link>{" "}
+                  </li> */}
                   <li className="nav-item">
                     <Link className="nav-link" to="/users">
                       Our bloggers

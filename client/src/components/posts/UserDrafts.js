@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchUser, fetchUserPosts } from "../../actions";
 // import PostCompact from "./PostCompact";
-import PostListFilters from "./PostListFilters";
+// import PostListFilters from "./PostListFilters";
 import PostsList from "./PostsList";
 
 class UserDrafts extends Component {
@@ -21,7 +21,7 @@ class UserDrafts extends Component {
       <div>
         {this.props.user_drafts.length ? (
           <>
-            <PostListFilters />
+            {/* <PostListFilters /> */}
             <PostsList posts={this.props.user_drafts} like={false} />
           </>
         ) : (

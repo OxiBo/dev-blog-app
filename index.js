@@ -10,11 +10,13 @@ const express = require("express"),
   Comment = require("./models/Comment"),
   isLoggedIn = require("./middleware/isLoggedin"),
   app = express();
-
+  
+  
 app.use(cors()); // CORS is a node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options. ; https://en.wikipedia.org/wiki/Cross-origin_resource_sharing   , https://www.udemy.com/course/node-with-react-fullstack-web-development/learn/lecture/7605040?start=667#bookmarks
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + "/public"));
+
 
 // database configuration
 try {

@@ -12,6 +12,7 @@ import requireAuthorizationToSeeDrafts from "./HOC/requireAuthorizationToSeeDraf
 import requireAuthorizationToSeeDraft from "./HOC/requireAuthorizationToSeeDraft"; // for PostShow
 import Landing from "./Landing";
 import Header from "./Header";
+import Footer from "./Footer";
 import PostsAll from "./posts/PostsAll";
 import PostCreate from "./posts/PostCreate";
 import UserPosts from "./posts/UserPosts";
@@ -25,7 +26,7 @@ import EditUserProfileForm from "./profile/EditUserProfileForm";
 export default class App extends Component {
   render() {
     return (
-      <div>
+      <>
         <BrowserRouter>
           <ToastContainer
             position="top-center"
@@ -38,23 +39,63 @@ export default class App extends Component {
             draggable
             pauseOnHover
           />
-          <Header />
-          <div className="container-fluid">
-            <Switch>
-              <Route exact path="/" component={Landing} />
-              <Route exact path="/posts" component={requireAuth(PostsAll)} />
-              <Route exact path="/users" component={requireAuth(UsersList)} />
-              <Route exact path="/user-profile/:userId" component={UserProfile} />
-              <Route exact path="/user-profile/:userId/edit" component={requireAuthorizationToEditProfile(EditUserProfileForm)} />
-              <Route exact path="/posts/new" component={requireAuth(PostCreate)} />
-              <Route exact path="/posts/show/:postId" component={requireAuth(requireAuthorizationToSeeDraft(PostShow))} />
-              <Route exact path="/posts/edit/:postId" component={requireAuth( requireAuthorizationToEditPost(EditPost))} />
-              <Route exact path="/user/:userId/posts" component={requireAuth(UserPosts)} />
-              <Route exact path="/user/:userId/posts/drafts" component={requireAuth(requireAuthorizationToSeeDrafts(UserDrafts))} />
-            </Switch>
+          <div className="site-content">
+            <Header />
+            <main className="container-fluid">
+              <Switch>
+                <Route exact path="/" component={Landing} />
+                {/* <Route exact path="/posts" component={requireAuth(PostsAll)} /> */}
+                <Route exact path="/posts" component={PostsAll} />
+                <Route exact path="/users" component={requireAuth(UsersList)} />
+                <Route
+                  exact
+                  path="/user-profile/:userId"
+                  component={UserProfile}
+                />
+                <Route
+                  exact
+                  path="/user-profile/:userId/edit"
+                  component={requireAuthorizationToEditProfile(
+                    EditUserProfileForm
+                  )}
+                />
+                <Route
+                  exact
+                  path="/posts/new"
+                  component={requireAuth(PostCreate)}
+                />
+                <Route
+                  exact
+                  path="/posts/show/:postId"
+                  component={requireAuth(
+                    requireAuthorizationToSeeDraft(PostShow)
+                  )}
+                />
+                <Route
+                  exact
+                  path="/posts/edit/:postId"
+                  component={requireAuth(
+                    requireAuthorizationToEditPost(EditPost)
+                  )}
+                />
+                <Route
+                  exact
+                  path="/user/:userId/posts"
+                  component={requireAuth(UserPosts)}
+                />
+                <Route
+                  exact
+                  path="/user/:userId/posts/drafts"
+                  component={requireAuth(
+                    requireAuthorizationToSeeDrafts(UserDrafts)
+                  )}
+                />
+              </Switch>
+            </main>
+            <Footer />
           </div>
         </BrowserRouter>
-      </div>
+      </>
     );
   }
 }

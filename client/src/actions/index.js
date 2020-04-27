@@ -190,7 +190,7 @@ export const editComment = (values, commentId, postId) => async (dispatch) => {
       `/api/posts/show/${postId}/comments/edit/${commentId}`,
       values
     );
-    console.log(res.data);
+    // console.log(res.data);
     await dispatch({ type: EDIT_COMMENT, payload: res.data });
     // toast("Post edited successfully!", toastOptions);
     // history.push(`/posts/show/${id}`); // console.log(res.data)

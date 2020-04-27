@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { fetchUser, fetchUserPosts } from "../../actions";
 // import PostCompact from "./PostCompact";
 import filterPosts from "../../selectors/filterPosts";
-import PostListFilters from "./PostListFilters";
+// import PostListFilters from "./PostListFilters";
 import PostsList from "./PostsList";
 
 class UserPosts extends Component {
@@ -19,11 +19,11 @@ class UserPosts extends Component {
   render() {
     // console.log(this.props);
     return (
-      <div>
+      <>
      
         {this.props.user_posts.length ? (
           <>
-          <PostListFilters />
+          {/* <PostListFilters /> */}
           <PostsList posts={this.props.user_posts} />
           </>
         ) : (
@@ -33,7 +33,7 @@ class UserPosts extends Component {
             </div>
           </div>
         )}
-      </div>
+      </>
     );
   }
 }
