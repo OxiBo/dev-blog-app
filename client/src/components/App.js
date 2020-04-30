@@ -71,6 +71,11 @@ export default class App extends Component {
                     requireAuthorizationToSeeDraft(PostShow)
                   )}
                 />
+                {/* <Route
+                  exact
+                  path="/posts/show/:postId"
+                  component={requireAuthorizationToSeeDraft(PostShow)}
+                /> */}
                 <Route
                   exact
                   path="/posts/edit/:postId"

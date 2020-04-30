@@ -16,6 +16,7 @@ class PostCompact extends Component {
       likes,
       published,
     } = this.props.post;
+    // const postShowPath = this.props.current_user ? `/posts/show/${_id}` : "";
     // console.log(user.id === this.props.current_user._id)
     return (
       <div className="container col-lg-10 ">
@@ -39,11 +40,16 @@ class PostCompact extends Component {
                   <p className="card-text text-justify">
                     {body.length > 250
                       ? body.substring(0, 350) + "...  "
-                      : body + '   '}
-                    <Link to={`/posts/show/${_id}`} type="submit"
-                    className="font-weight-bolder">
-                      see more
-                    </Link>
+                      : body + "   "}
+
+                    {this.props.current_user && (
+                      <Link
+                        to={`/posts/show/${_id}`}
+                        className="font-weight-bolder"
+                      >
+                        see more
+                      </Link>
+                    )}
                   </p>
                   <div className="d-flex justify-content-between h-100">
                     <p className="card-text  text-left align-self-center text-muted d-inline mb-0">
@@ -75,7 +81,6 @@ class PostCompact extends Component {
                 </div>
               </div>
             </div>
-          
           </div>
         )}
       </div>
@@ -89,9 +94,6 @@ const mapStateToProps = ({ auth }) => {
   };
 };
 export default connect(mapStateToProps, { fetchCurrentUser })(PostCompact);
-
-
-
 
 /*
 

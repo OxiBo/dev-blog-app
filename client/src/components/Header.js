@@ -35,9 +35,11 @@ class Header extends Component {
           >
             <i className="fa fa-github"> </i> with GitHub
           </a>
-          <a className="dropdown-item btn btn-block btn-social btn-twitter"
-           href="/auth/twitter">
-          <i className="fa fa-twitter"> </i> with Twitter
+          <a
+            className="dropdown-item btn btn-block btn-social btn-twitter"
+            href="/auth/twitter"
+          >
+            <i className="fa fa-twitter"> </i> with Twitter
           </a>
         </div>
       </li>
@@ -53,8 +55,9 @@ class Header extends Component {
     // console.log(github)
     return (
       <header>
-        {/* navbar breakpoints - https://stackoverflow.com/questions/36405532/bootstrap-4-change-breakpoint-navbar */}
-        <nav className="navbar navbar-expand-sm navbar-light fixed-top">
+        {/* navbar breakpoints - https://stackoverflow.com/questions/36405532/bootstrap-4-change-breakpoint-navbar 
+        change to *navbar-expand-xsm for smaller screen*/}
+        <nav className="navbar navbar-expand-sm navbar-light fixed-top"> 
           <Link className="navbar-brand nav-item" to="/">
             Home
           </Link>
@@ -71,11 +74,11 @@ class Header extends Component {
           </button>
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <ul className="navbar-nav">
-            <li className="nav-item active">
-                    <Link className="nav-link" to="/posts">
-                      Blog Posts <span className="sr-only">(current)</span>
-                    </Link>{" "}
-                  </li>
+              <li className="nav-item active">
+                <Link className="nav-link" to="/posts">
+                  Blog Posts <span className="sr-only">(current)</span>
+                </Link>{" "}
+              </li>
               {current_user ? (
                 <>
                   {/* <li className="nav-item active">
@@ -94,7 +97,10 @@ class Header extends Component {
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to={`/user/${current_user._id}/posts/drafts`}>
+                    <Link
+                      className="nav-link"
+                      to={`/user/${current_user._id}/posts/drafts`}
+                    >
                       My drafts
                     </Link>
                   </li>
@@ -106,8 +112,6 @@ class Header extends Component {
                       My Posts <span className="sr-only">(current)</span>
                     </Link>{" "}
                   </li>
-                 
-                 
                 </>
               ) : (
                 ""
@@ -149,7 +153,7 @@ class Header extends Component {
 
 const mapStateToProps = ({ auth }) => {
   return {
-    current_user: auth.current_user
+    current_user: auth.current_user,
   };
 };
 

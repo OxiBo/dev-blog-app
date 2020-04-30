@@ -55,7 +55,7 @@ module.exports = (app) => {
     }
   );
 
-  app.get("/api/posts/show/:postId", isLoggedIn, async (req, res) => {
+  app.get("/api/posts/show/:postId", /*isLoggedIn, */async (req, res) => {
     try {
       const foundPost = await Post.findById(req.params.postId)
         .populate({
