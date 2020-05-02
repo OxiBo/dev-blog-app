@@ -1,38 +1,36 @@
+/* Stackoverflow https://stackoverflow.com/questions/40178386/bootstrap-4-navbar-items-on-right-side */
+nav {
+  background-color: $navbarBackground;
+  color: $navbarTextColor;
+  padding: 0 1rem !important;
 
- 
- /* Stackoverflow https://stackoverflow.com/questions/40178386/bootstrap-4-navbar-items-on-right-side */
- nav{
-     background-color: $navbarBackground;
-     color: $navbarTextColor;
-       padding: 0 1rem!important;
-   
-     .navbar-nav {
-        // flex-direction: row;
-       
-        .nav-item:hover{
-            background-color: yellowgreen;
+  .navbar-brand{
+    color: $navbarBrandColor!important;
+  }
+  .navbar-nav {
+    // flex-direction: row;
 
-        }
-      }
-      
-      .nav-link {
-        padding-right: .5rem !important;
-        padding-left: .5rem !important;
-        color: white!important;
-      }
-      
-      /* Fixes dropdown menus placed on the right side */
-      .ml-auto .dropdown-menu {
-        left: auto !important;
-        right: 0px;
-      }
+    .nav-item:hover {
+      background-color: $navbarHover;
+    }
 
-      button.navbar-toggler{
-          border: 2px solid grey!important;
-      }
- }
+    .nav-item {
+      padding: 5px;
+    }
+    .nav-link {
+      padding-right: 0.5rem !important;
+      padding-left: 0.5rem !important;
+      color: white !important;
+    }
+  }
 
- 
+  /* Fixes dropdown menus placed on the right side */
+  .ml-auto .dropdown-menu {
+    left: auto !important;
+    right: 0px;
+  }
 
- 
- 
+  button.navbar-toggler {
+    border: 2px solid grey !important;
+  }
+}

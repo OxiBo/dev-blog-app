@@ -149,7 +149,7 @@ class PostCreateForm extends Component {
             <div className="card-group buttons">
               <button
                 onClick={() => this.props.history.goBack()}
-                className="btn btn-primary btn-lg m-3"
+                className="btn my-main-btn btn-lg m-3"
               >
                 Cancel
               </button>

@@ -6,7 +6,7 @@ export default class UserCompact extends Component {
     // console.log(this.props)
     const { avatar, name, occupation, _id, createdAt } = this.props.user;
     return (
-      <div className="card bg-light mb-0">
+      <div className="card mb-0">
         <div className="row m-4 no-gutters">
           <div className="col-md-4">
             <img src={avatar} className="img-fluid img-thumbnail" alt="..." />
@@ -19,7 +19,7 @@ export default class UserCompact extends Component {
             </div>
 
             <div className="profile-btn text-center">
-              <Link to={`/user-profile/${_id}`} className="btn btn-info btn-lg">
+              <Link to={`/user-profile/${_id}`} className="btn my-main-btn btn-lg">
                 See more
               </Link>
             </div>

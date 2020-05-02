@@ -27,7 +27,7 @@ export default WrappedComponent => {
     // }
 
     render() {
-      console.log("???")
+      
       return <WrappedComponent {...this.props} />;
     }
   }

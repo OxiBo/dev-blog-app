@@ -54,7 +54,7 @@ class UserProfile extends Component {
           <div className="card-group buttons">
             <button
               type="button"
-              className="btn btn-primary btn-lg"
+              className="btn btn-info my-main-btn btn-lg"
               onClick={() => this.props.history.goBack()}
             >
               GO BACK
@@ -66,7 +66,7 @@ class UserProfile extends Component {
                 <Link
                   to={`/user-profile/${this.props.match.params.userId}/edit`}
                   type="button"
-                  className="btn btn-warning btn-lg"
+                  className="btn btn-edit btn-lg"
                 >
                   EDIT
                 </Link>

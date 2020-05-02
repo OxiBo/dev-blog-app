@@ -29,16 +29,17 @@ class PostShow extends Component {
         _id,
         published,
       } = this.props.post;
+      // console.log(user)
 
       const { postLikes } = this.props.current_user;
-
+      // console.log(postLikes)
       const liked = postLikes.find((postLike) => postLike.post === _id);
       const likesStyle = liked && liked.like ? "liked" : "";
       // const likesStyle = this.state.postLikedStyle ? "liked" : "";
       return (
         <div className="container col-lg-10 ">
-          <div className="card mb-3 p-2">
-            <h4 className="card-header text-center p-4">{title}</h4>
+          <div className="card mb-3 p-2 shadow p-3 mb-5 bg-white rounded">
+            <h4 className="card-header text-center p-4 shadow-sm p-3 mb-5 bg-white rounded">{title}</h4>
             <div className="row no-gutters mb-1">
               {image && (
                 <div className="col-md-4">
@@ -96,7 +97,7 @@ class PostShow extends Component {
             <div className="card-group buttons m-0 p-0">
               <button
                 onClick={() => this.props.history.goBack()}
-                className="btn btn-primary btn-lg m-0 p-2"
+                className="btn my-main-btn btn-lg m-0 p-2"
               >
                 Go Back
               </button>
@@ -105,7 +106,7 @@ class PostShow extends Component {
                   <>
                     <Link
                       to={`/posts/edit/${_id}`}
-                      className="btn btn-warning btn-lg m-0 p-2"
+                      className="btn btn-edit btn-lg m-0 p-2"
                     >
                       Edit
                     </Link>
@@ -136,9 +137,10 @@ const mapStateToProps = ({ auth, posts }) => {
   return {
     current_user: auth.current_user,
     post: posts.post,
-    postLike: (auth.current_user && posts.post) && auth.current_user.postLikes.find(
-      (like) => like.post === posts.post._id
-    ),
+    postLike:
+      auth.current_user &&
+      posts.post &&
+      auth.current_user.postLikes.find((like) => like.post === posts.post._id),
   };
 };
 export default connect(mapStateToProps, {

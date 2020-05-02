@@ -1,5 +1,18 @@
-$navbarBackground:  rgba(123, 172, 32, 0.7);
+$navbarBackground: #034f84;
+$navbarHover:#92a8d1;
 $navbarTextColor: white;
+$navbarBrandColor: #92a8d1;
+$backgroundColor:  #fda4a2;
+$backgroundColorLeft:  #fda4a2;
+$backgroundColorRight: #ffdde1;
+$cardColor: #f0f2f7;
+$mainButtonColor: #034f84;
+$mainButtonHover: #92a8d1;
+$cardHeaderColor: #d7e0f1;
+$editButtonsColor: #92a8d1;
+$editButtonHover: #b7c4df;
+$outlineBtnColor: $mainButtonColor;
+
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +23,11 @@ $navbarTextColor: white;
 }
 
 body {
-  background-color: burlywood;
+  // background-color: $backgroundColor;
+  background: $backgroundColor; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, $backgroundColorLeft, $backgroundColorRight); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, $backgroundColorLeft,$backgroundColorRight); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
   .container-fluid {
     margin-top: 4rem !important;
   }
@@ -21,6 +38,22 @@ body {
     min-height: 100vh;
     main {
       flex: 1 !important;
+      .container{
+        margin-top: 10px;
+        .card{
+          background-color: $cardColor!important;
+        }
+        .card-header{
+          background-color: $cardHeaderColor!important;
+        }
+        .my-main-btn{
+          background-color: $mainButtonColor;
+          color: white;
+      }
+      .my-main-btn:hover{
+          background-color: $mainButtonHover;
+      }
+      }
     }
     footer{
       text-align: center;
@@ -38,10 +71,27 @@ body {
       margin: 1rem 2rem;
       width: 10rem;
     }
-    a.btn-warning,
+    a.btn-edit,
     button.btn-success {
       // margin-left: auto!important;
       color: white;
     }
+    a.btn-edit{
+      background-color: $editButtonsColor;
+      outline: none;
+    }
+    a.btn-edit:hover{
+      background-color: $editButtonHover;
+    }
+
+    
+  }
+  .my-outline-info-btn{
+    color: $outlineBtnColor!important;
+    border-color: $outlineBtnColor!important;
+  }
+  .my-outline-info-btn:hover{
+    color: white!important;
+    background-color: $outlineBtnColor;
   }
 }

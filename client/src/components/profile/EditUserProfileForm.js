@@ -134,7 +134,7 @@ class EditUserProfile extends Component {
             <div className="card-group buttons">
               <button
                 type="button"
-                className="btn btn-primary btn-lg"
+                className="btn my-main-btn btn-lg"
                 onClick={() => this.props.history.goBack()}
               >
                 GO BACK

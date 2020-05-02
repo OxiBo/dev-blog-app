@@ -135,6 +135,7 @@ export const likePost = (id) => async (dispatch) => {
   try {
     // console.log(id)
     const res = await axios.patch(`/api/posts/show/${id}/like`);
+    // console.log(res.data)
     dispatch({ type: FETCH_POST, payload: res.data });
   } catch (err) {
     console.error(err);

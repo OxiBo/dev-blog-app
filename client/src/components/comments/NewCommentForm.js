@@ -43,7 +43,7 @@ class NewCommentForm extends Component {
       bio: { avatar, name }
     } = this.props.current_user;
     return (
-      <div className="row no-gutters col-md-12">
+      <div className="row no-gutters col-md-12 shadow-sm p-3 mb-5 bg-white rounded">
         <div className="col-md-2 text-center  user-tiny">
           <div className="user-icon-container ">
             <img src={avatar} className="card-img user-icon" alt="..." />

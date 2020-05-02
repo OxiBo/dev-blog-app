@@ -5,7 +5,7 @@ import { setFindByTitle, setSortBy } from "../../actions";
 class PostListFilters extends Component {
   render() {
     return (
-      <div className="container col-lg-10 mb-3">
+      <div className="container col-lg-10 mb-2">
         <div className="row no-gutters-m-3 mx-0">
 
         <div className="card col-md-6">

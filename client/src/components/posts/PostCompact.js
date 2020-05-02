@@ -19,10 +19,10 @@ class PostCompact extends Component {
     // const postShowPath = this.props.current_user ? `/posts/show/${_id}` : "";
     // console.log(user.id === this.props.current_user._id)
     return (
-      <div className="container col-lg-10 ">
+      <div className="container col-lg-10 mt-1">
         {this.props.post && (
-          <div className="card mb-3">
-            <div className="row no-gutters m-3 ">
+          <div className="card mb-2">
+            <div className="row no-gutters m-3">
               {image && (
                 // vertical alignment in bootstrap - https://medium.com/wdstack/bootstrap-4-vertical-center-1211448a2eff
                 <div className="col-md-4 my-auto">
@@ -42,6 +42,7 @@ class PostCompact extends Component {
                       ? body.substring(0, 350) + "...  "
                       : body + "   "}
 
+                    {/* https://css-tricks.com/how-to-disable-links/ */}
                     {this.props.current_user && (
                       <Link
                         to={`/posts/show/${_id}`}

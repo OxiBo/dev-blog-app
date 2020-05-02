@@ -12,7 +12,7 @@ class UsersList extends Component {
     return (
       <div className="container">
         <div className="card">
-          <div className="card">
+          <div className="card card-header">
             <h1 className="card-title text-center m-4">Our Bloggers</h1>
           </div>
 

@@ -21,22 +21,22 @@ class Header extends Component {
         >
           Signin/up
         </a>
-        <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <div className="dropdown-menu p-0 m-0 rounded-sm" aria-labelledby="navbarDropdownMenuLink">
           <a
-            className="dropdown-item btn btn-block btn-social btn-google"
+            className="dropdown-item btn btn-block btn-social btn-google p-2 m-0 rounded-0"
             href="/auth/google"
           >
             <i className="fa fa-google"> </i>
             with Google
           </a>
           <a
-            className="dropdown-item btn btn-block btn-social btn-github"
+            className="dropdown-item btn btn-block btn-social btn-github p-2 m-0 rounded-0"
             href="/auth/github"
           >
             <i className="fa fa-github"> </i> with GitHub
           </a>
           <a
-            className="dropdown-item btn btn-block btn-social btn-twitter"
+            className="dropdown-item btn btn-block btn-social btn-twitter p-2 m-0 rounded-0"
             href="/auth/twitter"
           >
             <i className="fa fa-twitter"> </i> with Twitter
@@ -48,11 +48,7 @@ class Header extends Component {
 
   render() {
     const { current_user } = this.props;
-    // console.log(this.props)
-    // console.log( current_user)
-    // const { google, github } = current_user || {};
-    // console.log(google)
-    // console.log(github)
+   
     return (
       <header>
         {/* navbar breakpoints - https://stackoverflow.com/questions/36405532/bootstrap-4-change-breakpoint-navbar 

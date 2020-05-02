@@ -9,7 +9,7 @@ export default class Comments extends Component {
 
   render() {
     return (
-      <div className="card m-3">
+      <div className="card m-3 border-0">
         <NewComment />
         <button
           onClick={() =>
@@ -17,7 +17,7 @@ export default class Comments extends Component {
               showComments: !prevState.showComments
             }))
           }
-          className="btn btn-outline-info btn-lg btn-block"
+          className="btn my-outline-info-btn btn-lg btn-block"
         >
           {this.state.showComments ? "Hide Comments" : "Show Comments"}
         </button>
