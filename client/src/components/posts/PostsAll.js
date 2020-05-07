@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PostsList from "./PostsList";
-import PostListFilters from "./PostListFilters";
+// import PostListFilters from "./PostListFilters";
 import { fetchPosts } from "../../actions";
 import filterPosts from "../../selectors/filterPosts";
 

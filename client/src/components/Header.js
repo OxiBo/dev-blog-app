@@ -12,7 +12,7 @@ class Header extends Component {
       <li className="nav-item nav-link dropdown mr-auto">
         <a
           className="nav-link dropdown-toggle"
-          href="#"
+          href="/#" // https://stackoverflow.com/questions/52801051/react-site-warning-the-href-attribute-requires-a-valid-address-provide-a-valid
           id="navbarDropdownMenuLink"
           role="button"
           data-toggle="dropdown"
@@ -21,7 +21,7 @@ class Header extends Component {
         >
           Signin/up
         </a>
-        <div className="dropdown-menu p-0 m-0 rounded-sm" aria-labelledby="navbarDropdownMenuLink">
+        <div className="dropdown-menu p-0 m-0 rounded-sm shadow-sm bg-white rounded" aria-labelledby="navbarDropdownMenuLink">
           <a
             className="dropdown-item btn btn-block btn-social btn-google p-2 m-0 rounded-0"
             href="/auth/google"
@@ -127,7 +127,7 @@ class Header extends Component {
                     </a>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link disabled">
+                    <a className="nav-link disabled" href="/#">
                       Logged in as {current_user.bio.name}
                     </a>
                   </li>

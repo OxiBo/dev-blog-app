@@ -39,7 +39,9 @@ class PostShow extends Component {
       return (
         <div className="container col-lg-10 ">
           <div className="card mb-3 p-2 shadow p-3 mb-5 bg-white rounded">
-            <h4 className="card-header text-center p-4 shadow-sm p-3 mb-5 bg-white rounded">{title}</h4>
+            <h4 className="card-header text-center p-4 shadow-sm p-3 mb-5 bg-white rounded">
+              {title}
+            </h4>
             <div className="row no-gutters mb-1">
               {image && (
                 <div className="col-md-4">
@@ -66,11 +68,7 @@ class PostShow extends Component {
                             className="likes"
                             onClick={async () => {
                               await this.props.likePost(_id);
-                              {
-                                /* this.setState((prevState) => ({
-                                postLikedStyle: !prevState.postLikedStyle,
-                              })); */
-                              }
+
                               this.props.fetchCurrentUser();
                             }}
                           >

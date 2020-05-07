@@ -18,7 +18,7 @@ class CommentSingle extends Component {
     return this.props.current_user._id === user.id ? (
       <>
         <button
-          className="btn btn-sm btn-outline-warning"
+          className="btn btn-sm my-btn-outline-warning"
           onClick={() => this.props.renderEditComment(_id)}
         >
           Edit
