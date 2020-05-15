@@ -1,6 +1,6 @@
 module.exports = {
-    // googleClientID: process.env.GOOGLE_CLIENT_ID,
-    // googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    googleClientID: process.env.GOOGLE_CLIENT_ID,
+    googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
     // facebookAPIId: process.env.FACEBOOK_API_ID,
     // facebookAPISecret: process.env.FACEBOOK_API_SECRET,
     // facebookCallBackURL: process.env.FACEBOOK_CALLBACK_URL,
