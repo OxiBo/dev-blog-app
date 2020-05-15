@@ -12,7 +12,7 @@ const passport = require("passport"),
 //     done(err, user);
 //   });
 // });
-console.log(keys.googleClientID)
+
 // https://console.developers.google.com/apis/dashboard?project=our-mechanism-252021&pli=1
 // https://www.udemy.com/course/react-redux/learn/lecture/12700577?start=51#bookmarks
 passport.use(
