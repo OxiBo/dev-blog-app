@@ -8,7 +8,7 @@ const express = require("express"),
   User = require("./models/User"),
   Post = require("./models/Post"),
   Comment = require("./models/Comment"),
-  isLoggedIn = require("./middleware/isLoggedin"),
+  // isLoggedIn = require("./middleware/isLoggedIn"),
   app = express();
   
   
@@ -66,12 +66,16 @@ passport.deserializeUser((id, done) => {
   }
 });
 
-app.get("/", (req, res) => {
-  console.log("============= REQ.USER ===========");
-  console.log(req.user);
+if (process.env.NODE_ENV === "production") {
+  // Express will serve production assets like main.css  or main.js files
+  app.use(express.static("client/build"));
 
-  res.send({ greeting: "Hello, blog" });
-});
+  // Express will serve index.html if it does not recognize the route
+  const path = require("path");
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 
 const PORT = process.env.PORT || 6060; // if getting error about server already running on this port - https://stackoverflow.com/questions/9898372/how-to-fix-error-listen-eaddrinuse-while-using-nodejs
 app.listen(PORT, () => {
