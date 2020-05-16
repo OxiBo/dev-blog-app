@@ -9,6 +9,7 @@ module.exports = app => {
     "/auth/twitter/callback",
     passport.authenticate("twitter", { failureRedirect: "/" }),
     (req, res) => {
+      console.log(req)
       // Successful authentication, redirect home.
       res.redirect("/posts");
     }

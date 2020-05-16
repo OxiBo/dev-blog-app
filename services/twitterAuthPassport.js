@@ -37,6 +37,7 @@ passport.use(
         }).save();
         return done(null, newUser);
       } catch (err) {
+           console.log("===================")
         console.error(err);
         return done(err);
       }
