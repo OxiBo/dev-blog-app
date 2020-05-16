@@ -1,3 +1,5 @@
+// https://medium.com/@vampiire/how-to-verify-the-authenticity-of-a-github-apps-webhook-payload-8d63ccc81a24
+
 const passport = require("passport");
 require("../../services/githubAuthPassport");
 
