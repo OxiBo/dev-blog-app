@@ -14,7 +14,7 @@ passport.use(
       // User.findOrCreate({ githubId: profile.id }, function (err, user) {
       //   return cb(err, user);
       // });
-      // console.log(profile);
+      console.log(profile);
 
       const { id, username, email } = profile;
     //   console.log("===================")
