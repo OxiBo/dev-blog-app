@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import Spinner from '../Spinner';
 import { fetchCurrentUser, fetchUser } from "../../actions";
 // import parseUserDetails from "../../utils/parseUserDetails";
 
@@ -87,7 +88,7 @@ class UserProfile extends Component {
       return <div>{this.renderContent()}</div>;
     }
 
-    return <div>Server side error...</div>;
+  return  <Spinner /> ; // TODO - need to display error message in case of receiving an error from server
   }
 }
 

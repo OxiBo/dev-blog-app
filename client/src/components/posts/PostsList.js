@@ -16,7 +16,7 @@ class PostsList extends Component {
             )}
           </>
         ) : (
-          <div>Refresh to load posts...</div>
+          <div>Nobody wrote a post yet...</div>
         )}
       </>
     );

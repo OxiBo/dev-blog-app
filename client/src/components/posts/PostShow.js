@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import Spinner from '../Spinner'
 import Comments from "../comments/Comments";
 import {
   fetchCurrentUser,
@@ -126,7 +127,7 @@ class PostShow extends Component {
         </div>
       );
     } else {
-      return <div>Loading....</div>;
+      return <Spinner />;
     }
   }
 }

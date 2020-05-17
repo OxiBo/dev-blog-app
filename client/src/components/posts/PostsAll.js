@@ -21,6 +21,7 @@ class PostsAll extends Component {
           <>
             {/* <PostListFilters /> */}
             <PostsList posts={this.props.posts} />
+           
           </>
         )}
       </div>
