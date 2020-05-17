@@ -53,7 +53,7 @@ class Header extends Component {
       <header>
         {/* navbar breakpoints - https://stackoverflow.com/questions/36405532/bootstrap-4-change-breakpoint-navbar 
         change to *navbar-expand-xsm for smaller screen*/}
-        <nav className="navbar navbar-expand-sm navbar-light fixed-top"> 
+        <nav className="navbar navbar-expand-xsm navbar-light fixed-top"> 
           <Link className="navbar-brand nav-item" to="/">
             Home
           </Link>
