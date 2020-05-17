@@ -1,3 +1,5 @@
+// TODO - make drop down for my posts, my drafts and new post
+
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -52,8 +54,8 @@ class Header extends Component {
     return (
       <header>
         {/* navbar breakpoints - https://stackoverflow.com/questions/36405532/bootstrap-4-change-breakpoint-navbar 
-        change to *navbar-expand-xsm for smaller screen*/}
-        <nav className="navbar navbar-expand-xsm navbar-light fixed-top"> 
+        change to *navbar-expand-xsm for smaller screen ??? change to lg for production*/}
+        <nav className="navbar navbar-expand-lg navbar-light fixed-top"> 
           <Link className="navbar-brand nav-item" to="/">
             Home
           </Link>
