@@ -23,7 +23,10 @@ class Header extends Component {
         >
           Signin/up
         </a>
-        <div className="dropdown-menu p-0 m-0 rounded-sm shadow-sm bg-white rounded" aria-labelledby="navbarDropdownMenuLink">
+        <div
+          className="dropdown-menu p-0 m-0 rounded-sm shadow-sm bg-white rounded"
+          aria-labelledby="navbarDropdownMenuLink"
+        >
           <a
             className="dropdown-item btn btn-block btn-social btn-google p-2 m-0 rounded-0"
             href="/auth/google"
@@ -50,12 +53,12 @@ class Header extends Component {
 
   render() {
     const { current_user } = this.props;
-   
+
     return (
       <header>
         {/* navbar breakpoints - https://stackoverflow.com/questions/36405532/bootstrap-4-change-breakpoint-navbar 
         change to *navbar-expand-xsm for smaller screen ??? change to lg for production*/}
-        <nav className="navbar navbar-expand-lg navbar-light fixed-top"> 
+        <nav className="navbar navbar-expand-sm navbar-light fixed-top">
           <Link className="navbar-brand nav-item" to="/">
             Home
           </Link>
@@ -89,6 +92,41 @@ class Header extends Component {
                       Our bloggers
                     </Link>
                   </li>
+
+                  <li className="nav-item dropdown">
+                    <a
+                      className="nav-link dropdown-toggle"
+                      href="#"
+                      id="navbarDropdown"
+                      role="button"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      My posts
+                    </a>
+                    <div
+                      className="dropdown-menu"
+                      aria-labelledby="navbarDropdown"
+                    >
+                      <Link className="dropdown-item" to="/posts/new">
+                        New Post
+                      </Link>
+                      <Link
+                        className="dropdown-item"
+                        to={`/user/${current_user._id}/posts/drafts`}
+                      >
+                        My drafts
+                      </Link>
+                      <Link
+                        className="dropdown-item"
+                        to={`/user/${current_user._id}/posts`}
+                      >
+                        My Posts <span className="sr-only">(current)</span>
+                      </Link>
+                    </div>
+                  </li>
+
                   <li className="nav-item">
                     <Link className="nav-link" to="/posts/new">
                       New Post
