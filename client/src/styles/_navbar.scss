@@ -25,9 +25,19 @@ nav {
       padding-left: 0.5rem !important;
       color: white !important;
     }
-    // nav .navbar-nav .dropdown-menu.show{
-    //   background-color: $navbarTextColor!important;
+
+    // li.nav-item.dropdown.show{
+    //   .dropdown-menu.show{
+    //     background-color: $navbarTextColor!important;
+    //   }
     // }
+     li.nav-item.dropdown.show .dropdown-menu.show{
+      background-color: $dropdownMenuBackground!important;
+      a:hover{
+        background-color:$dropdownLinksHover;
+
+      }
+    }
   
   
   }

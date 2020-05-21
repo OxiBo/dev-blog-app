@@ -96,7 +96,7 @@ class Header extends Component {
                   <li className="nav-item dropdown">
                     <a
                       className="nav-link dropdown-toggle"
-                      href="#"
+                      href="/#"
                       id="navbarDropdown"
                       role="button"
                       data-toggle="dropdown"
@@ -127,7 +127,7 @@ class Header extends Component {
                     </div>
                   </li>
 
-                  <li className="nav-item">
+                  {/* <li className="nav-item">
                     <Link className="nav-link" to="/posts/new">
                       New Post
                     </Link>
@@ -147,7 +147,7 @@ class Header extends Component {
                     >
                       My Posts <span className="sr-only">(current)</span>
                     </Link>{" "}
-                  </li>
+                  </li> */}
                 </>
               ) : (
                 ""
