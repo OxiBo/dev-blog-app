@@ -9,7 +9,8 @@ import {
 const defaultPostReducer = {
   post: null,
   posts: [],
-  user_posts: []
+  user_posts: [],
+  isLoading: true
 };
 
 export default (state = defaultPostReducer, action) => {
@@ -23,7 +24,8 @@ export default (state = defaultPostReducer, action) => {
     case FETCH_USER_POSTS:
       return {
         ...state,
-        user_posts: action.payload
+        user_posts: action.payload,
+        isLoading: false
       };
     case FETCH_POST:
       return {
@@ -33,12 +35,14 @@ export default (state = defaultPostReducer, action) => {
     case FETCH_POSTS:
       return {
         ...state,
-        posts: action.payload
+        posts: action.payload,
+        isLoading: false
       };
     case DELETE_POST:
       return {
         ...state,
-        posts: [state.posts.filter(post => post._id === action.payload)]
+        posts: [state.posts.filter(post => post._id === action.payload)],
+        isLoading: false
       };
     default:
       return state;

@@ -23,7 +23,13 @@ module.exports = (app) => {
           .exec();
         // console.log(foundPosts);
         // return res.status(500).send(err);
-        return res.send(foundPosts);
+
+        const delay = () => {
+          return res.send(foundPosts)
+        }
+
+       await setTimeout(delay, 4000)
+        // return res.send(foundPosts);
       } catch (err) {
         console.error(err);
         return res.status(500).send(err);
@@ -31,7 +37,7 @@ module.exports = (app) => {
     }
   );
 
-  // TODO - middleware to check if user has the right to see the posts (should be able to only see his drafts)
+  // TODO - middleware to check if user has the right to see the posts (should be able to only see their drafts)
   app.get(
     "/api/user/:userId/posts/:published",
     isLoggedIn,
@@ -52,6 +58,14 @@ module.exports = (app) => {
           })
           .exec();
         //   console.log(foundUser)
+
+      //   const delay = () => {
+      //     return res.send([])
+      //   }
+
+      //  await setTimeout(delay, 4000)
+
+
 
         return res.send(foundUser.posts);
       } catch (err) {

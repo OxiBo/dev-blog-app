@@ -45,7 +45,7 @@ class PostCreateReview extends Component {
                     type="checkbox"
                     className="form-check-input"
                   />
-                  <label className="form-check-label" htmlFor="publish">
+                  <label className="form-check-label ml-3" htmlFor="publish">
                     Publish
                   </label>
                 </div>

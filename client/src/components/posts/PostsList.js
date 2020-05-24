@@ -3,20 +3,24 @@ import React, { Component } from "react";
 // import { fetchUser, fetchUserPosts } from "../../actions";
 import PostCompact from "./PostCompact";
 import PostListFilters from "./PostListFilters";
+import Spinner from "../Spinner";
+
 class PostsList extends Component {
   render() {
     // console.log(this.props);
     return (
       <>
-        {this.props.posts.length ? (
+        {this.props.isLoading ? (
+          <Spinner />
+        ) : this.props.posts.length === 0 ? (
+          <div>There are no posts yet...</div>
+        ) : (
           <>
             <PostListFilters />
             {this.props.posts.map(
               (post) => post._id && <PostCompact key={post._id} post={post} />
             )}
           </>
-        ) : (
-          <div>Nobody wrote a post yet...</div>
         )}
       </>
     );

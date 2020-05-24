@@ -20,18 +20,14 @@ class UserPosts extends Component {
     // console.log(this.props);
     return (
       <>
-     
-        {this.props.user_posts.length ? (
+        {this.props.user_posts && (
           <>
-          {/* <PostListFilters /> */}
-          <PostsList posts={this.props.user_posts} />
+            {/* <PostListFilters /> */}
+            <PostsList
+              posts={this.props.user_posts}
+              isLoading={this.props.isLoading}
+            />
           </>
-        ) : (
-          <div className="card m-3">
-            <div className="list-group m-2 p-2 text-center">
-              You don't have posts yet
-            </div>
-          </div>
         )}
       </>
     );
@@ -43,7 +39,8 @@ const mapStateToProps = ({ posts, filters: { sortBy, findByTitle } }) => {
     // current_user: auth.current_user
     sortBy,
     findByTitle,
-    user_posts: filterPosts(posts.user_posts, sortBy, findByTitle)
+    isLoading: posts.isLoading,
+    user_posts: filterPosts(posts.user_posts, sortBy, findByTitle),
   };
 };
 export default connect(mapStateToProps, { fetchUser, fetchUserPosts })(
@@ -72,3 +69,27 @@ render() {
 
 
 */
+
+/*
+
+ return (
+      <>
+     
+        {this.props.user_posts ? (
+          <>
+          {/* <PostListFilters /> */
+{
+  /* <PostsList posts={this.props.user_posts} isLoading={this.props.isLoading}/>
+          </>
+        ) : (
+          <div className="card m-3">
+            <div className="list-group m-2 p-2 text-center">
+              You don't have posts yet
+            </div>
+          </div>
+        )}
+      </>
+    ); */
+}
+
+// */

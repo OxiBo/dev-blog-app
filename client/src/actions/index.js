@@ -107,16 +107,16 @@ export const fetchUserPosts = (id, history, published) => async (dispatch) => {
   }
 };
 
-export const fetchPosts = () => async (dispatch) => {
+export const fetchPosts = (history) => async (dispatch) => {
   try {
-    const res = await axios.get(`/api//posts`);
+    const res = await axios.get(`/api/posts`);
     // console.log(res);
     dispatch({ type: FETCH_POSTS, payload: res.data });
     // history(`/user/${id}/posts`);
   } catch (err) {
     console.error(err);
     toast("Server error. Failed to fetch posts!", errorToastStyle);
-    // history.goBack();
+    history.goBack();
   }
 };
 
