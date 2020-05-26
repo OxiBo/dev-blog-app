@@ -1,24 +1,22 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import Spinner from '../Spinner';
-import { fetchCurrentUser, fetchUser } from "../../actions";
+import Spinner from "../Spinner";
+import { fetchCurrentUser, fetchUser, setSpinner } from "../../actions";
 // import parseUserDetails from "../../utils/parseUserDetails";
 
 class UserProfile extends Component {
-  componentDidMount() {
-    this.props.fetchCurrentUser();
+  async componentDidMount() {
+    await this.props.fetchCurrentUser();
+    await this.props.setSpinner();
     // console.log(this.props.match.params.userId)
-    this.props.fetchUser(this.props.match.params.userId);
+    await this.props.fetchUser(this.props.match.params.userId);
+    this.props.setSpinner(false);
     // console.log(this.props);
     // console.log(this.props.match.params.userId)
   }
 
   renderContent() {
-    // const { user } = this.props;
-    // const { avatar } = this.props.user;
-    // console.log(this.props.current_user._id)
-    // console.log(this.props.match.params.userId)
     const { bio } = this.props.user;
     const { avatar } = bio;
     const userDetails = ["name", "email", "occupation", "age", "gender"];
@@ -80,30 +78,39 @@ class UserProfile extends Component {
 
   render() {
     // console.log(this.props);
-    if (
-      this.props.user &&
-      Object.entries(this.props.user).length > 0 &&
-      this.props.user.constructor === Object
-    ) {
-      return <div>{this.renderContent()}</div>;
-    }
 
-  return  <Spinner /> ; // TODO - need to display error message in case of receiving an error from server
+    return (
+      <>
+        {this.props.isLoading ? (
+          <Spinner />
+        ) : this.props.user &&
+          Object.entries(this.props.user).length > 0 &&
+          this.props.user.constructor === Object ? (
+          <div>{this.renderContent()}</div>
+        ) : (
+          ""
+        )}
+      </>
+    );
+    // TODO - need to display error message in case of receiving an error from server or redirect
   }
 }
 
-const mapStateToProps = ({ auth }) => {
-//   console.log(auth.user);
+const mapStateToProps = ({ auth, spinner }) => {
+  //   console.log(auth.user);
   return {
+    isLoading: spinner.isLoading,
     current_user: auth.current_user,
-    user: auth.user
+    user: auth.user,
     // user: parseUserDetails(auth.user)
   };
 };
 
-export default connect(mapStateToProps, { fetchCurrentUser, fetchUser })(
-  UserProfile
-);
+export default connect(mapStateToProps, {
+  fetchCurrentUser,
+  fetchUser,
+  setSpinner,
+})(UserProfile);
 
 /*
 

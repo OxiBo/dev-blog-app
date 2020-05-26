@@ -13,7 +13,7 @@ class Landing extends Component {
         <div className="row">
           <div className={`col-md-${styles} col-lg-${styles} homepage-content`}>
             <h1>Welcome!</h1>
-            Sign up or sing in to read our blog posts
+            Sign up or sing in to read blog posts in full
           </div>
 
           {this.props.current_user ? (
