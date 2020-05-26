@@ -1,18 +1,21 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchUser, fetchUserPosts } from "../../actions";
+import { fetchUser, fetchUserPosts, setSpinner } from "../../actions";
 // import PostCompact from "./PostCompact";
 // import PostListFilters from "./PostListFilters";
 import PostsList from "./PostsList";
+import Spinner from "../Spinner";
 
 class UserDrafts extends Component {
-  componentDidMount() {
-    this.props.fetchUser(this.props.match.params.userId);
-    this.props.fetchUserPosts(
+  async componentDidMount() {
+   await this.props.fetchUser(this.props.match.params.userId);
+    await this.props.setSpinner()
+    await this.props.fetchUserPosts(
       this.props.match.params.userId,
       this.props.history,
       false
     );
+    this.props.setSpinner(false)
   }
 
   render() {
@@ -30,14 +33,14 @@ class UserDrafts extends Component {
   }
 }
 
-const mapStateToProps = ({ posts, isLoading }) => {
+const mapStateToProps = ({ posts, spinner }) => {
   return {
     // current_user: auth.current_user
-    isLoading: posts.isLoading,
+    isLoading: spinner.isLoading,
     user_drafts: posts.user_posts,
   };
 };
-export default connect(mapStateToProps, { fetchUser, fetchUserPosts })(
+export default connect(mapStateToProps, { fetchUser, fetchUserPosts, setSpinner })(
   UserDrafts
 );
 

@@ -3,14 +3,15 @@ import {
   FETCH_USER_POSTS,
   FETCH_POST,
   FETCH_POSTS,
-  DELETE_POST
+  DELETE_POST,
+  // SET_SPINNER
 } from "../actions/types";
 
 const defaultPostReducer = {
   post: null,
   posts: [],
   user_posts: [],
-  isLoading: true
+  // isLoading: true
 };
 
 export default (state = defaultPostReducer, action) => {
@@ -25,7 +26,7 @@ export default (state = defaultPostReducer, action) => {
       return {
         ...state,
         user_posts: action.payload,
-        isLoading: false
+        // isLoading: false
       };
     case FETCH_POST:
       return {
@@ -36,14 +37,19 @@ export default (state = defaultPostReducer, action) => {
       return {
         ...state,
         posts: action.payload,
-        isLoading: false
+        // isLoading: false
       };
     case DELETE_POST:
       return {
         ...state,
         posts: [state.posts.filter(post => post._id === action.payload)],
-        isLoading: false
+        // isLoading: false
       };
+      // case SET_SPINNER:
+      //   return {
+      //     ...state,
+      //     isLoading: action.payload
+      //   }
     default:
       return state;
   }

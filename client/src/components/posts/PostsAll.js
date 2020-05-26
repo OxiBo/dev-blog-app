@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PostsList from "./PostsList";
 // import PostListFilters from "./PostListFilters";
-import { fetchPosts } from "../../actions";
+import { fetchPosts, setSpinner } from "../../actions";
 import filterPosts from "../../selectors/filterPosts";
 // import Spinner from "../Spinner"
 class PostsAll extends Component {
-  componentDidMount() {
-    // console.log(this.props)
-    this.props.fetchPosts(this.props.history);
+  async componentDidMount() {
+    console.log(this.props)
+   await this.props.setSpinner();
+   await  this.props.fetchPosts(this.props.history);
+   this.props.setSpinner(false);
   }
   render() {
     // strange behavior, find out
@@ -29,14 +31,15 @@ class PostsAll extends Component {
     );
   }
 }
-const mapStateToProps = ({ posts, filters: { sortBy, findByTitle } }) => {
+const mapStateToProps = ({ spinner, posts, filters: { sortBy, findByTitle } }) => {
+  console.log(spinner)
   // console.log(posts.posts);
   return {
     // current_user: auth.current_user
     sortBy,
     findByTitle,
-    isLoading: posts.isLoading,
+    isLoading: spinner.isLoading,
     posts: filterPosts(posts.posts, sortBy, findByTitle),
   };
 };
-export default connect(mapStateToProps, { fetchPosts })(PostsAll);
+export default connect(mapStateToProps, { fetchPosts, setSpinner })(PostsAll);

@@ -6,7 +6,7 @@ const mongoose = require("mongoose"),
 (isAuthorizedToDeleteComment = require("../../middleware/isAuthorizedToDeleteComment")),
   (isAuthorizedToEditComment = require("../../middleware/isAuthorizedToEditComment"));
 
-module.exports = app => {
+module.exports = (app) => {
   // get all post comments
   app.get("/api/posts/show/:postId/comments", isLoggedIn, async (req, res) => {
     try {
@@ -14,6 +14,7 @@ module.exports = app => {
         .populate({ path: "comments", model: Comment })
         .exec();
       //   console.log(foundPost);
+
       res.send(foundPost.comments);
     } catch (err) {
       console.error(err);
@@ -34,9 +35,9 @@ module.exports = app => {
           user: {
             id: req.user._id,
             name: req.user.bio.name,
-            avatar: user.bio.avatar
+            avatar: user.bio.avatar,
           },
-          post: req.params.postId
+          post: req.params.postId,
         }).save();
         await foundPost.comments.push(newComment);
         await foundPost.save();
@@ -63,7 +64,7 @@ module.exports = app => {
           req.params.commentId,
           {
             text,
-            createdAt
+            createdAt,
           },
           { new: true } // to get new updated comment back
         );

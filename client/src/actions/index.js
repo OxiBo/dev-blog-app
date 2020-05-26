@@ -1,6 +1,7 @@
 import { reset } from "redux-form";
 
 import {
+  SET_SPINNER,
   FETCH_CURRENT_USER,
   FETCH_USER,
   FETCH_USERS,
@@ -24,7 +25,14 @@ import axios from "axios";
 
 import { toastOptions, errorToastStyle } from "../styles/toastifyStyles";
 
-
+export const setSpinner = (isLoading = true) => {
+  console.log("sppiner fire off")
+  console.log(isLoading)
+  return {
+    type: SET_SPINNER,
+    payload: isLoading
+  }
+}
 export const fetchCurrentUser = () => async (dispatch) => {
   const res = await axios.get("/api/current_user");
   // console.log(res);

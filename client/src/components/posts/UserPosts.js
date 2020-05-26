@@ -1,19 +1,21 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchUser, fetchUserPosts } from "../../actions";
+import { fetchUser, fetchUserPosts, setSpinner } from "../../actions";
 // import PostCompact from "./PostCompact";
 import filterPosts from "../../selectors/filterPosts";
 // import PostListFilters from "./PostListFilters";
 import PostsList from "./PostsList";
 
 class UserPosts extends Component {
-  componentDidMount() {
-    this.props.fetchUser(this.props.match.params.userId);
-    this.props.fetchUserPosts(
+  async componentDidMount() {
+    await this.props.fetchUser(this.props.match.params.userId);
+    await this.props.setSpinner();
+    await this.props.fetchUserPosts(
       this.props.match.params.userId,
       this.props.history,
       true
     );
+    await this.props.setSpinner(false);
   }
 
   render() {
@@ -34,18 +36,24 @@ class UserPosts extends Component {
   }
 }
 
-const mapStateToProps = ({ posts, filters: { sortBy, findByTitle } }) => {
+const mapStateToProps = ({
+  posts,
+  filters: { sortBy, findByTitle },
+  spinner,
+}) => {
   return {
     // current_user: auth.current_user
     sortBy,
     findByTitle,
-    isLoading: posts.isLoading,
+    isLoading: spinner.isLoading,
     user_posts: filterPosts(posts.user_posts, sortBy, findByTitle),
   };
 };
-export default connect(mapStateToProps, { fetchUser, fetchUserPosts })(
-  UserPosts
-);
+export default connect(mapStateToProps, {
+  fetchUser,
+  fetchUserPosts,
+  setSpinner,
+})(UserPosts);
 
 // export default UserPosts;
 
