@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router";
 import { reduxForm, Field } from "redux-form";
 import { connect } from "react-redux";
+
 import validateURL from "../../utils/validateURL";
 
 const formFields = [
@@ -9,14 +10,14 @@ const formFields = [
     name: "title",
     label: "Title",
     type: "text",
-    placeholder: "Enter title"
+    placeholder: "Enter title",
   },
   {
     name: "image",
     label: "Image",
     type: "text",
-    placeholder: "Enter image url"
-  }
+    placeholder: "Enter image url",
+  },
 ];
 
 class PostCreateForm extends Component {
@@ -80,6 +81,7 @@ class PostCreateForm extends Component {
             className={`form-control ${errorStyle}`}
             placeholder={placeholder}
             rows={rows}
+            wrap="hard" // https://www.w3schools.com/tags/att_textarea_wrap.asp
           />
         </div>
 
@@ -99,7 +101,7 @@ class PostCreateForm extends Component {
           </h3>
           <form
             action=""
-            onSubmit={this.props.handleSubmit(values =>
+            onSubmit={this.props.handleSubmit((values) =>
               this.props.onSubmit(values)
             )}
             className="needs-validation m-4"
@@ -130,20 +132,21 @@ class PostCreateForm extends Component {
             />
             {this.props.edit && (
               <div className="form-inline m-3">
-              <label className="col-sm-4 col-form-label text-uppercase font-weight-bold text-right  form-check-label" htmlFor="publish">
+                <label
+                  className="col-sm-4 col-form-label text-uppercase font-weight-bold text-right  form-check-label"
+                  htmlFor="publish"
+                >
                   Publish
                 </label>
                 <div className="col-sm-8">
-                <Field
-                  name="published"
-                  id="published"
-                  component={"input"}
-                  type="checkbox"
-                  className="form-check-input"
-                />
+                  <Field
+                    name="published"
+                    id="published"
+                    component={"input"}
+                    type="checkbox"
+                    className="form-check-input"
+                  />
                 </div>
-                
-               
               </div>
             )}
             <div className="card-group buttons">
@@ -164,7 +167,7 @@ class PostCreateForm extends Component {
   }
 }
 
-const validate = formValues => {
+const validate = (formValues) => {
   const errors = {};
   if (!formValues.title) {
     errors.title = "You must enter title";
@@ -197,7 +200,7 @@ const validate = formValues => {
 
 const mapStateToProps = ({ auth }) => {
   return {
-    user: auth.user
+    user: auth.user,
   };
 };
 
@@ -209,8 +212,6 @@ const mapStateToProps = ({ auth }) => {
 //   )
 // );
 
-
-
 // export default withRouter(
 //   connect(mapStateToProps)(
 //     reduxForm({ validate })(
@@ -218,7 +219,6 @@ const mapStateToProps = ({ auth }) => {
 //     )
 //   )
 // );
-
 
 export default withRouter(
   connect(mapStateToProps)(

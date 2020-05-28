@@ -1,3 +1,4 @@
+$mainColor: #034f84;
 $navbarBackground: #034f84;
 $navbarHover: #92a8d1;
 $navbarTextColor: white;
@@ -86,14 +87,21 @@ body {
       margin: 1rem 2rem;
       width: 10rem;
     }
-    a.btn-edit,
+    // a.btn-edit,
     button.btn-success {
+      // background-color: #f7cac9;
+      // outline: #fda7a6;
+      // border-color: #ffc0bf;
       // margin-left: auto!important;
       color: white;
     }
+    // button.btn-success:hover {
+    //   background-color: #f7786b;
+    // }
     a.btn-edit {
       background-color: $editButtonsColor;
       outline: none;
+      color: white
     }
     a.btn-edit:hover {
       background-color: $editButtonHover;

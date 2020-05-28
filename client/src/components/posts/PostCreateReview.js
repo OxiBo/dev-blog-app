@@ -29,7 +29,7 @@ class PostCreateReview extends Component {
             <div className={`col-md-${image ? "8" : "12"}`}>
               <div className="card-body">
                 <h5 className="card-title text-center">{title}</h5>
-                <p className="card-text">{body}</p>
+                <p className="card-text post-body">{body}</p>
                 <p className="card-text  text-right">
                   <span className="text-muted">
                     {" "}
@@ -55,7 +55,7 @@ class PostCreateReview extends Component {
           <div className="card-group buttons">
             <button
               onClick={() => this.props.onCancel()}
-              className="btn btn-primary btn-lg m-3"
+              className="btn my-main-btn btn-lg m-3"
             >
               Go Back
             </button>

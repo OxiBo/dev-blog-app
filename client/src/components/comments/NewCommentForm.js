@@ -74,7 +74,7 @@ class NewCommentForm extends Component {
               <div className="buttons">
                 {this.props.form === "editCommentForm" && (
                   <button type="button" // https://github.com/redux-form/redux-form/issues/2679
-                    className="btn btn-md btn-primary ml-auto m-2"
+                    className="btn btn-md  my-main-btn ml-auto m-2"
                     onClick={this.props.onCancel}
                   >
                     Cancel
