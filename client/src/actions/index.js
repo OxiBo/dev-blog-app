@@ -27,7 +27,7 @@ import { toastOptions, errorToastStyle } from "../styles/toastifyStyles";
 
 export const setSpinner = (isLoading = true) => {
   console.log("sppiner fire off")
-  console.log(isLoading)
+ 
   return {
     type: SET_SPINNER,
     payload: isLoading

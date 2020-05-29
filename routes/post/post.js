@@ -25,10 +25,10 @@ module.exports = (app) => {
         // return res.status(500).send(err);
 
         const delay = () => {
-          return res.send(foundPosts)
-        }
+          return res.send(foundPosts);
+        };
 
-       await setTimeout(delay, 4000)
+        await setTimeout(delay, 4000);
         // return res.send(foundPosts);
       } catch (err) {
         console.error(err);
@@ -59,13 +59,11 @@ module.exports = (app) => {
           .exec();
         //   console.log(foundUser)
 
-      //   const delay = () => {
-      //     return res.send([])
-      //   }
+        //   const delay = () => {
+        //     return res.send([])
+        //   }
 
-      //  await setTimeout(delay, 4000)
-
-
+        //  await setTimeout(delay, 4000)
 
         return res.send(foundUser.posts);
       } catch (err) {
@@ -187,8 +185,9 @@ module.exports = (app) => {
 
   app.delete("/api/posts/delete/:postId", isLoggedIn, async (req, res) => {
     try {
-      await Post.findByIdAndRemove(req.params.postId);
-
+      // await Post.findByIdAndRemove(req.params.postId);
+      const postToDelete = await Post.findById(req.params.postId);
+      postToDelete.remove(); //mongodb method, https://www.youtube.com/watch?v=5iz69Wq_77k
       return res.send("Post has been deleted");
     } catch (err) {
       res.status(500).send(err);
