@@ -7,7 +7,7 @@ import filterPosts from "../../selectors/filterPosts";
 // import Spinner from "../Spinner"
 class PostsAll extends Component {
   async componentDidMount() {
-    console.log(this.props)
+    // console.log(this.props)
    await this.props.setSpinner();
    await  this.props.fetchPosts(this.props.history);
    this.props.setSpinner(false);
@@ -32,7 +32,7 @@ class PostsAll extends Component {
   }
 }
 const mapStateToProps = ({ spinner, posts, filters: { sortBy, findByTitle } }) => {
-  console.log(spinner)
+  // console.log(spinner)
   // console.log(posts.posts);
   return {
     // current_user: auth.current_user

@@ -26,7 +26,6 @@ import axios from "axios";
 import { toastOptions, errorToastStyle } from "../styles/toastifyStyles";
 
 export const setSpinner = (isLoading = true) => {
-  console.log("sppiner fire off")
  
   return {
     type: SET_SPINNER,

@@ -14,3 +14,5 @@
  TODO
  1. How to delete assiciated data in mongodb with mongoose  - done https://www.youtube.com/watch?v=5iz69Wq_77k , https://stackoverflow.com/questions/14348516/cascade-style-delete-in-mongoose/14349259#14349259
  Changed code in Post model
+
+** about bootstrap 4 navbar toggle - https://stackoverflow.com/questions/42401606/how-to-hide-collapsible-bootstrap-4-navbar-on-click

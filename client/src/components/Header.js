@@ -1,5 +1,3 @@
-// TODO - make drop down for my posts, my drafts and new post
-
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -58,8 +56,12 @@ class Header extends Component {
       <header>
         {/* navbar breakpoints - https://stackoverflow.com/questions/36405532/bootstrap-4-change-breakpoint-navbar 
         change to *navbar-expand-xsm for smaller screen ??? change to lg for production*/}
-        <nav className="navbar navbar-expand-sm navbar-light fixed-top">
-          <Link className="navbar-brand nav-item" to="/">
+        <nav
+          className="navbar navbar-expand-sm navbar-light fixed-top"
+          data-toggle="collapse"
+          data-target=".navbar-collapse.show"
+        >
+          <Link className="navbar-brand nav-item" to={"/"}>
             Home
           </Link>
           <button
@@ -75,8 +77,12 @@ class Header extends Component {
           </button>
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <ul className="navbar-nav">
-              <li className="nav-item active">
-                <Link className="nav-link" to="/posts">
+              <li
+                className="nav-item active"
+                data-toggle="collapse"
+                data-target=".navbar-collapse.show"
+              >
+                <Link className="nav-link" to={"/posts"}>
                   Blog Posts <span className="sr-only">(current)</span>
                 </Link>{" "}
               </li>
@@ -87,13 +93,21 @@ class Header extends Component {
                       Blog Posts <span className="sr-only">(current)</span>
                     </Link>{" "}
                   </li> */}
-                  <li className="nav-item">
-                    <Link className="nav-link" to="/users">
+                  <li
+                    className="nav-item"
+                    data-toggle="collapse"
+                    data-target=".navbar-collapse.show"
+                  >
+                    <Link className="nav-link" to={"/users"}>
                       Our bloggers
                     </Link>
                   </li>
 
-                  <li className="nav-item dropdown">
+                  <li
+                    className="nav-item dropdown"
+                    data-toggle="collapse"
+                    data-target=".navbar-collapse.show"
+                  >
                     <a
                       className="nav-link dropdown-toggle"
                       href="/#"
@@ -109,7 +123,7 @@ class Header extends Component {
                       className="dropdown-menu"
                       aria-labelledby="navbarDropdown"
                     >
-                      <Link className="dropdown-item" to="/posts/new">
+                      <Link className="dropdown-item" to={"/posts/new"}>
                         New Post
                       </Link>
                       <Link
@@ -158,21 +172,29 @@ class Header extends Component {
                 this.renderAuthButtons()
               ) : (
                 <>
-                  <li className="nav-item">
-                    <a
-                      href={`/user-profile/${current_user._id}`}
+                  <li
+                    className="nav-item"
+                    data-toggle="collapse"
+                    data-target=".navbar-collapse.show"
+                  >
+                    <Link
+                      to={`/user-profile/${current_user._id}`}
                       className="nav-link"
                     >
                       My Profile
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
                     <a className="nav-link disabled" href="/#">
                       Logged in as {current_user.bio.name}
                     </a>
                   </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="/api/logout">
+                  <li
+                    className="nav-item"
+                    data-toggle="collapse"
+                    data-target=".navbar-collapse.show"
+                  >
+                    <a className="nav-link" href={"/api/logout"}>
                       <i className="fa fa-sign-out" aria-hidden="true"></i>
                       Logout
                     </a>
