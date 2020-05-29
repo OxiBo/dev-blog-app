@@ -24,12 +24,12 @@ module.exports = (app) => {
         // console.log(foundPosts);
         // return res.status(500).send(err);
 
-        const delay = () => {
-          return res.send(foundPosts);
-        };
+        // const delay = () => {
+        //   return res.send(foundPosts);
+        // };
 
-        await setTimeout(delay, 4000);
-        // return res.send(foundPosts);
+        // await setTimeout(delay, 4000);
+        return res.send(foundPosts);
       } catch (err) {
         console.error(err);
         return res.status(500).send(err);
