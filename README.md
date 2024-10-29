@@ -83,4 +83,4 @@ The application should now be running on `http://localhost:3000`.
 
 ---
 
-© 2021 OxiBo. All rights reserved.
+© 2019 OxiBo. All rights reserved.
