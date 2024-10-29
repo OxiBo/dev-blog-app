@@ -1,4 +1,4 @@
-import { reset } from "redux-form";
+import { reset } from 'redux-form';
 
 import {
   SET_SPINNER,
@@ -18,22 +18,21 @@ import {
   RENDER_EDIT_COMMENT,
   SET_FIND_BY_TITLE,
   SET_SORT_BY,
-} from "./types";
-import { toast } from "react-toastify";
+} from './types';
+import { toast } from 'react-toastify';
 
-import axios from "axios";
+import axios from 'axios';
 
-import { toastOptions, errorToastStyle } from "../styles/toastifyStyles";
+import { toastOptions, errorToastStyle } from '../styles/toastifyStyles';
 
 export const setSpinner = (isLoading = true) => {
- 
   return {
     type: SET_SPINNER,
-    payload: isLoading
-  }
-}
+    payload: isLoading,
+  };
+};
 export const fetchCurrentUser = () => async (dispatch) => {
-  const res = await axios.get("/api/current_user");
+  const res = await axios.get('/api/current_user');
   // console.log(res);
   dispatch({ type: FETCH_CURRENT_USER, payload: res.data });
 };
@@ -46,7 +45,7 @@ export const fetchUser = (id) => async (dispatch) => {
 
 // TODO change to fetch posts with particular userId
 export const fetchUsers = () => async (dispatch) => {
-  const res = await axios.get("/api/users");
+  const res = await axios.get('/api/users');
   // console.log(res);
   dispatch({ type: FETCH_USERS, payload: res.data });
 };
@@ -55,24 +54,24 @@ export const editProfile = (id, values, history) => async (dispatch) => {
   try {
     const res = await axios.patch(`/api/user-profile/${id}/edit`, values);
     dispatch({ type: EDIT_PROFILE, payload: res.data });
-    toast("You have successfully edited your profile!", toastOptions);
+    toast('You have successfully edited your profile!', toastOptions);
     history.push(`/user-profile/${id}`);
   } catch (err) {
     console.error(err);
-    toast("Server error. Failed to edit profile!", errorToastStyle);
+    toast('Server error. Failed to edit profile!', errorToastStyle);
   }
 };
 
 export const submitNewPost = (values) => async (dispatch) => {
   try {
-    const res = await axios.post("/api/posts/new", values);
+    const res = await axios.post('/api/posts/new', values);
 
     dispatch({ type: SUBMIT_NEW_POST, payload: res.data });
 
     // console.log(res.data)
   } catch (err) {
     console.error(err);
-    toast("Server error. Failed to add new post!", errorToastStyle);
+    toast('Server error. Failed to add new post!', errorToastStyle);
   }
 };
 
@@ -85,7 +84,7 @@ export const editPost = (values, id, history) => async (dispatch) => {
     history.push(`/posts/show/${id}`); // console.log(res.data)
   } catch (err) {
     console.error(err);
-    toast("Server error. Failed to edit post!", errorToastStyle);
+    toast('Server error. Failed to edit post!', errorToastStyle);
   }
 };
 
@@ -94,10 +93,10 @@ export const deletePost = (id) => async (dispatch) => {
     await axios.delete(`/api/posts/delete/${id}`);
 
     dispatch({ type: DELETE_POST, payload: id });
-    toast("Your post has been removed!", toastOptions);
+    toast('Your post has been removed!', toastOptions);
   } catch (err) {
     console.error(err);
-    toast("Server error. Failed to delete post!", errorToastStyle);
+    toast('Server error. Failed to delete post!', errorToastStyle);
   }
 };
 
@@ -109,21 +108,21 @@ export const fetchUserPosts = (id, history, published) => async (dispatch) => {
     // history(`/user/${id}/posts`);
   } catch (err) {
     console.error(err);
-    toast("Server error. Failed to fetch posts!", errorToastStyle);
+    toast('Server error. Failed to fetch posts!', errorToastStyle);
     history.goBack();
   }
 };
 
-export const fetchPosts = (history) => async (dispatch) => {
+export const fetchPosts = () => async (dispatch) => {
   try {
     const res = await axios.get(`/api/posts`);
-    // console.log(res);
+    console.log(res);
     dispatch({ type: FETCH_POSTS, payload: res.data });
     // history(`/user/${id}/posts`);
   } catch (err) {
     console.error(err);
-    toast("Server error. Failed to fetch posts!", errorToastStyle);
-    history.goBack();
+    toast('Server error. Failed to fetch posts!', errorToastStyle);
+    // history.goBack();
   }
 };
 
@@ -134,7 +133,7 @@ export const fetchPost = (id) => async (dispatch) => {
     // history(`/user/${id}/posts`);
   } catch (err) {
     console.error(err);
-    toast("Server error. Failed to fetch the post!", errorToastStyle);
+    toast('Server error. Failed to fetch the post!', errorToastStyle);
   }
 };
 
@@ -159,11 +158,11 @@ export const submitNewComment = (values, postId) => async (dispatch) => {
     );
 
     dispatch({ type: SUBMIT_NEW_COMMENT, payload: res.data });
-    dispatch(reset("newComment"));
+    dispatch(reset('newComment'));
     // console.log(res.data)
   } catch (err) {
     console.error(err);
-    toast("Server error. Failed to add new comment!", errorToastStyle);
+    toast('Server error. Failed to add new comment!', errorToastStyle);
   }
 };
 
@@ -175,7 +174,7 @@ export const fetchComments = (postId) => async (dispatch) => {
     // history(`/user/${id}/posts`);
   } catch (err) {
     console.error(err);
-    toast("Server error. Failed to fetch posts!", errorToastStyle);
+    toast('Server error. Failed to fetch posts!', errorToastStyle);
     // history.goBack();
   }
 };
@@ -185,10 +184,10 @@ export const deleteComment = (id, postId) => async (dispatch) => {
     await axios.delete(`/api/posts/show/${postId}/comments/${id}`);
 
     dispatch({ type: DELETE_COMMENT, payload: id });
-    toast("Your comment has been removed!", toastOptions);
+    toast('Your comment has been removed!', toastOptions);
   } catch (err) {
     console.error(err);
-    toast("Server error. Failed to delete comment!", errorToastStyle);
+    toast('Server error. Failed to delete comment!', errorToastStyle);
   }
 };
 
@@ -204,11 +203,11 @@ export const editComment = (values, commentId, postId) => async (dispatch) => {
     // history.push(`/posts/show/${id}`); // console.log(res.data)
   } catch (err) {
     console.error(err);
-    toast("Server error. Failed to edit comment!", errorToastStyle);
+    toast('Server error. Failed to edit comment!', errorToastStyle);
   }
 };
 
-export const renderEditComment = (id = "") => {
+export const renderEditComment = (id = '') => {
   return {
     type: RENDER_EDIT_COMMENT,
     payload: id,
@@ -223,7 +222,6 @@ export const setSortBy = (sortBy) => {
     payload: sortBy,
   };
 };
-
 
 export const setFindByTitle = (title) => {
   return {
