@@ -1,3 +1,5 @@
+// about bootstrap 4 navbar toggle - https://stackoverflow.com/questions/42401606/how-to-hide-collapsible-bootstrap-4-navbar-on-click
+
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";

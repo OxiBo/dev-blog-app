@@ -1,13 +1,13 @@
-const mongoose = require("mongoose").set("debug", true),
-  Post = mongoose.model("posts"),
-  User = mongoose.model("users"),
-  isLoggedIn = require("../../middleware/isLoggedIn"),
-  isAuthorizedToEditPost = require("../../middleware/isAuthorizedToEditPost");
+const mongoose = require('mongoose').set('debug', true),
+  Post = mongoose.model('posts'),
+  User = mongoose.model('users'),
+  isLoggedIn = require('../../middleware/isLoggedIn'),
+  isAuthorizedToEditPost = require('../../middleware/isAuthorizedToEditPost');
 
 module.exports = (app) => {
   // get a list of all posts
   app.get(
-    "/api/posts",
+    '/api/posts',
     /*isLoggedIn, (made posts visible to not logged in users*/ async (
       req,
       res
@@ -15,10 +15,9 @@ module.exports = (app) => {
       try {
         const foundPosts = await Post.find({ published: true })
           .populate({
-            // path: "user",
-            path: "user",
+            path: 'user',
             model: User,
-            select: { "bio.name": 1 },
+            select: { 'bio.name': 1 },
           })
           .exec();
         // console.log(foundPosts);
@@ -39,7 +38,7 @@ module.exports = (app) => {
 
   // TODO - middleware to check if user has the right to see the posts (should be able to only see their drafts)
   app.get(
-    "/api/user/:userId/posts/:published",
+    '/api/user/:userId/posts/:published',
     isLoggedIn,
     async (req, res) => {
       // console.log(req.params.published);
@@ -47,13 +46,13 @@ module.exports = (app) => {
       try {
         const foundUser = await User.findById(req.params.userId)
           .populate({
-            path: "posts",
+            path: 'posts',
             model: Post,
             match: { published: req.params.published },
             populate: {
-              path: "user",
+              path: 'user',
               model: User,
-              select: { "bio.name": 1 }, // https://stackoverflow.com/questions/26691543/return-certain-fields-with-populate-from-mongoose/26698904
+              select: { 'bio.name': 1 }, // https://stackoverflow.com/questions/26691543/return-certain-fields-with-populate-from-mongoose/26698904
             },
           })
           .exec();
@@ -74,15 +73,14 @@ module.exports = (app) => {
   );
 
   app.get(
-    "/api/posts/show/:postId",
+    '/api/posts/show/:postId',
     /*isLoggedIn, */ async (req, res) => {
       try {
         const foundPost = await Post.findById(req.params.postId)
           .populate({
-            // path: "user",
-            path: "user",
+            path: 'user',
             model: User,
-            select: { "bio.name": 1 },
+            select: { 'bio.name': 1 },
           })
           .exec();
 
@@ -94,11 +92,10 @@ module.exports = (app) => {
   );
 
   app.patch(
-    "/api/posts/edit/:postId",
+    '/api/posts/edit/:postId',
     isLoggedIn,
     isAuthorizedToEditPost,
     async (req, res) => {
-      // console.log(req.body);
       try {
         const { title, body, image, published } = req.body;
         const updatedPost = await Post.findByIdAndUpdate(req.params.postId, {
@@ -109,9 +106,9 @@ module.exports = (app) => {
         })
           .populate({
             // path: "user",
-            path: "user",
+            path: 'user',
             model: User,
-            select: { "bio.name": 1 },
+            select: { 'bio.name': 1 },
           })
           .exec();
 
@@ -123,7 +120,7 @@ module.exports = (app) => {
     }
   );
 
-  app.patch("/api/posts/show/:id/like", isLoggedIn, async (req, res) => {
+  app.patch('/api/posts/show/:id/like', isLoggedIn, async (req, res) => {
     try {
       const user = await User.findById(req.user.id).select({
         postLikes: {
@@ -144,9 +141,9 @@ module.exports = (app) => {
         )
           .populate({
             // path: "user",
-            path: "user",
+            path: 'user',
             model: User,
-            select: { "bio.name": 1 },
+            select: { 'bio.name': 1 },
           })
           .exec();
 
@@ -166,9 +163,9 @@ module.exports = (app) => {
           { new: true }
         )
           .populate({
-            path: "user",
+            path: 'user',
             model: User,
-            select: { "bio.name": 1 },
+            select: { 'bio.name': 1 },
           })
           .exec();
         // res.send(post);
@@ -183,19 +180,19 @@ module.exports = (app) => {
     }
   });
 
-  app.delete("/api/posts/delete/:postId", isLoggedIn, async (req, res) => {
+  app.delete('/api/posts/delete/:postId', isLoggedIn, async (req, res) => {
     try {
       // await Post.findByIdAndRemove(req.params.postId);
       const postToDelete = await Post.findById(req.params.postId);
       postToDelete.remove(); //mongodb method, https://www.youtube.com/watch?v=5iz69Wq_77k
-      return res.send("Post has been deleted");
+      return res.send('Post has been deleted');
     } catch (err) {
       res.status(500).send(err);
     }
   });
 
   // create a new post
-  app.post("/api/posts/new", isLoggedIn, async (req, res) => {
+  app.post('/api/posts/new', isLoggedIn, async (req, res) => {
     // console.log(req.body);
     // console.log(req.user);
     // const { name } = req.user.bio;

@@ -1,3 +1,7 @@
+ TODO - pagination - https://jasonwatmore.com/post/2019/07/18/react-node-server-side-pagination-tutorial-example
+ https://jasonwatmore.com/post/2018/08/07/javascript-pure-pagination-logic-in-vanilla-js-typescript
+
+ 
  *  error about server already running on this port - https://stackoverflow.com/questions/9898372/how-to-fix-error-listen-eaddrinuse-while-using-nodejs
 
 
@@ -12,7 +16,7 @@
 
 
  TODO
- 1. How to delete assiciated data in mongodb with mongoose  - done https://www.youtube.com/watch?v=5iz69Wq_77k , https://stackoverflow.com/questions/14348516/cascade-style-delete-in-mongoose/14349259#14349259
+ 1. How to delete associated data in mongodb with mongoose  - done https://www.youtube.com/watch?v=5iz69Wq_77k , https://stackoverflow.com/questions/14348516/cascade-style-delete-in-mongoose/14349259#14349259
  Changed code in Post model
 
 ** about bootstrap 4 navbar toggle - https://stackoverflow.com/questions/42401606/how-to-hide-collapsible-bootstrap-4-navbar-on-click
