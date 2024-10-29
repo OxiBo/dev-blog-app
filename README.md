@@ -51,14 +51,14 @@ This is a full-stack blogging application built using Node.js, Express, Passport
    ```js
    // dev.js - Don't commit this
    module.exports = {
-       googleClientID: process.env.GOOGLE_CLIENT_ID,
-       googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
-       githubClientId: process.env.GITHUB_CLIENT_ID,
-       githubClientSecret: process.env.GITHUB_CLIENT_SECRET,
-       twitterConsumerKey: process.env.TWITTER_CONSUMER_KEY,
-       twitterConsumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-       mongoURI: process.env.MONGO_URI,
-       cookieKey: process.env.COOKIE_KEY,
+       googleClientID: 'your_google_client_id_here',
+       googleClientSecret: 'your_google_client_secret_here',
+       githubClientId: 'your_github_client_id_here',
+       githubClientSecret: 'your_github_client_secret_here',
+       twitterConsumerKey: 'your_twitter_consumer_key_here',
+       twitterConsumerSecret: 'your_twitter_consumer_secret_here',
+       mongoURI: 'your_mongodb_connection_string_here',
+       cookieKey: 'your_cookie_key_here'
    };
    ```
    Additionally, create a keys.js file in the /config folder to determine which set of credentials to use based on the environment:
